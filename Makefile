@@ -36,15 +36,22 @@ ps:
 logs:
 	docker-compose logs -f
 bash4:
-	docker-compose exec phpsf4 bash
+	docker-compose exec $(SF4) bash
 bash5:
-	docker-compose exec phpsf5 bash
+	docker-compose exec $(SF5) bash
 bash:
-	docker-compose exec -w /var/www phpsf5 bash
+	docker-compose exec -w /var/www $(SF5) bash
 
+install-vendors:
+	docker-compose run --rm --no-deps $(SF4) php -dmemory_limit=-1 /usr/bin/composer install \
+	&& docker-compose run --rm --no-deps $(SF5) composer install \
+	&& docker-compose run --rm --no-deps -w /var/www/Component/audio-core-entities $(SF4) php -dmemory_limit=-1 /usr/bin/composer install \
+	&& docker-compose run --rm --no-deps -w /var/www/Component/id3 $(SF4) php -dmemory_limit=-1 /usr/bin/composer install;\
 
-install:
-	docker-compose.exe run --rm  php composer install
+create-database:
+	docker-compose run --rm --no-deps $(SF5) php -dmemory_limit=-1 bin/console doctrine:schema:update --force -vv
+
+install: install-vendors create-database
 
 index: create-index-file split-index-file import-splited-files-into-db index-merge-new index-populate-elastic
 
