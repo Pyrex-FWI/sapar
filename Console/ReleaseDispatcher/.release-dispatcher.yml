@@ -1,0 +1,5 @@
+release_dispatcher:
+    dispatcher:
+        target_format: 'target_path~"/_"~release.getGroup()~"/"~release.getYear()~"/"~release.getName()'
+        target_path: /mnt/c/Users/Kris/PhpstormProjects/sapar/Console/ReleaseDispatcher/
+        source_path: /mnt/c/Users/Kris/PhpstormProjects/sapar/Console/ReleaseDispatcher/

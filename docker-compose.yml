@@ -1,0 +1,62 @@
+version: "3.7"
+services:
+  phpsf5:
+    image: yemistikris/php74
+    working_dir: /var/www/App/Symfony5
+    volumes:
+      - ./:/var/www/
+      - ${ARCHIVE_PATH}:${ARCHIVE_PATH}
+      - ./Devops/docker/php.ini /etc/php7/conf.d/
+      - ./Devops/docker/php.ini /etc/php7/cli/conf.d/
+      - ./Devops/docker/php-fpm.conf /etc/php7/php-fpm.d/
+    #      - ./devops/docker/xdebug.ini  /etc/php7/conf.d/
+    ports:
+      - 8000:8000
+    depends_on:
+      - rabbitmq
+      - elasticsearch
+
+  phpsf4:
+    image: yemistikris/php74
+    working_dir: /var/www/App/Symfony4
+    volumes:
+      - ./:/var/www/
+      - ${ARCHIVE_PATH}:${ARCHIVE_PATH}
+      - ./Devops/docker/php.ini /etc/php7/conf.d/
+      - ./Devops/docker/php.ini /etc/php7/cli/conf.d/
+      - ./Devops/docker/php-fpm.conf /etc/php7/php-fpm.d/
+    ports:
+      - 8001:8000
+  # elasticsearch server (official image)
+  # https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
+  elasticsearch:
+    image: elasticsearch:6.8.8 # 6.8.4 out
+    ports:
+      - 9209:9200
+    environment:
+      - "discovery.type=single-node"
+      - "bootstrap.memory_lock=true"
+      - "ES_JAVA_OPTS=-Xms1G -Xmx1G"
+      - "xpack.security.enabled=false"
+      - "http.cors.enabled=true"
+      - "http.cors.allow-origin=*"
+
+  # elasticsearch head manager (fork of mobz/elasticsearch-head for elasticsearch 6)
+  # /!\ it isn't an official image /!\
+  # https://hub.docker.com/r/tobias74/elasticsearch-head
+  elasticsearch-head:
+    container_name: sb-elasticsearch-head
+    depends_on:
+      - elasticsearch
+    image: tobias74/elasticsearch-head:6
+    ports:
+      - "9109:9100"
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+      - RABBITMQ_DEFAULT_VHOST=/sapar_index
+    ports:
+      - 15672:15672

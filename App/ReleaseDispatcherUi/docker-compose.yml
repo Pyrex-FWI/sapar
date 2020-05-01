@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  node:
+    build:
+      context: ${DOCKER_RELEASE_DISPATCHER_UI_BASE_PATH:-.}
+      dockerfile: ./devops/docker/Dockerfile
+    container_name: node
+    command: ["ng", "serve", "--host", "0.0.0.0", "--port", "4000", "--poll", "2000"]
+    volumes:
+      - ${DOCKER_RELEASE_DISPATCHER_UI_BASE_PATH:-.}:/app
+    working_dir: /app
+    ports:
+      - "${DOCKER_RELEASE_DISPATCHER_UI_PORT_PREFIX:-4}000:4000"
+#    user: "${UID}:${GID}"
+
+  node_test:
+    build:
+      context: ${DOCKER_RELEASE_DISPATCHER_UI_BASE_PATH:-.}
+
+      dockerfile: ./devops/docker/Dockerfile
+    container_name: node_test
+    command: ["ng", "test", "--watch"]
+    volumes:
+      - ${DOCKER_RELEASE_DISPATCHER_UI_BASE_PATH:-.}:/app
+    working_dir: /app
+    ports:
+      - "${DOCKER_RELEASE_DISPATCHER_UI_PORT_PREFIX:-4}002:9876"
+#    user: "${UID}:${GID}"
+

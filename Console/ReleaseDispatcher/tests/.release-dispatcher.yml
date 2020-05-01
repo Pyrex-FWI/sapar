@@ -1,0 +1,5 @@
+release_dispatcher:
+  dispatcher:
+    target_format: 'target_path~"/_"~release.getGroup()~"/"~release.getYear()~"/"~release.getName()'
+    target_path: vfs://saparNas/
+    source_path: vfs://saparNas/
