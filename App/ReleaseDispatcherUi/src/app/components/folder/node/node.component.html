@@ -1,0 +1,23 @@
+<ng-template [ngIf]="item.hasChildren() == true">
+<li>
+  <span
+    [ngClass]="currentClasses"
+    (click)="collapse()"
+  >
+  </span>
+  <span class="title" (click)="showContent(item)">{{item.name}}</span>
+  <ng-template [ngIf]="item.isOpen()">
+    <ul class="nested active" *ngFor="let child of item.children">
+      <app-node [item]="child"></app-node>
+    </ul>
+  </ng-template>
+</li>
+</ng-template>
+<ng-template [ngIf]="item.hasChildren() == false">
+  <li>
+    <span
+        [ngClass]="currentClasses"
+        (click)="collapse()"
+    ></span>{{item.name}}
+  </li>
+</ng-template>

@@ -1,0 +1,78 @@
+<?php
+
+namespace AudioCoreEntity\Repository;
+
+use AudioCoreEntity\Entity\ImportMedia;
+use AudioCoreEntity\Entity\Media;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+
+/**
+ * @method ImportMedia|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ImportMedia|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ImportMedia[]    findAll()
+ * @method ImportMedia[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ */
+class ImportMediaRepository extends ServiceEntityRepository
+{
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, ImportMedia::class);
+    }
+
+    /**
+     * @return int|mixed|string
+     */
+    public function removeDuplicates()
+    {
+        $query = $this->createQueryBuilder('im');
+        return $query
+            ->delete()
+            ->where($query->expr()->in(
+                'im.hash',
+                $this->_em->createQueryBuilder('m')
+                    ->select('m.hash')
+                    ->from(Media::class, 'm')
+//                    ->setMaxResults(1000) #Iterrate for optimize?
+                    ->getDQL()
+            ))
+            ->getQuery()->execute();
+    }
+    /**
+     * @return int
+     */
+    public function countNewFilesToImport(): int
+    {
+        $allNewIndexCount = $this->count([]);
+        $alreadyExistInMediaCount = $this->countExistingFileInMedias();
+
+        return ($allNewIndexCount - $alreadyExistInMediaCount);
+    }
+
+    public function countExistingFileInMedias(): int
+    {
+        $q = $this->createQueryBuilder('i')
+            ->select('count(i.id)')
+            ->leftJoin(Media::class, 'media', Join::WITH, 'media.hash = i.hash')
+            ->andWhere('media.hash IS NOT NULL')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+        return $q;
+    }
+
+    /*
+    public function findOneBySomeField($value): ?Media
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.exampleField = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    */
+}

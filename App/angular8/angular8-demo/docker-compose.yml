@@ -1,0 +1,13 @@
+version: '3.7'
+services:
+  node:
+    build:
+      context: ./
+      dockerfile: devops/docker/Dockerfile
+    container_name: node
+    command: ["ng", "serve", "--host", "0.0.0.0", "--port", "4000", "--poll", "2000"]
+    volumes:
+      - $PWD:/app
+    working_dir: /app
+    ports:
+      - "4001:4000"

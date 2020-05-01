@@ -1,0 +1,29 @@
+{
+    "name": "sapar/node-folder-api",
+    "type": "project",
+    "require": {
+        "slim/slim": "4",
+        "slim/psr7": "^0.5.0",
+        "guzzlehttp/psr7": "^1.6",
+        "http-interop/http-factory-guzzle": "^1.0",
+        "zendframework/zend-diactoros": "^2.1",
+        "sapar/release-dispatcher": "^0.13"
+    },
+    "authors": [
+        {
+            "name": "Pyrex-Fwi",
+            "email": "yemistikris@hotmail.fr"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "NodeFolderApi\\": "src"
+        },
+        "exclude-from-classmap": [
+            "/tests/"
+        ]
+    },
+    "require-dev": {
+        "mikey179/vfsstream": "^1.6"
+    }
+}

@@ -1,0 +1,35 @@
+{
+    "name": "sapar/movie-unrar",
+    "description": "Lib for unrar movies on nas",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pyrex-FWI",
+            "email": "yemistikrys@gmail.com"
+        }
+    ],
+    "bin": [
+        "movie-unrar"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Sapar\\Console\\MovieUnrar\\": "src"
+        }
+    },
+    "require": {
+        "php": "^7.3",
+        "symfony/console": "4.* || 5.*",
+        "symfony/finder": "^4.3",
+        "doctrine/collections": "^1.5",
+        "sapar/sfv-checker": "^0.14",
+        "symfony/process": "4.* || 5.*",
+        "symfony/stopwatch": "4.* || 5.*",
+        "psr/log": "^1.1"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^4.3 | ^5.*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
