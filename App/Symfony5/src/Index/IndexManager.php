@@ -113,7 +113,7 @@ class IndexManager
         $count = $this->entityManager->getRepository(Media::class)->count(['tagged' => false]);
         /** @var QueryBuilder $qb */
         $qb = $this->entityManager->getRepository(Media::class)->createQueryBuilder('m');
-        $limit = 100;
+        $limit = $count < 100 ? $count : 100;
 
         $symfonyStyle->progressStart($count);
 

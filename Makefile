@@ -18,7 +18,7 @@ SPLIT_NAME_PREFIX=archive_file-
 SF5=phpsf5
 SF4=phpsf4
 IMAGE=yemistikris/php74:latest
-
+DEBIAN_IMAGE=debian:stable-slim
 pull:
 	docker-compose pull && docker image prune -f
 up: pull
@@ -51,17 +51,17 @@ install-vendors:
 create-database:
 	docker-compose run --rm --no-deps $(SF5) php -dmemory_limit=-1 bin/console doctrine:schema:update --force -vv
 
-install: install-vendors create-database
+install: install-vendors create-database reload
 
 index: create-index-file split-index-file import-splited-files-into-db index-merge-new index-populate-elastic
 
 create-index-file:
 	docker run -it --rm -v ${ARCHIVE_PATH}:${ARCHIVE_PATH} ${IMAGE} bash -c "find ${ARCHIVE_PATH} -type f -iname *.mp3 -o -iname *.wav -o -iname *.flac -o -iname *.mp4 " > ${INDEX_FILE}
-	docker run -it --rm -v ${ARCHIVE_PATH}:${ARCHIVE_PATH} debian:stable-slim bash -c "wc -l < ${INDEX_FILE}"
+	docker run -it --rm -v ${ARCHIVE_PATH}:${ARCHIVE_PATH} ${DEBIAN_IMAGE} bash -c "wc -l < ${INDEX_FILE}"
 
 split-index-file:
-	docker run -it --rm -v ${ARCHIVE_PATH}:${ARCHIVE_PATH} debian:stable-slim bash -c "cd ${ARCHIVE_PATH}; rm -f ${SPLIT_NAME_PREFIX}*" ; \
-	docker run -it --rm -v ${ARCHIVE_PATH}:${ARCHIVE_PATH} debian:stable-slim bash -c "cd ${ARCHIVE_PATH}; split -l ${ROWS_LIMIT} -d --additional-suffix=.txt ${INDEX_FILE} ${SPLIT_NAME_PREFIX}"
+	docker run -it --rm -v ${ARCHIVE_PATH}:${ARCHIVE_PATH} ${DEBIAN_IMAGE} bash -c "cd ${ARCHIVE_PATH}; rm -f ${SPLIT_NAME_PREFIX}*" ; \
+	docker run -it --rm -v ${ARCHIVE_PATH}:${ARCHIVE_PATH} ${DEBIAN_IMAGE} bash -c "cd ${ARCHIVE_PATH}; split -l ${ROWS_LIMIT} -d --additional-suffix=.txt ${INDEX_FILE} ${SPLIT_NAME_PREFIX}"
 
 import-splited-files-into-db:
 	docker-compose run --rm  --no-deps ${SF5} php bin/console index:truncate:import-table -vvv; \
@@ -75,8 +75,12 @@ index-merge-new:
 index-populate-elastic:
 	docker-compose.exe exec  ${SF4} bin/console fos:elastica:populate
 
+producer:
+	docker-compose.exe exec  ${SF5}  bin/console index:producer:update:metadata
 consume:
 	docker-compose.exe exec  ${SF5}  bin/console messenger:consume -vv
 
 monorepo-merge:
 	docker-compose exec -w /var/www $(SF5) vendor/bin/monorepo-builder merge
+monorepo-split:
+	docker-compose exec -w /var/www $(SF5) vendor/bin/monorepo-builder split -v
