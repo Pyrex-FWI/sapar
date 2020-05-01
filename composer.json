@@ -17,16 +17,20 @@
         "symfony/serializer": "^4.0 || ^5.0",
         "symfony/stopwatch": "4.* || 5.*",
         "symfony/validator": "^4.0 || ^5.0",
-        "symfony/yaml": "*",
-        "symplify/monorepo-builder": "^7.2"
+        "symfony/yaml": "*"
     },
     "require-dev": {
         "doctrine/data-fixtures": "^1.1",
         "friendsofphp/php-cs-fixer": "^2.11",
+        "mikey179/vfsStream": "^1.6",
         "mikey179/vfsstream": "^1.6",
         "phpmetrics/phpmetrics": "^2.6",
+        "phpro/grumphp": "^0.18",
+        "phpspec/phpspec": "^5.1",
         "phpunit/phpunit": "^9.1",
-        "satooshi/php-coveralls": "^1.0"
+        "satooshi/php-coveralls": "^1.0",
+        "symfony/doctrine-bridge": "^3.0",
+        "symfony/var-dumper": "^4.3 | ^5.1"
     },
     "autoload": {
         "classmap": [
