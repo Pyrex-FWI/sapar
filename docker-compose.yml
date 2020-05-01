@@ -1,15 +1,22 @@
 version: "3.7"
+
+x-volumes: &volumeAnchor
+  volumes:
+    - ./:/var/www/
+    - ${ARCHIVE_PATH}:${ARCHIVE_PATH}
+    - ./Devops/docker/php.ini /etc/php7/conf.d/
+    - ./Devops/docker/php.ini /etc/php7/cli/conf.d/
+    - ./Devops/docker/php-fpm.conf /etc/php7/php-fpm.d/
+    - ./App/Symfony5/config/supervisor/messenger-worker.conf:/etc/supervisor.d/messenger-worker.ini
+
+x-image: &image
+  image: yemistikris/docker-sapar:latest
+
 services:
   phpsf5:
-    image: yemistikris/php74
+    <<: *image
     working_dir: /var/www/App/Symfony5
-    volumes:
-      - ./:/var/www/
-      - ${ARCHIVE_PATH}:${ARCHIVE_PATH}
-      - ./Devops/docker/php.ini /etc/php7/conf.d/
-      - ./Devops/docker/php.ini /etc/php7/cli/conf.d/
-      - ./Devops/docker/php-fpm.conf /etc/php7/php-fpm.d/
-    #      - ./devops/docker/xdebug.ini  /etc/php7/conf.d/
+    <<: *volumeAnchor
     ports:
       - 8000:8000
     depends_on:
@@ -17,16 +24,21 @@ services:
       - elasticsearch
 
   phpsf4:
-    image: yemistikris/php74
+    <<: *image
     working_dir: /var/www/App/Symfony4
-    volumes:
-      - ./:/var/www/
-      - ${ARCHIVE_PATH}:${ARCHIVE_PATH}
-      - ./Devops/docker/php.ini /etc/php7/conf.d/
-      - ./Devops/docker/php.ini /etc/php7/cli/conf.d/
-      - ./Devops/docker/php-fpm.conf /etc/php7/php-fpm.d/
+    <<: *volumeAnchor
     ports:
       - 8001:8000
+
+  supervisor:
+    <<: *image
+    working_dir: /var/www/App/Symfony5
+    <<: *volumeAnchor
+    command: [ "supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf" ]
+    depends_on:
+      - rabbitmq
+      - phpsf5
+
   # elasticsearch server (official image)
   # https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
   elasticsearch:
