@@ -20,3 +20,4 @@ parameters:
         Console/MovieUnrar: 'git@gitlab.com:Pyrex-FWI/movie-unrar.git'
         Console/ReleaseDispatcher: 'git@gitlab.com:Pyrex-FWI/release-dispatcher.git'
         App/NodeFolderApi: 'git@gitlab.com:Pyrex-FWI/node-folder-api.git'
+        Devops/docker-sapar: 'git@github.com:Pyrex-FWI/docker-sapar.git'
