@@ -122,3 +122,4 @@ class MyClass
 ## Tests
 
 [Show doc](docs/tests.md)
+[Releases](releases.md)

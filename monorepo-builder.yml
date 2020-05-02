@@ -3,6 +3,7 @@ parameters:
         - 'Bundle'
         - 'Component'
         - 'Console'
+        - 'App'
 
     # for "merge" command
 #    data_to_append:
