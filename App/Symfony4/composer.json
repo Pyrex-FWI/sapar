@@ -79,11 +79,5 @@
             "allow-contrib": false,
             "require": "4.4.*"
         }
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../../Component/audio-core-entities/"
-        }
-    ]
+    }
 }
