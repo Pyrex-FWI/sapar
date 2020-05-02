@@ -98,3 +98,4 @@ data.db
 /App/Symfony4/var/log/
 /App/Symfony5/var/cache/
 /App/Symfony5/var/log/
+/Component/id3/report/
