@@ -94,3 +94,7 @@ data.db
 /App/node_tests/node_music_metadata_2/node_modules/
 /App/node_tests/node_test_01/node_modules/
 /App/semantic-ui/semantic/dist/
+/App/Symfony4/var/cache/
+/App/Symfony4/var/log/
+/App/Symfony5/var/cache/
+/App/Symfony5/var/log/
