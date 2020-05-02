@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-### Unreleased
+## 5.0.0 - 2020-05-02
 
 - Create release 0.13 for test
 - Mise à jour de l'image docker

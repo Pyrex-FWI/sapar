@@ -14,9 +14,11 @@
             "AudioCoreEntity\\Tests": "./tests/",
             "SymfonyStandard": "app/"
         },
-        "classmap": ["src/","./tests/"]
+        "classmap": [
+            "src/",
+            "./tests/"
+        ]
     },
-
     "scripts": {
         "ci:test-travis": [
             "phpunit --coverage-html=coverage"
