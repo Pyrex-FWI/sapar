@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## .Unreleased
+### Unreleased
+
+- Create release 0.13 for test
+- Mise à jour de l'image docker
+- Add Symfony4 and Symfony5 on Monorepo
 
 ## v0.12.9 - 2019-09-14
 
