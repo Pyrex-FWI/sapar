@@ -1,7 +1,7 @@
 {
     "name": "pyrex-fwi/audio-core-entities",
     "description": "Core entities for Sapar audio project",
-    "version": "dev-master",
+    "minimum-stability": "stable",
     "authors": [
         {
             "name": "Christophe Pyree",
