@@ -10,7 +10,7 @@ x-volumes: &volumeAnchor
     - ./App/Symfony5/config/supervisor/messenger-worker.conf:/etc/supervisor.d/messenger-worker.ini
 
 x-image: &image
-  image: yemistikris/docker-sapar:latest
+  image: yemistikris/docker-sapar:base
 
 services:
   phpsf5:

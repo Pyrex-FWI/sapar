@@ -2345,7 +2345,7 @@
         },
         {
             "name": "pyrex-fwi/audio-core-entities",
-            "version": "v5.0.3",
+            "version": "v5.0.4",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/Pyrex-FWI/audio-core-entities.git",
