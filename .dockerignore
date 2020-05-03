@@ -2,8 +2,9 @@
 */*/temp*
 temp?
 /App
-!/App/Symfony4
-!/App/Symfony5
+!/App/Symfony*
+/App/Symfony*/var/cache
+/App/Symfony*/var/log
 /Component
 !/Component/audio-core-entities
 !/Component/id3

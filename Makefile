@@ -25,6 +25,10 @@ up: pull
 	docker-compose up -d --build --remove-orphans
 build:
 	cd Devops/docker/ && $(MAKE) build
+build-sapar:
+	docker build -t yemistikris/docker-sapar:sapar -f Devops/docker-sapar/sapar/Dockerfile  .
+sapar-bash:
+	docker run --rm -ti yemistikris/docker-sapar:sapar bash
 push:
 	cd Devops/docker && $(MAKE) push
 down:

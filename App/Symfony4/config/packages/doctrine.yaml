@@ -10,12 +10,12 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            Sapar:
-                is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'Sapar\Entity'
-                alias: Sapar
+#            Sapar:
+#                is_bundle: false
+#                type: annotation
+#                dir: '%kernel.project_dir%/src/Entity'
+#                prefix: 'Sapar\Entity'
+#                alias: Sapar
             AudioCore:
                 is_bundle: false
                 type: annotation
