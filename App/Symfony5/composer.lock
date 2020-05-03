@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d489880e4d0c8652354a0113060b70d2",
+    "content-hash": "6bb6e41713df4ae6f2d69fa8f990780d",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1711,22 +1711,28 @@
         },
         {
             "name": "pyrex-fwi/audio-core-entities",
-            "version": "dev-master",
+            "version": "v5.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/Pyrex-FWI/audio-core-entities.git",
+                "reference": "90d2a3f3a06de5c9c84202c784794b71fc1a34a3"
+            },
             "dist": {
-                "type": "path",
-                "url": "../../Component/audio-core-entities",
-                "reference": "6a9d338a7791da821aadd4819596f08b1a55e47e"
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/Pyrex-FWI%2Faudio-core-entities/repository/archive.zip?sha=90d2a3f3a06de5c9c84202c784794b71fc1a34a3",
+                "reference": "90d2a3f3a06de5c9c84202c784794b71fc1a34a3",
+                "shasum": ""
             },
             "require": {
                 "doctrine/orm": "*",
                 "fza/mysql-doctrine-levenshtein-function": "^0.3.0",
                 "gedmo/doctrine-extensions": "^2.4",
-                "symfony/serializer": "^5.0",
-                "symfony/validator": "^5.0"
+                "symfony/serializer": "^4.0 || ^5.0",
+                "symfony/validator": "^4.0 || ^5.0"
             },
             "require-dev": {
                 "doctrine/data-fixtures": "^1.1",
-                "phpunit/phpunit": "^5.1",
+                "phpunit/phpunit": "^9.1",
                 "satooshi/php-coveralls": "^1.0",
                 "symfony/doctrine-bridge": "^3.0",
                 "symfony/yaml": "*"
@@ -1743,14 +1749,7 @@
                     "./tests/"
                 ]
             },
-            "scripts": {
-                "ci:test-travis": [
-                    "phpunit --coverage-html=coverage"
-                ],
-                "tests": [
-                    "php vendor/bin/doctrine orm/info"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
                     "name": "Christophe Pyree",
@@ -1758,17 +1757,21 @@
                 }
             ],
             "description": "Core entities for Sapar audio project",
-            "transport-options": {
-                "relative": true
-            }
+            "time": "2020-05-03T08:44:03+00:00"
         },
         {
             "name": "pyrex-fwi/sapar-id3",
-            "version": "dev-master",
+            "version": "v5.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/Pyrex-FWI/sapar-id3.git",
+                "reference": "e227edc97cdb527ed8b5cac46fad33d84d1f4852"
+            },
             "dist": {
-                "type": "path",
-                "url": "../../Component/id3",
-                "reference": "e6f3a71879268728e84216c3f3891715d6368824"
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/Pyrex-FWI%2Fsapar-id3/repository/archive.zip?sha=e227edc97cdb527ed8b5cac46fad33d84d1f4852",
+                "reference": "e227edc97cdb527ed8b5cac46fad33d84d1f4852",
+                "shasum": ""
             },
             "require": {
                 "php": "^7.3",
@@ -1781,7 +1784,7 @@
                 "phpmetrics/phpmetrics": "^2.6",
                 "phpro/grumphp": "^0.18",
                 "phpunit/phpunit": "^9.1",
-                "symfony/var-dumper": "^5.0"
+                "symfony/var-dumper": "^4.3 | ^5.1"
             },
             "type": "library",
             "autoload": {
@@ -1790,6 +1793,7 @@
                     "Sapar\\Component\\Id3\\Test\\": "Test"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1799,10 +1803,8 @@
                     "email": "pyrex-fwi@gmail.com"
                 }
             ],
-            "description": "The package lays the basis for the simple manipulation of ID3 tags.\nYou can define readers and writers to manipulate the metadata in read or write.",
-            "transport-options": {
-                "relative": true
-            }
+            "description": "The package lays the basis for the simple manipulation of ID3 tags.You can define readers and writers to manipulate the metadata in read or write.",
+            "time": "2020-05-02T16:56:33+00:00"
         },
         {
             "name": "symfony/cache",
@@ -5216,10 +5218,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "pyrex-fwi/audio-core-entities": 20,
-        "pyrex-fwi/sapar-id3": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
