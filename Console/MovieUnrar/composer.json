@@ -22,7 +22,7 @@
         "symfony/console": "4.* || 5.*",
         "symfony/finder": "^4.3",
         "doctrine/collections": "^1.5",
-        "sapar/sfv-checker": "^5.1",
+        "sapar/sfv-checker": "^5.0.4",
         "symfony/process": "4.* || 5.*",
         "symfony/stopwatch": "4.* || 5.*",
         "psr/log": "^1.1"
