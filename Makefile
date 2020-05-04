@@ -13,11 +13,10 @@ COMPOSER = eval $(ssh-agent); \
 	 --user `id -u`:`id -g` \
 	 composer
 
-INDEX_FILE=$(ARCHIVE_PATH)/archive_file.txt
+INDEX_FILE=${ARCHIVE_PATH}/archive_file.txt
 SPLIT_NAME_PREFIX=archive_file-
 SF5=phpsf5
-SF4=phpsf4
-IMAGE=yemistikris/php74:latest
+IMAGE=yemistikris/docker-sapar:sapar
 DEBIAN_IMAGE=debian:stable-slim
 pull:
 	docker-compose pull && docker image prune -f
@@ -40,20 +39,20 @@ ps:
 logs:
 	docker-compose logs -f
 bash4:
-	docker-compose exec $(SF4) bash
+	docker-compose exec -w /var/www/App/Symfony4 $(SF5) bash
 bash5:
 	docker-compose exec $(SF5) bash
 bash:
 	docker-compose exec -w /var/www $(SF5) bash
 
 install-vendors:
-	docker-compose run --rm --no-deps $(SF4) php -dmemory_limit=-1 /usr/bin/composer install \
+	docker-compose run --rm --no-deps  -w /var/www/App/Symfony4 $(SF5) php -dmemory_limit=-1 /usr/bin/composer install \
 	&& docker-compose run --rm --no-deps $(SF5) composer install \
-	&& docker-compose run --rm --no-deps -w /var/www/Component/audio-core-entities $(SF4) php -dmemory_limit=-1 /usr/bin/composer install \
-	&& docker-compose run --rm --no-deps -w /var/www/Component/id3 $(SF4) php -dmemory_limit=-1 /usr/bin/composer install;\
+	&& docker-compose run --rm --no-deps -w /var/www/Component/audio-core-entities $(SF5) php -dmemory_limit=-1 /usr/bin/composer install \
+	&& docker-compose run --rm --no-deps -w /var/www/Component/id3 $(SF5) php -dmemory_limit=-1 /usr/bin/composer install;\
 
 update-sapar-deps:
-	docker-compose run --rm --no-deps  phpsf4  bash -c 'composer update pyrex-fwi/* --no-scripts' ; \
+	docker-compose run --rm --no-deps -w /var/www/App/Symfony4 phpsf5  bash -c 'composer update pyrex-fwi/* --no-scripts' ; \
 	docker-compose run --rm --no-deps  phpsf5  bash -c 'composer update pyrex-fwi/* --no-scripts'
 
 create-database:
@@ -78,17 +77,17 @@ import-splited-files-into-db:
     done; \
 
 index-merge-new:
-	docker-compose.exe exec  ${SF5} bin/console index:merge:mediafile -vvvv
+	docker-compose exec  ${SF5} php bin/console index:merge:mediafile -vvvv
 
 index-populate-elastic:
-	docker-compose.exe exec  ${SF4} bin/console fos:elastica:populate
+	docker-compose exec -w /var/www/App/Symfony4 ${SF5} php bin/console fos:elastica:populate
 
 producer:
-	docker-compose.exe exec  ${SF5}  bin/console index:producer:update:metadata
+	docker-compose exec  ${SF5} php bin/console index:producer:update:metadata
 consume:
-	docker-compose.exe exec  ${SF5}  bin/console messenger:consume -vv
+	docker-compose exec  ${SF5} php bin/console messenger:consume -vv
 
 monorepo-merge:
-	docker-compose exec -w /var/www $(SF5) vendor/bin/monorepo-builder merge
+	docker-compose exec -w /var/www $(SF5) php vendor/bin/monorepo-builder merge
 monorepo-split:
-	docker-compose exec -w /var/www $(SF5) vendor/bin/monorepo-builder split -v
+	docker-compose exec -w /var/www $(SF5) php vendor/bin/monorepo-builder split -v

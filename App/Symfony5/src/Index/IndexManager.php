@@ -126,6 +126,7 @@ class IndexManager
                 ;
             $this->bus->dispatch(new ReadMediaFilesTag($mediafiles));
             $symfonyStyle->progressAdvance($limit);
+            $this->entityManager->clear();
         }
         $symfonyStyle->progressFinish();
     }

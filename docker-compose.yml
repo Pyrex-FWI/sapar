@@ -2,11 +2,8 @@ version: "3.7"
 
 x-volumes: &volumeAnchor
   volumes:
-    - ./:/var/www/
+    - ${PWD}/:/var/www/
     - ${ARCHIVE_PATH}:${ARCHIVE_PATH}
-    - ./Devops/docker-sapar/base/php.ini /etc/php7/conf.d/
-    - ./Devops/docker-sapar/base/php.ini /etc/php7/cli/conf.d/
-    - ./Devops/docker-sapar/base/php-fpm.conf /etc/php7/php-fpm.d/
     - ./App/Symfony5/config/supervisor/messenger-worker.conf:/etc/supervisor.d/messenger-worker.ini
 
 x-image: &image
