@@ -86,8 +86,24 @@ producer:
 	docker-compose exec  ${SF5} php bin/console index:producer:update:metadata
 consume:
 	docker-compose exec  ${SF5} php bin/console messenger:consume -vv
+update-tags: producer
+	docker-compose start supervisor
 
+count-untaged:
+	while true ; do \
+		docker-compose exec ${SF5} php bin/console doctrine:query:sql "SELECT COUNT(*) FROM media where tagged=0" -vvv; \
+		sleep 10; \
+	done;
 monorepo-merge:
 	docker-compose exec -w /var/www $(SF5) php vendor/bin/monorepo-builder merge
 monorepo-split:
 	docker-compose exec -w /var/www $(SF5) php vendor/bin/monorepo-builder split -v
+
+remove-bd:
+	docker-compose exec -w /var/www/ $(SF5) bash -c "rm -f ${DATABASE_SQLITE_FILE} && touch ${DATABASE_SQLITE_FILE}"
+reset-database: remove-bd create-database
+
+reset-tag-status:
+	docker-compose exec ${SF5} php bin/console doctrine:query:sql "UPDATE media set tagged=0 where id > 0 " -q
+
+force-update-tags: reset-tag-status update-tags

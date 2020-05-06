@@ -5,7 +5,7 @@ x-volumes: &volumeAnchor
     - ${PWD}/:/var/www/
     - ${ARCHIVE_PATH}:${ARCHIVE_PATH}
     - ./App/Symfony5/config/supervisor/messenger-worker.conf:/etc/supervisor.d/messenger-worker.ini
-
+    - ./Devops/supervisord/supervisord.conf:/etc/supervisord.conf
 x-image: &image
   image: yemistikris/docker-sapar:base
 
@@ -14,8 +14,7 @@ services:
     <<: *image
     working_dir: /var/www/App/Symfony5
     <<: *volumeAnchor
-    ports:
-      - 8000:8000
+    command: ["symfony", "server:start"]
     depends_on:
       - rabbitmq
       - elasticsearch
@@ -24,14 +23,15 @@ services:
     <<: *image
     working_dir: /var/www/App/Symfony4
     <<: *volumeAnchor
-    ports:
-      - 8001:8000
+    command: ["symfony", "server:start"]
 
   supervisor:
     <<: *image
     working_dir: /var/www/App/Symfony5
     <<: *volumeAnchor
-    command: [ "supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf" ]
+    command: [ '/var/www/Devops/scripts/wait-for-it.sh', '--timeout=60','rabbitmq:5672', '--', "supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf" ]
+    environment:
+      - NB_ID3_CONSUMER=${NB_ID3_CONSUMER}
     depends_on:
       - rabbitmq
       - phpsf5
@@ -40,8 +40,6 @@ services:
   # https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
   elasticsearch:
     image: elasticsearch:6.8.8 # 6.8.4 out
-    ports:
-      - 9209:9200
     environment:
       - "discovery.type=single-node"
       - "bootstrap.memory_lock=true"
@@ -58,8 +56,6 @@ services:
     depends_on:
       - elasticsearch
     image: tobias74/elasticsearch-head:6
-    ports:
-      - "9109:9100"
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
@@ -67,5 +63,3 @@ services:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
       - RABBITMQ_DEFAULT_VHOST=/sapar_index
-    ports:
-      - 15672:15672
