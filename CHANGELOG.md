@@ -2,8 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## v5.0.1 - 2020-05-02 (## v5.0.1 - 2020-05-02)
+## 5.1.0 - 2020-05-06
 
+- Ajout du script d'attente wait-for-it
+- Extraction de l'exposition des ports dans une fichier docker-compose unique.
 
 
 ## 5.0.0 - 2020-05-02
