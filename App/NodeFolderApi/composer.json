@@ -7,7 +7,7 @@
         "guzzlehttp/psr7": "^1.6",
         "http-interop/http-factory-guzzle": "^1.0",
         "zendframework/zend-diactoros": "^2.1",
-        "sapar/release-dispatcher": "^5.1"
+        "sapar/release-dispatcher": "^5.0.6"
     },
     "authors": [
         {
