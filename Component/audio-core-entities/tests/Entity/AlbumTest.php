@@ -1,9 +1,15 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace AudioCoreEntity\Tests\Entity;
 
 use AudioCoreEntity\Tests\EntityBase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class AlbumTest extends EntityBase
 {
     public function testGenreMethods(): void
@@ -11,7 +17,8 @@ class AlbumTest extends EntityBase
         $album = self::getAlbumInstance();
         $media = self::getMediaInstance();
         $album
-            ->setName('Album');
+            ->setName('Album')
+        ;
         $album->getId();
         $this->assertEquals('Album', $album->getName());
     }

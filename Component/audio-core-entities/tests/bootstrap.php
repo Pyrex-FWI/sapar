@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare(strict_types=1);
 
 namespace AudioCoreEntity\Tests;
 
@@ -7,16 +8,14 @@ require_once 'autoload.php';
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\EventManager;
-use Doctrine\DBAL\Logging\EchoSQLLogger;
 use Doctrine\DBAL\Logging\SQLLogger;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\UnderscoreNamingStrategy;
 use Doctrine\ORM\Tools\Setup;
-use Doctrine\ORM\EntityManager;
 use Gedmo\Sluggable\SluggableListener;
 use Gedmo\Timestampable\TimestampableListener;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
-use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\Logger\DbalLogger;
 use Symfony\Component\Yaml\Parser;
 
@@ -25,17 +24,18 @@ class bootstrap
     public static function getConf()
     {
         $yaml = new Parser();
+
         return $yaml->parse(file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'/config/parameters.yml'));
     }
 
     public static function getEntityManager()
     {
-        $paths     = [__DIR__ . DIRECTORY_SEPARATOR . '../src/Entity'];
+        $paths     = [__DIR__.DIRECTORY_SEPARATOR.'../src/Entity'];
         $isDevMode = true;
 
         $dbParams = [
             'driver' => 'pdo_sqlite',
-            'path' => __DIR__ . '/db.sqlite',
+            'path' => __DIR__.'/db.sqlite',
         ];
 
         $cache = new \Doctrine\Common\Cache\ArrayCache();

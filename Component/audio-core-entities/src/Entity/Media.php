@@ -1,22 +1,25 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace AudioCoreEntity\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\Table;
-use Doctrine\ORM\Mapping\Index;
-use Doctrine\ORM\Mapping\UniqueConstraint;
 use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
-use Doctrine\ORM\Mapping\ManyToMany;
-use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\Table;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * Media
+ * Media.
+ *
  * @Entity(repositoryClass="AudioCoreEntity\Repository\MediaRepository")
  * @Table(
  *      indexes={@Index(name="provider_filename", columns={"file_name"})},
@@ -48,7 +51,6 @@ class Media
      *
      * @Column(type="text", nullable=true, columnDefinition="TEXT not null")
      * @Groups({"media-read"})
-     *
      */
     protected $filePath;
     /**
@@ -56,7 +58,6 @@ class Media
      *
      * @Column(type="string", length=32, nullable=false)
      * @Groups({"media-read"})
-     *
      */
     protected $hash;
     /**
@@ -64,7 +65,6 @@ class Media
      *
      * @Column(type="string", length=200, nullable=true)
      * @Groups({"media-read"})
-     *
      */
     protected $dirName;
     /**
@@ -96,7 +96,7 @@ class Media
      */
     protected $fileName;
     /**
-     * @var boolean
+     * @var bool
      *
      * @Column(type="boolean", nullable=false, options={"default":false})
      * @Groups({"media-read"})
@@ -104,6 +104,7 @@ class Media
     protected $exist = false;
     /**
      * @var bool
+     *
      * @todo remove property and associated method
      * @Column(type="boolean", nullable=false, options={"default":false})
      * @Groups({"media-read", "genre-read", "artist-read"})
@@ -124,7 +125,7 @@ class Media
      */
     protected $deletedAt;
     /**
-     * @var integer
+     * @var int
      *
      * @Column(name="id", type="integer")
      * @Id
@@ -146,9 +147,10 @@ class Media
      *      joinColumns={@JoinColumn(name="media_id", referencedColumnName="id")},
      *      inverseJoinColumns={@JoinColumn(name="genre_id", referencedColumnName="id")}
      *      )
+     *
      * @var ArrayCollection<Genre>
      * @Groups({"media-read"})
-     **/
+     */
     protected $linkedGenres;
     /**
      * @ManyToMany(targetEntity="\AudioCoreEntity\Entity\Artist", inversedBy="medias", cascade={"persist", "detach", "refresh"}, fetch="EXTRA_LAZY")
@@ -156,27 +158,26 @@ class Media
      *      joinColumns={@JoinColumn(name="media_id", referencedColumnName="id")},
      *      inverseJoinColumns={@JoinColumn(name="artist_id", referencedColumnName="id")}
      *      )
+     *
      * @var ArrayCollection<Artist>
      * @Groups({"media-read"})
-     **/
+     */
     protected $artists;
     /**
-     * @var integer
+     * @var int
      *
      * @Column(type="integer", nullable=true)
      * @Groups({"media-read"})
      */
     protected $type;
     /**
-     * @var integer
+     * @var int
      *
      * @Column(type="integer", length=4, nullable=true)
      * @Groups({"media-read", "artist-read", "genre-read"})
      */
     protected $year;
-    /**
-     *
-     */
+
     public function __construct()
     {
         $this->linkedGenres = new ArrayCollection();
@@ -192,9 +193,9 @@ class Media
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -237,6 +238,7 @@ class Media
 
     /**
      * @param int $bpm
+     *
      * @return Media
      */
     public function setBpm($bpm)
@@ -246,6 +248,7 @@ class Media
                 $this->bpm = abs($bpm);
             }
         }
+
         return $this;
     }
 
@@ -259,11 +262,13 @@ class Media
 
     /**
      * @param string $exist
+     *
      * @return $this
      */
     public function setExist($exist)
     {
         $this->exist = $exist;
+
         return $this;
     }
 
@@ -286,7 +291,7 @@ class Media
      */
     public function setFilePath($filePath)
     {
-        $pattern     = '#(' .DIRECTORY_SEPARATOR.')\1+#';
+        $pattern     = '#('.DIRECTORY_SEPARATOR.')\1+#';
         $replacement = DIRECTORY_SEPARATOR;
         $filePath    = preg_replace($pattern, $replacement, $filePath);
 
@@ -312,17 +317,17 @@ class Media
 
     /**
      * @param string $hash
+     *
      * @return Media
      */
     public function setHash($hash)
     {
-        if (strlen($hash) == 32) {
+        if (32 == strlen($hash)) {
             $this->hash = $hash;
         }
+
         return $this;
     }
-
-
 
     /**
      * Get title.
@@ -351,9 +356,9 @@ class Media
     }
 
     /**
-     * Get type
+     * Get type.
      *
-     * @return integer
+     * @return int
      */
     public function getType()
     {
@@ -361,9 +366,10 @@ class Media
     }
 
     /**
-     * Set type
+     * Set type.
      *
-     * @param integer $type
+     * @param int $type
+     *
      * @return Media
      */
     public function setType($type)
@@ -402,7 +408,6 @@ class Media
     }
 
     /**
-     * @param Genre $genre
      * @return $this
      */
     public function addGenre(Genre $genre)
@@ -410,11 +415,11 @@ class Media
         if (!$this->linkedGenres->contains($genre)) {
             $this->linkedGenres->add($genre);
         }
+
         return $this;
     }
 
     /**
-     * @param Genre $genre
      * @return $this
      */
     public function removeGenre(Genre $genre)
@@ -422,6 +427,7 @@ class Media
         if ($this->linkedGenres->contains($genre)) {
             $this->linkedGenres->removeElement($genre);
         }
+
         return $this;
     }
 
@@ -435,7 +441,7 @@ class Media
 
     /**
      * Set Genres.
-     * @param ArrayCollection $linkedGenres
+     *
      * @return $this
      */
     public function setLinkedGenres(ArrayCollection $linkedGenres)
@@ -444,8 +450,8 @@ class Media
 
         return $this;
     }
+
     /**
-     * @param Artist $artist
      * @return $this
      */
     public function addArtist(Artist $artist)
@@ -453,11 +459,11 @@ class Media
         if (!$this->artists->contains($artist)) {
             $this->artists->add($artist);
         }
+
         return $this;
     }
 
     /**
-     * @param Artist $artist
      * @return $this
      */
     public function removeArtist(Artist $artist)
@@ -465,6 +471,7 @@ class Media
         if ($this->artists->contains($artist)) {
             $this->artists->removeElement($artist);
         }
+
         return $this;
     }
 
@@ -477,7 +484,6 @@ class Media
     }
 
     /**
-     * @param ArrayCollection $artists
      * @return $this
      */
     public function setArtists(ArrayCollection $artists)
@@ -521,6 +527,7 @@ class Media
 
     /**
      * @param string $fileName
+     *
      * @return $this
      */
     public function setFileName($fileName)
@@ -540,6 +547,7 @@ class Media
 
     /**
      * @param string $score
+     *
      * @return Media
      */
     public function setScore($score)
@@ -547,6 +555,7 @@ class Media
         if (filter_var($score, FILTER_VALIDATE_INT) || filter_var($score, FILTER_VALIDATE_FLOAT)) {
             $this->score = $score;
         }
+
         return $this;
     }
 
@@ -560,11 +569,13 @@ class Media
 
     /**
      * @param \DateTime $deletedAt
+     *
      * @return Media
      */
     public function setDeletedAt($deletedAt)
     {
         $this->deletedAt = $deletedAt;
+
         return $this;
     }
 
@@ -578,13 +589,16 @@ class Media
 
     /**
      * @param string $dirName
+     *
      * @return Media
      */
     public function setDirName($dirName)
     {
         $this->dirName = $dirName;
+
         return $this;
     }
+
     public function isUntaged()
     {
         // @codeCoverageIgnoreStart
@@ -602,6 +616,7 @@ class Media
 
     /**
      * @param int $year
+     *
      * @return Media
      */
     public function setYear($year)
@@ -609,11 +624,12 @@ class Media
         if (preg_match('/\d{4}/', (string) $year)) {
             $this->year = $year;
         }
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getTagged()
     {
@@ -624,12 +640,14 @@ class Media
 
     /**
      * @param bool $tagged
+     *
      * @return Media
      */
     public function setTagged($tagged)
     {
         // @codeCoverageIgnoreStart
         $this->tagged = $tagged;
+
         return $this;
         // @codeCoverageIgnoreEnd
     }
@@ -642,10 +660,6 @@ class Media
         return $this->genre;
     }
 
-    /**
-     * @param string $genre
-     * @return Media
-     */
     public function setGenre(string $genre): Media
     {
         $this->genre = $genre;

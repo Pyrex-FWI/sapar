@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace AudioCoreEntity\Tests;
 
@@ -40,6 +42,7 @@ abstract class EntityBase extends TestCase
 
     /**
      * @param null $name
+     *
      * @return Genre
      */
     public static function getGenreInstance($name = null)
@@ -54,20 +57,24 @@ abstract class EntityBase extends TestCase
 
     /**
      * @param null $name
+     *
      * @return Genre
-     */    public static function getArtistInstance($name = null)
+     */
+    public static function getArtistInstance($name = null)
     {
         return new Artist($name);
     }
 
     /**
      * @param null $name
+     *
      * @return Album
      */
     public static function getAlbumInstance($name = null)
     {
         return new Album($name);
     }
+
     /**
      * @return DeletedRelease
      */
@@ -75,6 +82,7 @@ abstract class EntityBase extends TestCase
     {
         return new DeletedRelease();
     }
+
     /**
      * @return Radio
      */
@@ -82,6 +90,7 @@ abstract class EntityBase extends TestCase
     {
         return new Radio();
     }
+
     /**
      * @return RadioHit
      */

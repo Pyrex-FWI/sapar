@@ -1,11 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace AudioCoreEntity\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * DeletedRelease
+ * DeletedRelease.
  *
  * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="raw_name_idx", columns={"rawName"})})
  * @ORM\Entity
@@ -13,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 class DeletedRelease
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -56,11 +58,10 @@ class DeletedRelease
      */
     private $deletedDate;
 
-
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -68,9 +69,10 @@ class DeletedRelease
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $rawName
+     *
      * @return DeletedRelease
      */
     public function setRawName($rawName)
@@ -81,7 +83,7 @@ class DeletedRelease
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -91,9 +93,10 @@ class DeletedRelease
     }
 
     /**
-     * Set genre
+     * Set genre.
      *
      * @param string $genre
+     *
      * @return DeletedRelease
      */
     public function setGenre($genre)
@@ -104,7 +107,7 @@ class DeletedRelease
     }
 
     /**
-     * Get genre
+     * Get genre.
      *
      * @return string
      */
@@ -114,9 +117,10 @@ class DeletedRelease
     }
 
     /**
-     * Set albumName
+     * Set albumName.
      *
      * @param string $albumName
+     *
      * @return DeletedRelease
      */
     public function setAlbumName($albumName)
@@ -127,7 +131,7 @@ class DeletedRelease
     }
 
     /**
-     * Get albumName
+     * Get albumName.
      *
      * @return string
      */
@@ -137,9 +141,10 @@ class DeletedRelease
     }
 
     /**
-     * Set artistName
+     * Set artistName.
      *
      * @param string $artistName
+     *
      * @return DeletedRelease
      */
     public function setArtistName($artistName)
@@ -150,7 +155,7 @@ class DeletedRelease
     }
 
     /**
-     * Get artistName
+     * Get artistName.
      *
      * @return string
      */
@@ -160,9 +165,10 @@ class DeletedRelease
     }
 
     /**
-     * Set deletedDate
+     * Set deletedDate.
      *
      * @param \DateTime $deletedDate
+     *
      * @return DeletedRelease
      */
     public function setDeletedDate($deletedDate)
@@ -173,7 +179,7 @@ class DeletedRelease
     }
 
     /**
-     * Get deletedDate
+     * Get deletedDate.
      *
      * @return \DateTime
      */

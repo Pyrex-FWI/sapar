@@ -1,12 +1,14 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace AudioCoreEntity\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Radio.
@@ -18,6 +20,13 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 class Radio
 {
     use TimestampableEntity;
+
+    /**
+     * @var string
+     * @Gedmo\Slug(fields={"name"}, unique=true)
+     * @ORM\Column(type="string", length=128, unique=true)
+     */
+    protected $slug;
 
     /**
      * @var int
@@ -36,15 +45,8 @@ class Radio
     private $name;
 
     /**
-     * @var string
-     * @Gedmo\Slug(fields={"name"}, unique=true)
-     * @ORM\Column(type="string", length=128, unique=true)
-     */
-    protected $slug;
-
-    /**
-     *
      * @todo refactor in favour of hitPagesUrls
+     *
      * @var ArrayCollection
      *
      * @ORM\Column(name="hitPages", type="json_array")
@@ -92,8 +94,6 @@ class Radio
 
     /**
      * Set hitPages.
-     *
-     * @param array $hitPagesUrls
      *
      * @return Radio
      */

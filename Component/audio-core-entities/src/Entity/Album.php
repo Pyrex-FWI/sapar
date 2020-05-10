@@ -1,7 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /**
  * @author: Pyrex-Fwi
  */
+
 namespace AudioCoreEntity\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
- * Album
+ * Album.
  *
  * @ORM\Table()
  * @ORM\Entity
@@ -19,7 +22,14 @@ class Album
     use TimestampableEntity;
 
     /**
-     * @var integer
+     * @var string
+     * @Gedmo\Slug(fields={"name"}, unique=true)
+     * @ORM\Column(type="string", length=128, unique=true)
+     */
+    protected $slug;
+
+    /**
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -36,6 +46,7 @@ class Album
 
     /**
      * @todo set url instead blob data
+     *
      * @var string
      *
      * @ORM\Column(name="cover", type="blob")
@@ -43,16 +54,9 @@ class Album
     private $cover;
 
     /**
-     * @var string
-     * @Gedmo\Slug(fields={"name"}, unique=true)
-     * @ORM\Column(type="string", length=128, unique=true)
-     */
-    protected $slug;
-
-    /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -60,9 +64,10 @@ class Album
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
+     *
      * @return Album
      */
     public function setName($name)
@@ -73,7 +78,7 @@ class Album
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -83,21 +88,23 @@ class Album
     }
 
     /**
-     * Set cover
+     * Set cover.
      *
      * @param string $cover
+     *
      * @return Album
      */
     public function setCover($cover)
     {
         // @codeCoverageIgnoreStart
         $this->cover = $cover;
+
         return $this;
         // @codeCoverageIgnoreEnd
     }
 
     /**
-     * Get cover
+     * Get cover.
      *
      * @return string
      */

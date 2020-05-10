@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace AudioCoreEntity\Entity;
 
@@ -12,6 +14,16 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class RadioHit
 {
+    /**
+     * @ORM\ManyToMany(targetEntity="Genre", cascade={"persist", "detach", "refresh"})
+     * @ORM\JoinTable(name="radiohit_genre",
+     *      joinColumns={@ORM\JoinColumn(name="radiohit_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="genre_id", referencedColumnName="id")}
+     *      )
+     *
+     * @var ArrayCollection<Genre>
+     */
+    protected $genres;
     /**
      * @var int
      *
@@ -34,23 +46,21 @@ class RadioHit
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Genre", cascade={"persist", "detach", "refresh"})
-     * @ORM\JoinTable(name="radiohit_genre",
-     *      joinColumns={@ORM\JoinColumn(name="radiohit_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="genre_id", referencedColumnName="id")}
-     *      )
-     *
-     * @var ArrayCollection<Genre>
-     **/
-    protected $genres;
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetime")
      */
     private $created;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->genres  = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->created = new \DateTime('now');
+    }
 
     /**
      * Get id.
@@ -133,14 +143,6 @@ class RadioHit
     {
         return $this->created;
     }
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->genres  = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->created = new \DateTime('now');
-    }
 
     /**
      * Add genres.
@@ -149,7 +151,7 @@ class RadioHit
      *
      * @return RadioHit
      */
-    public function addGenre(\AudioCoreEntity\Entity\Genre $genres)
+    public function addGenre(Genre $genres)
     {
         $this->genres->add($genres);
 
@@ -161,7 +163,7 @@ class RadioHit
      *
      * @param \AudioCoreEntity\Entity\Genre $genres
      */
-    public function removeGenre(\AudioCoreEntity\Entity\Genre $genres): void
+    public function removeGenre(Genre $genres): void
     {
         $this->genres->removeElement($genres);
     }

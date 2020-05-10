@@ -9,6 +9,8 @@ $finder = PhpCsFixer\Finder::create()
 return PhpCsFixer\Config::create()
     ->setRules([
         '@PSR2' => true,
+        '@PhpCsFixer' => true,
+        '@Symfony' => true,
         '@PHP73Migration' => true,
         '@PHP71Migration:risky' => true,
         'binary_operator_spaces' => [

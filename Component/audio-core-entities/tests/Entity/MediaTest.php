@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace AudioCoreEntity\Tests\Entity;
@@ -6,6 +7,10 @@ namespace AudioCoreEntity\Tests\Entity;
 use AudioCoreEntity\Tests\EntityBase;
 use Doctrine\Common\Collections\ArrayCollection;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class MediaTest extends EntityBase
 {
     private const FAKE_GENRE             = 'Genre';
@@ -15,7 +20,7 @@ class MediaTest extends EntityBase
     private const FAKE_TITLE             = 'Title';
     private const FAKE_DIR_NAME          = 'DirName';
     private const FAKE_FILE_NAME         = 'FileName.mp3';
-    private const FILEPATH               = __DIR__ . '/' . self::FAKE_FILE_NAME;
+    private const FILEPATH               = __DIR__.'/'.self::FAKE_FILE_NAME;
 
     protected static $hash;
 
@@ -32,13 +37,11 @@ class MediaTest extends EntityBase
         parent::setUp();
     }
 
-
     protected function tearDown(): void
     {
         parent::tearDown();
         $this->cleanFixtures();
     }
-
 
     public function testMediaMethods(): void
     {
@@ -92,7 +95,6 @@ class MediaTest extends EntityBase
         $media->getId();
         $this->assertEquals($media->getType(), 2);
     }
-
 
     public function testWrongBpm(): void
     {

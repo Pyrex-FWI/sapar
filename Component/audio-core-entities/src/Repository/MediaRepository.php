@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace AudioCoreEntity\Repository;
 
@@ -8,24 +10,26 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sapar\Component\Id3\Metadata\Id3Metadata;
 
 /**
- * MediaRepository
+ * MediaRepository.
  *
  * @method MediaRepository|null find($id, $lockMode = null, $lockVersion = null)
  * @method MediaRepository|null findOneBy(array $criteria, array $orderBy = null)
  * @method MediaRepository[]    findAll()
  * @method MediaRepository[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- * @property EntityManagerInterface   $_em
+ *
+ * @property EntityManagerInterface $_em
  */
 class MediaRepository extends CoreRepository
 {
-    public function __construct(EntityManagerInterface $em)
-    {
-        parent::__construct($em, $em->getClassMetadata(Media::class));
-    }
     /**
      * @var Genre[]
      */
     private $cachecGenres;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        parent::__construct($em, $em->getClassMetadata(Media::class));
+    }
 
     public function updateMeta(int $getId, ?Id3Metadata $id3): void
     {
@@ -64,7 +68,7 @@ class MediaRepository extends CoreRepository
         }
 
         if ($_allGenres[$getGenre] ?? false) {
-            /** @var Genre $_allGenres */
+            // @var Genre $_allGenres
             return $_allGenres[$getGenre]->getName();
         }
 

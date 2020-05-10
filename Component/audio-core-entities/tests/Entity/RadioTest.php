@@ -1,18 +1,24 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace AudioCoreEntity\Tests\Entity;
 
 use AudioCoreEntity\Tests\EntityBase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class RadioTest extends EntityBase
 {
     public function testGenreMethods(): void
     {
         $radio   = self::getRadioInstance();
         $hitUrls = [
-            "http://someurl.com/toto/dld?dff=f",
-            "http://someurl.com/toto/dld?dff=f",
-            "http://someurl.com/toto/dld?dff=f",
+            'http://someurl.com/toto/dld?dff=f',
+            'http://someurl.com/toto/dld?dff=f',
+            'http://someurl.com/toto/dld?dff=f',
         ];
         $radio
             ->setName('NRJ')

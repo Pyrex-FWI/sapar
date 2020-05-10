@@ -1,15 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace AudioCoreEntity\Repository;
 
 use AudioCoreEntity\Entity\ImportMedia;
 use AudioCoreEntity\Entity\Media;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Mapping;
 use Doctrine\ORM\Query\Expr\Join;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method ImportMedia|null find($id, $lockMode = null, $lockVersion = null)
@@ -30,6 +28,7 @@ class ImportMediaRepository extends CoreRepository
     public function removeDuplicates()
     {
         $query = $this->createQueryBuilder('im');
+
         return $query
             ->delete()
             ->where($query->expr()->in(
@@ -42,27 +41,24 @@ class ImportMediaRepository extends CoreRepository
             ))
             ->getQuery()->execute();
     }
-    /**
-     * @return int
-     */
+
     public function countNewFilesToImport(): int
     {
         $allNewIndexCount         = $this->count([]);
         $alreadyExistInMediaCount = $this->countExistingFileInMedias();
 
-        return ($allNewIndexCount - $alreadyExistInMediaCount);
+        return $allNewIndexCount - $alreadyExistInMediaCount;
     }
 
     public function countExistingFileInMedias(): int
     {
-        $q = $this->createQueryBuilder('i')
+        return $this->createQueryBuilder('i')
             ->select('count(i.id)')
             ->leftJoin(Media::class, 'media', Join::WITH, 'media.hash = i.hash')
             ->andWhere('media.hash IS NOT NULL')
             ->getQuery()
             ->getSingleScalarResult()
         ;
-        return $q;
     }
 
     /*

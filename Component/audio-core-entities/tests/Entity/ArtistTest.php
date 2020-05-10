@@ -1,9 +1,15 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace AudioCoreEntity\Tests\Entity;
 
 use AudioCoreEntity\Tests\EntityBase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class ArtistTest extends EntityBase
 {
     public function testGenreMethods(): void
@@ -12,7 +18,8 @@ class ArtistTest extends EntityBase
         $media  = self::getMediaInstance();
         $artist
             ->setName('Artist')
-            ->setMedias($media);
+            ->setMedias($media)
+        ;
         $artist->getId();
         $artist->getMedias();
         $this->assertEquals('Artist', $artist->getName());

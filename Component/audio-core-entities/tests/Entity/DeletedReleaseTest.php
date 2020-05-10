@@ -1,9 +1,15 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace AudioCoreEntity\Tests\Entity;
 
 use AudioCoreEntity\Tests\EntityBase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class DeletedReleaseTest extends EntityBase
 {
     public function testGenreMethods(): void
