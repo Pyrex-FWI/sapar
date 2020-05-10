@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace AudioCoreEntity\Tests\Entity;
 
@@ -6,7 +6,7 @@ use AudioCoreEntity\Tests\EntityBase;
 
 class GenreTest extends EntityBase
 {
-    public function testGenreMethods()
+    public function testGenreMethods(): void
     {
         $genre = self::getGenreInstance();
         $media = self::getMediaInstance();

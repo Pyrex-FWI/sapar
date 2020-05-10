@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace AudioCoreEntity\Entity;
 
@@ -606,7 +606,7 @@ class Media
      */
     public function setYear($year)
     {
-        if (preg_match('/\d{4}/', $year)) {
+        if (preg_match('/\d{4}/', (string) $year)) {
             $this->year = $year;
         }
         return $this;

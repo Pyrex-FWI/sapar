@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace AudioCoreEntity\Entity;
 
@@ -161,7 +161,7 @@ class RadioHit
      *
      * @param \AudioCoreEntity\Entity\Genre $genres
      */
-    public function removeGenre(\AudioCoreEntity\Entity\Genre $genres)
+    public function removeGenre(\AudioCoreEntity\Entity\Genre $genres): void
     {
         $this->genres->removeElement($genres);
     }

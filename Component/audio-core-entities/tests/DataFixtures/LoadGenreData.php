@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace AudioCoreEntity\Tests\DataFixtures;
 
@@ -8,7 +8,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class LoadGenreData implements FixtureInterface
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $genre = new Genre();
         $genre->setName('Pop');

@@ -40,7 +40,7 @@ class MediaTest extends EntityBase
     }
 
 
-    public function testMediaMethods()
+    public function testMediaMethods(): void
     {
         $media = self::getMediaInstance();
         $genre = self::getGenreInstance(self::FAKE_GENRE);
@@ -94,25 +94,25 @@ class MediaTest extends EntityBase
     }
 
 
-    public function testWrongBpm()
+    public function testWrongBpm(): void
     {
         $this->assertNull(self::getMediaInstance()->setBpm(-100.67)->getBpm());
         $this->assertEquals(self::getMediaInstance()->setBpm(+100.67)->getBpm(), 100.67);
     }
 
-    public function testWrongType()
+    public function testWrongType(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         self::getMediaInstance()->setType(100);
     }
 
-    public function testTypes()
+    public function testTypes(): void
     {
         $this->assertArrayHasKey('audio', self::getMediaInstance()->getTypes());
         $this->assertArrayHasKey('video', self::getMediaInstance()->getTypes());
     }
 
-    public function testWrongYear()
+    public function testWrongYear(): void
     {
         $this->assertNull(self::getMediaInstance()->setYear('toto')->getYear());
     }

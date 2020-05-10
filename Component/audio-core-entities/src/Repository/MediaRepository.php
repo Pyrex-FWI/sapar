@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace AudioCoreEntity\Repository;
 
@@ -27,7 +27,7 @@ class MediaRepository extends CoreRepository
      */
     private $cachecGenres;
 
-    public function updateMeta(int $getId, ?Id3Metadata $id3)
+    public function updateMeta(int $getId, ?Id3Metadata $id3): void
     {
         /** @var Media $media */
         $media = $this->_em->getReference(Media::class, $getId);
@@ -42,7 +42,7 @@ class MediaRepository extends CoreRepository
         $this->_em->persist($media);
     }
 
-    public function flush()
+    public function flush(): void
     {
         $this->_em->flush();
     }
