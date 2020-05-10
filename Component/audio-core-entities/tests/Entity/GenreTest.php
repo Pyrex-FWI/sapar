@@ -13,7 +13,7 @@ use AudioCoreEntity\Tests\EntityBase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \AudioCoreEntity\Entity\Genre
  */
 final class GenreTest extends EntityBase
 {

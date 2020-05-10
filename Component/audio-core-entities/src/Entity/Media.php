@@ -117,9 +117,9 @@ class Media
      */
     protected $tagged = false;
     /**
-     * @var int
+     * @var int|float
      *
-     * @Column(type="integer", nullable=true)
+     * @Column(type="float", nullable=true)
      * @Groups({"media-read"})
      */
     protected $score = 0;
@@ -534,15 +534,20 @@ class Media
         return $this;
     }
 
-    public function getScore(): int
+    /**
+     * @return float|int
+     */
+    public function getScore()
     {
         return $this->score;
     }
 
     /**
+     * @param mixed $score
+     *
      * @return Media
      */
-    public function setScore(int $score)
+    public function setScore($score)
     {
         if (filter_var($score, FILTER_VALIDATE_INT) || filter_var($score, FILTER_VALIDATE_FLOAT)) {
             $this->score = $score;

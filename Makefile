@@ -23,7 +23,7 @@ pull:
 up: pull
 	docker-compose up -d --build --remove-orphans
 build:
-	cd Devops/docker/ && $(MAKE) build
+	cd Devops/docker-sapar/base && docker build -t yemistikris/docker-sapar:base . && cd ../../..
 build-sapar:
 	docker build -t yemistikris/docker-sapar:sapar -f Devops/docker-sapar/sapar/Dockerfile  .
 sapar-bash:
@@ -55,10 +55,10 @@ update-sapar-deps:
 	docker-compose run --rm --no-deps -w /var/www/App/Symfony4 phpsf5  bash -c 'composer update pyrex-fwi/* --no-scripts' ; \
 	docker-compose run --rm --no-deps  phpsf5  bash -c 'composer update pyrex-fwi/* --no-scripts'
 
-create-database:
+database-update-schema:
 	docker-compose run --rm --no-deps $(SF5) php -dmemory_limit=-1 bin/console doctrine:schema:update --force -vv
 
-install: install-vendors create-database reload
+install: install-vendors database-update-schema reload
 
 index: create-index-file split-index-file import-splited-files-into-db index-merge-new index-populate-elastic
 
@@ -101,9 +101,11 @@ monorepo-split:
 
 remove-bd:
 	docker-compose exec -w /var/www/ $(SF5) bash -c "rm -f ${DATABASE_SQLITE_FILE} && touch ${DATABASE_SQLITE_FILE}"
-reset-database: remove-bd create-database
+reset-database: remove-bd database-update-schema
 
 reset-tag-status:
-	docker-compose exec ${SF5} php bin/console doctrine:query:sql "UPDATE media set tagged=0 where id > 0 " -q
+	docker-compose exec ${SF5} php bin/console doctrine:query:sql "UPDATE media set tagged=0 where id > 0 " -q ;\
+	docker-compose exec ${SF5} php bin/console doctrine:query:sql "DELETE FROM media_genre" -q ;\
+	docker-compose exec ${SF5} php bin/console doctrine:query:sql "DELETE FROM media_artist" -q
 
 force-update-tags: reset-tag-status update-tags

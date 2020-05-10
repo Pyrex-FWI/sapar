@@ -14,7 +14,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \AudioCoreEntity\Entity\Media
+ * @covers \AudioCoreEntity\Repository\MediaRepository
  */
 final class MediaTest extends EntityBase
 {
@@ -97,7 +98,8 @@ final class MediaTest extends EntityBase
         static::assertSame($media->getScore(), 3);
         static::assertSame($media->getVersion(), 'Explicit');
         static::assertSame($media->getDirName(), basename(__DIR__));
-        $media->getId();
+        static::assertIsInt($media->getId());
+        static::assertFalse($media->getExist());
         static::assertSame($media->getType(), 2);
     }
 

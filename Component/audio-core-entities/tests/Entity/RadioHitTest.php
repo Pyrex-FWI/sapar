@@ -13,7 +13,7 @@ use AudioCoreEntity\Tests\EntityBase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \AudioCoreEntity\Entity\RadioHit
  */
 final class RadioHitTest extends EntityBase
 {

@@ -1,5 +1,44 @@
 parameters:
+    testsuites:
+        qa:
+            tasks:
+                - phpcsfixer2
+                - phpmd
+                - phpstan
+                - psalm
+        security:
+            tasks:
+                - securitychecker
+        tests:
+            tasks:
+                - phpunit
+                - xinfection
+        # Specify the test-suite for the git:commit-msg command:
+        git_commit_msg:
+            tasks: []
+        # Specify the test-suite for the git:pre-commit command:
+        git_pre_commit:
+            tasks: []
     tasks:
+        xinfection:
+            threads: ~
+            test_framework: ~
+            only_covered: false
+            configuration: infection.json.dist
+            min_msi: ~
+            min_covered_msi: ~
+            mutators: []
+            ignore_patterns: []
+            triggered_by: [php]
+#        phpcpd:
+#            directory: ['.']
+#            exclude: ['vendor']
+#            names_exclude: []
+#            regexps_exclude: []
+#            fuzzy: false
+#            min_lines: 5
+#            min_tokens: 70
+#            triggered_by: ['php']
         phpcsfixer2:
             config: .php_cs
             allow_risky: true
@@ -26,6 +65,11 @@ parameters:
             threads: 1
             triggered_by: ['php']
             show_info: false
+        phpunit:
+            config_file: phpunit.xml.dist
+            testsuite: ~
+            group: []
+            always_execute: false
         securitychecker:
             lockfile: ./composer.lock
             format: ~

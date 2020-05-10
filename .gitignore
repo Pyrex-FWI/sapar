@@ -89,7 +89,7 @@ Temporary Items
 Devops/aws/ec2/ec2/
 archive_file.db
 data.db
-/Component/id3/coverage/
+/Component/**/coverage/
 /App/node_tests/node_music_metadata/node_modules/
 /App/node_tests/node_music_metadata_2/node_modules/
 /App/node_tests/node_test_01/node_modules/
@@ -99,3 +99,6 @@ data.db
 /App/Symfony5/var/cache/
 /App/Symfony5/var/log/
 /Component/id3/report/
+/*.db
+/Component/audio-core-entities/tests/cache/
+/Component/audio-core-entities/infection.log
