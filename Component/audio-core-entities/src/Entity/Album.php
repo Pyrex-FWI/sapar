@@ -1,8 +1,10 @@
 <?php
 
 declare(strict_types=1);
+
 /**
- * @author: Pyrex-Fwi
+ * This file is part of the Sapar project.
+ * @author Christophe Pyree <pyrex-fwi@gmail.com>
  */
 
 namespace AudioCoreEntity\Entity;

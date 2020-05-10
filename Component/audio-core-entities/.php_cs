@@ -16,7 +16,13 @@ return PhpCsFixer\Config::create()
         'binary_operator_spaces' => [
             'operators' => ['=' => 'align_single_space_minimal']
         ],
-        'array_syntax' => ['syntax' => 'short'],
+        //'array_syntax' => ['syntax' => 'short'],
+        'header_comment' => [
+            'commentType' => 'PHPDoc',
+            'header' => 'This file is part of the Sapar project.
+@author Christophe Pyree <pyrex-fwi@gmail.com>'
+        ],
+        '@Symfony:risky' => true,
     ])
     ->setFinder($finder)
     ;

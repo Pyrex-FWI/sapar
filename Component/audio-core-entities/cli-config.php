@@ -1,6 +1,12 @@
 <?php
 
 declare(strict_types=1);
+
+/**
+ * This file is part of the Sapar project.
+ * @author Christophe Pyree <pyrex-fwi@gmail.com>
+ */
+
 require_once __DIR__.'/tests/autoload.php';
 
 use Doctrine\ORM\Tools\Console\ConsoleRunner;

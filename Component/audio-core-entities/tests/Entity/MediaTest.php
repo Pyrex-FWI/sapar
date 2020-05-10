@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the Sapar project.
+ * @author Christophe Pyree <pyrex-fwi@gmail.com>
+ */
+
 namespace AudioCoreEntity\Tests\Entity;
 
 use AudioCoreEntity\Tests\EntityBase;
@@ -26,7 +31,7 @@ class MediaTest extends EntityBase
 
     public static function setUpBeforeClass(): void
     {
-        self::$hash = \md5(self::FILEPATH);
+        self::$hash = md5(self::FILEPATH);
 
         parent::setUpBeforeClass();
         self::cleanFixtures();
@@ -83,8 +88,8 @@ class MediaTest extends EntityBase
         $this->assertEquals($media->getLinkedGenres()->get(0), $genre);
         $this->assertEquals($media->getArtists()->get(0), $artist);
         $this->assertEquals($media->getBpm(), 120);
-        $this->assertEquals(get_class($media->getDeletedAt()), \DateTimeImmutable::class);
-        $this->assertEquals(get_class($media->getReleaseDate()), \DateTimeImmutable::class);
+        $this->assertEquals(\get_class($media->getDeletedAt()), \DateTimeImmutable::class);
+        $this->assertEquals(\get_class($media->getReleaseDate()), \DateTimeImmutable::class);
         $this->assertEquals($media->getExist(), false);
         $this->assertEquals($media->getFileName(), self::FAKE_FILE_NAME);
         $this->assertEquals($media->getHash(), self::$hash);

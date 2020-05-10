@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the Sapar project.
+ * @author Christophe Pyree <pyrex-fwi@gmail.com>
+ */
+
 namespace AudioCoreEntity\Tests;
 
 require_once 'autoload.php';
@@ -25,12 +30,12 @@ class bootstrap
     {
         $yaml = new Parser();
 
-        return $yaml->parse(file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'/config/parameters.yml'));
+        return $yaml->parse(file_get_contents(__DIR__.\DIRECTORY_SEPARATOR.'/config/parameters.yml'));
     }
 
     public static function getEntityManager()
     {
-        $paths     = [__DIR__.DIRECTORY_SEPARATOR.'../src/Entity'];
+        $paths     = [__DIR__.\DIRECTORY_SEPARATOR.'../src/Entity'];
         $isDevMode = true;
 
         $dbParams = [

@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the Sapar project.
+ * @author Christophe Pyree <pyrex-fwi@gmail.com>
+ */
+
 namespace AudioCoreEntity\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -291,8 +296,8 @@ class Media
      */
     public function setFilePath($filePath)
     {
-        $pattern     = '#('.DIRECTORY_SEPARATOR.')\1+#';
-        $replacement = DIRECTORY_SEPARATOR;
+        $pattern     = '#('.\DIRECTORY_SEPARATOR.')\1+#';
+        $replacement = \DIRECTORY_SEPARATOR;
         $filePath    = preg_replace($pattern, $replacement, $filePath);
 
         $this->filePath = $filePath;
@@ -322,7 +327,7 @@ class Media
      */
     public function setHash($hash)
     {
-        if (32 == strlen($hash)) {
+        if (32 == \strlen($hash)) {
             $this->hash = $hash;
         }
 
@@ -374,7 +379,7 @@ class Media
      */
     public function setType($type)
     {
-        if (!in_array($type, self::getTypes())) {
+        if (!\in_array($type, self::getTypes())) {
             throw new \InvalidArgumentException(sprintf('%s is not a valid type. See %s', $type, self::class.'::getTypes()'));
         }
 
@@ -660,7 +665,7 @@ class Media
         return $this->genre;
     }
 
-    public function setGenre(string $genre): Media
+    public function setGenre(string $genre): self
     {
         $this->genre = $genre;
 
