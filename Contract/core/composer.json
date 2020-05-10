@@ -1,0 +1,10 @@
+{
+    "name": "pyrex-fwi/core-contracts",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Sapar\\Contract\\": "src"
+        }
+    },
+    "require": {}
+}

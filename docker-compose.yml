@@ -29,7 +29,7 @@ services:
     <<: *image
     working_dir: /var/www/App/Symfony5
     <<: *volumeAnchor
-    command: [ '/var/www/Devops/scripts/wait-for-it.sh', '--timeout=60','rabbitmq:5672', '--', "supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf" ]
+    command: [ '/usr/bin/wait-for-it.sh', '--timeout=60', 'rabbitmq:5672', '--', "supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf" ]
     environment:
       - NB_ID3_CONSUMER=${NB_ID3_CONSUMER}
     depends_on:
@@ -40,6 +40,8 @@ services:
   # https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
   elasticsearch:
     image: elasticsearch:6.8.8 # 6.8.4 out
+    volumes:
+      - elsatic_data:/usr/share/elasticsearch/data
     environment:
       - "discovery.type=single-node"
       - "bootstrap.memory_lock=true"
@@ -48,18 +50,13 @@ services:
       - "http.cors.enabled=true"
       - "http.cors.allow-origin=*"
 
-  # elasticsearch head manager (fork of mobz/elasticsearch-head for elasticsearch 6)
-  # /!\ it isn't an official image /!\
-  # https://hub.docker.com/r/tobias74/elasticsearch-head
-  elasticsearch-head:
-    container_name: sb-elasticsearch-head
-    depends_on:
-      - elasticsearch
-    image: tobias74/elasticsearch-head:6
-
   rabbitmq:
     image: rabbitmq:3-management-alpine
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
       - RABBITMQ_DEFAULT_VHOST=/sapar_index
+
+volumes:
+  elsatic_data:
+    driver: local
