@@ -9,7 +9,7 @@ class DeletedReleaseTest extends EntityBase
     public function testGenreMethods(): void
     {
         $deletedRelease = self::getDeletedReleaseInstance();
-        $now = new \DateTime('now');
+        $now            = new \DateTime('now');
         $deletedRelease
             ->setAlbumName('AlbumName')
             ->setArtistName('ArtistName')

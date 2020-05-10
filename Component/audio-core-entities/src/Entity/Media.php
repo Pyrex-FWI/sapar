@@ -26,8 +26,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class Media
 {
-    public const MEDIA_TYPE_AUDIO          = 1;
-    public const MEDIA_TYPE_VIDEO          = 2;
+    public const MEDIA_TYPE_AUDIO = 1;
+    public const MEDIA_TYPE_VIDEO = 2;
     /**
      * @var string
      *
@@ -180,14 +180,14 @@ class Media
     public function __construct()
     {
         $this->linkedGenres = new ArrayCollection();
-        $this->artists = new ArrayCollection();
+        $this->artists      = new ArrayCollection();
     }
 
     public static function getTypes()
     {
         return [
-            'audio'         => self::MEDIA_TYPE_AUDIO,
-            'video'         => self::MEDIA_TYPE_VIDEO,
+            'audio' => self::MEDIA_TYPE_AUDIO,
+            'video' => self::MEDIA_TYPE_VIDEO,
         ];
     }
 
@@ -286,14 +286,14 @@ class Media
      */
     public function setFilePath($filePath)
     {
-        $pattern = '#(' .DIRECTORY_SEPARATOR.')\1+#';
+        $pattern     = '#(' .DIRECTORY_SEPARATOR.')\1+#';
         $replacement = DIRECTORY_SEPARATOR;
-        $filePath = preg_replace($pattern, $replacement, $filePath);
+        $filePath    = preg_replace($pattern, $replacement, $filePath);
 
         $this->filePath = $filePath;
 
         $this->exist = file_exists($filePath) ? true : true;
-        $splFile = new \SplFileInfo($this->filePath);
+        $splFile     = new \SplFileInfo($this->filePath);
         $this->setFileName($splFile->getBasename());
         $this->setHash(md5($this->filePath));
         $paths = explode('/', $splFile->getPath());

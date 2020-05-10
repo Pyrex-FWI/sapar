@@ -47,7 +47,7 @@ class ImportMediaRepository extends CoreRepository
      */
     public function countNewFilesToImport(): int
     {
-        $allNewIndexCount = $this->count([]);
+        $allNewIndexCount         = $this->count([]);
         $alreadyExistInMediaCount = $this->countExistingFileInMedias();
 
         return ($allNewIndexCount - $alreadyExistInMediaCount);

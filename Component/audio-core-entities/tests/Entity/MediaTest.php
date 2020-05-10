@@ -8,14 +8,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class MediaTest extends EntityBase
 {
-    private const FAKE_GENRE = 'Genre';
-    private const FAKE_ADDITIONAL_GENRE = 'Additional genre';
-    private const FAKE_ARTIST = 'artist';
+    private const FAKE_GENRE             = 'Genre';
+    private const FAKE_ADDITIONAL_GENRE  = 'Additional genre';
+    private const FAKE_ARTIST            = 'artist';
     private const FAKE_ADDITIONAL_ARTIST = 'Additional artist';
-    private const FAKE_TITLE = 'Title';
-    private const FAKE_DIR_NAME = 'DirName';
-    private const FAKE_FILE_NAME = 'FileName.mp3';
-    private const FILEPATH = __DIR__ . '/' . self::FAKE_FILE_NAME;
+    private const FAKE_TITLE             = 'Title';
+    private const FAKE_DIR_NAME          = 'DirName';
+    private const FAKE_FILE_NAME         = 'FileName.mp3';
+    private const FILEPATH               = __DIR__ . '/' . self::FAKE_FILE_NAME;
 
     protected static $hash;
 
@@ -42,10 +42,10 @@ class MediaTest extends EntityBase
 
     public function testMediaMethods(): void
     {
-        $media = self::getMediaInstance();
-        $genre = self::getGenreInstance(self::FAKE_GENRE);
-        $addGenre = self::getGenreInstance(self::FAKE_ADDITIONAL_GENRE);
-        $artist = self::getArtistInstance(self::FAKE_ARTIST);
+        $media     = self::getMediaInstance();
+        $genre     = self::getGenreInstance(self::FAKE_GENRE);
+        $addGenre  = self::getGenreInstance(self::FAKE_ADDITIONAL_GENRE);
+        $artist    = self::getArtistInstance(self::FAKE_ARTIST);
         $addArtist = self::getArtistInstance(self::FAKE_ADDITIONAL_ARTIST);
 
         $media

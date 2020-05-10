@@ -11,6 +11,9 @@ return PhpCsFixer\Config::create()
         '@PSR2' => true,
         '@PHP73Migration' => true,
         '@PHP71Migration:risky' => true,
+        'binary_operator_spaces' => [
+            'operators' => ['=' => 'align_single_space_minimal']
+        ],
         'array_syntax' => ['syntax' => 'short'],
     ])
     ->setFinder($finder)

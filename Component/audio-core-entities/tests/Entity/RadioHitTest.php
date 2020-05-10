@@ -9,9 +9,9 @@ class RadioHitTest extends EntityBase
     public function testGenreMethods(): void
     {
         $radioHit = self::getRadioHitInstance();
-        $genre = self::getGenreInstance('Genre');
-        $genre2 = self::getGenreInstance('Genre2');
-        $created = new \DateTime('now');
+        $genre    = self::getGenreInstance('Genre');
+        $genre2   = self::getGenreInstance('Genre2');
+        $created  = new \DateTime('now');
         $radioHit
             ->setArtist('Artist')
             ->setTitle('Title')

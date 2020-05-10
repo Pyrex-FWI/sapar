@@ -8,7 +8,7 @@ class RadioTest extends EntityBase
 {
     public function testGenreMethods(): void
     {
-        $radio = self::getRadioInstance();
+        $radio   = self::getRadioInstance();
         $hitUrls = [
             "http://someurl.com/toto/dld?dff=f",
             "http://someurl.com/toto/dld?dff=f",

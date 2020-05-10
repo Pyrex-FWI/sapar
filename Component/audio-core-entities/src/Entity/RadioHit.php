@@ -138,7 +138,7 @@ class RadioHit
      */
     public function __construct()
     {
-        $this->genres = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->genres  = new \Doctrine\Common\Collections\ArrayCollection();
         $this->created = new \DateTime('now');
     }
 

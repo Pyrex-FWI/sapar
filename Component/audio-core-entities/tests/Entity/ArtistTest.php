@@ -9,7 +9,7 @@ class ArtistTest extends EntityBase
     public function testGenreMethods(): void
     {
         $artist = self::getArtistInstance();
-        $media = self::getMediaInstance();
+        $media  = self::getMediaInstance();
         $artist
             ->setName('Artist')
             ->setMedias($media);

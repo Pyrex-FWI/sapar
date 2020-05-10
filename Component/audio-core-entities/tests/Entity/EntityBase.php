@@ -32,9 +32,9 @@ abstract class EntityBase extends TestCase
 
     public static function setUpBeforeClass(): void
     {
-        self::$em = bootstrap::getEntityManager();
+        self::$em               = bootstrap::getEntityManager();
         self::$mediaRespository = self::$em->getRepository(Media::class);
-        self::$genreRepository = self::$em->getRepository(Genre::class);
+        self::$genreRepository  = self::$em->getRepository(Genre::class);
         self::$artistRepository = self::$em->getRepository(Artist::class);
     }
 
