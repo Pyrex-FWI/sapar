@@ -26,10 +26,6 @@ class RadioHitRepository extends CoreRepository
     }
 
     /**
-     * @param $minSimilarity
-     * @param $artist
-     * @param $title
-     *
      * @return RadioHit[]
      */
     public function getSimilar(string $artist, string $title, int $minSimilarity = 51)

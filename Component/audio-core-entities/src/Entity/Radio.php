@@ -98,9 +98,7 @@ class Radio
     }
 
     /**
-     * Set hitPages.
-     *
-     * @return Radio
+     * @return $this
      */
     public function setHitPagesUrls(array $hitPagesUrls)
     {

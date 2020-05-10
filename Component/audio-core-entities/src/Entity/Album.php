@@ -55,6 +55,13 @@ class Album
      */
     private $cover;
 
+    public function __construct(?string $name = null)
+    {
+        if ($name) {
+            $this->setName($name);
+        }
+    }
+
     /**
      * Get id.
      *

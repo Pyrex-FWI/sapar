@@ -190,7 +190,7 @@ class Media
         $this->artists      = new ArrayCollection();
     }
 
-    public static function getTypes()
+    public static function getTypes(): array
     {
         return [
             'audio' => self::MEDIA_TYPE_AUDIO,
@@ -299,7 +299,7 @@ class Media
         $this->setFileName($splFile->getBasename());
         $this->setHash(md5($this->filePath));
         $paths = explode('/', $splFile->getPath());
-        $this->setDirName(end($paths));
+        $this->setDirName(''.end($paths));
 
         return $this;
     }
@@ -591,7 +591,7 @@ class Media
         return $this;
     }
 
-    public function isUntaged()
+    public function isUntaged(): bool
     {
         // @codeCoverageIgnoreStart
         return !$this->tagged;

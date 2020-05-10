@@ -177,7 +177,7 @@ class RadioHit
     /**
      * Get genres.
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection<int, Genre>
      */
     public function getGenres()
     {

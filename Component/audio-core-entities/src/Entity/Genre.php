@@ -54,12 +54,17 @@ class Genre
     /**
      * @ORM\ManyToMany(targetEntity="\AudioCoreEntity\Entity\Media",mappedBy="linkedGenres")
      * @Groups({"genre-read"})
+     *
+     * @var ArrayCollection
      */
     private $medias;
 
-    public function __construct($name = null)
+    public function __construct(?string $name = null)
     {
-        $this->setName($name);
+        if ($name) {
+            $this->setName($name);
+        }
+
         $this->medias = new ArrayCollection();
     }
 

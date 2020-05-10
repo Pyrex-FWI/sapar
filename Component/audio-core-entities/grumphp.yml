@@ -3,6 +3,14 @@ parameters:
         phpcsfixer2:
             config: .php_cs
             allow_risky: true
+        phpstan:
+            autoload_file: ~
+            configuration: .phpstan.neon
+            level: 7
+            force_patterns: []
+            ignore_patterns: []
+            triggered_by: ['php']
+            memory_limit: "-1"
         psalm:
             config: psalm.xml
             ignore_patterns: []

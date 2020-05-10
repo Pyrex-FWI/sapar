@@ -46,11 +46,9 @@ abstract class EntityBase extends TestCase
     }
 
     /**
-     * @param null $name
-     *
      * @return Genre
      */
-    public static function getGenreInstance($name = null)
+    public static function getGenreInstance(?string $name = null)
     {
         return new Genre($name);
     }
@@ -61,11 +59,9 @@ abstract class EntityBase extends TestCase
     }
 
     /**
-     * @param null $name
-     *
-     * @return Genre
+     * @return Artist
      */
-    public static function getArtistInstance($name = null)
+    public static function getArtistInstance(?string $name = null)
     {
         return new Artist($name);
     }

@@ -26,13 +26,24 @@ use Symfony\Component\Yaml\Parser;
 
 class bootstrap
 {
+    /**
+     * @return array|mixed|\stdClass|\Symfony\Component\Yaml\Tag\TaggedValue|null
+     */
     public static function getConf()
     {
         $yaml = new Parser();
 
-        return $yaml->parse(file_get_contents(__DIR__.\DIRECTORY_SEPARATOR.'/config/parameters.yml'));
+        $yamlString = file_get_contents(__DIR__.\DIRECTORY_SEPARATOR.'/config/parameters.yml');
+
+        return $yaml->parse($yamlString ?: '');
     }
 
+    /**
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\ORM\ORMException
+     *
+     * @return EntityManager
+     */
     public static function getEntityManager()
     {
         $paths     = [__DIR__.\DIRECTORY_SEPARATOR.'../src/Entity'];

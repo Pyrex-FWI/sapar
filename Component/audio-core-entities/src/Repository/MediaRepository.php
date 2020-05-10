@@ -73,6 +73,7 @@ class MediaRepository extends CoreRepository
         $_allGenres = [];
 
         if (!$this->cachecGenres) {
+            /** @var Genre[] $_allGenres */
             $_allGenres = (array) $this->_em->getRepository(Genre::class)->findAll();
 
             foreach ($_allGenres as $item) {

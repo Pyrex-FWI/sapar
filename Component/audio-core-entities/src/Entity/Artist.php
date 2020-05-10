@@ -51,15 +51,15 @@ class Artist
     /**
      * @ORM\ManyToMany(targetEntity="\AudioCoreEntity\Entity\Media",mappedBy="artists")
      * @Groups({"artist-read"})
+     *
+     * @var ArrayCollection
      */
     private $medias;
 
     /**
      * Artist constructor.
-     *
-     * @param null $name
      */
-    public function __construct($name = null)
+    public function __construct(?string $name = null)
     {
         if ($name) {
             $this->setName($name);
