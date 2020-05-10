@@ -60,7 +60,7 @@ class DeletedRelease
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -83,7 +83,7 @@ class DeletedRelease
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getRawName()
     {
@@ -106,7 +106,7 @@ class DeletedRelease
     /**
      * Get genre
      *
-     * @return string 
+     * @return string
      */
     public function getGenre()
     {
@@ -129,7 +129,7 @@ class DeletedRelease
     /**
      * Get albumName
      *
-     * @return string 
+     * @return string
      */
     public function getAlbumName()
     {
@@ -152,7 +152,7 @@ class DeletedRelease
     /**
      * Get artistName
      *
-     * @return string 
+     * @return string
      */
     public function getArtistName()
     {
@@ -175,7 +175,7 @@ class DeletedRelease
     /**
      * Get deletedDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDeletedDate()
     {

@@ -2,13 +2,11 @@
 
 namespace AudioCoreEntity\Tests\Entity;
 
-
 use AudioCoreEntity\Tests\EntityBase;
 
 class GenreTest extends EntityBase
 {
-
-    public function  testGenreMethods()
+    public function testGenreMethods()
     {
         $genre = self::getGenreInstance();
         $media = self::getMediaInstance();

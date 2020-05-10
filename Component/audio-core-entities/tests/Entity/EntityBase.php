@@ -42,12 +42,12 @@ abstract class EntityBase extends TestCase
      * @param null $name
      * @return Genre
      */
-    static public function getGenreInstance($name = null)
+    public static function getGenreInstance($name = null)
     {
         return new Genre($name);
     }
 
-    static public function getMediaInstance()
+    public static function getMediaInstance()
     {
         return new Media();
     }
@@ -55,7 +55,7 @@ abstract class EntityBase extends TestCase
     /**
      * @param null $name
      * @return Genre
-     */    static public function getArtistInstance($name = null)
+     */    public static function getArtistInstance($name = null)
     {
         return new Artist($name);
     }
@@ -64,28 +64,28 @@ abstract class EntityBase extends TestCase
      * @param null $name
      * @return Album
      */
-    static public function getAlbumInstance($name = null)
+    public static function getAlbumInstance($name = null)
     {
         return new Album($name);
     }
     /**
      * @return DeletedRelease
      */
-    static public function getDeletedReleaseInstance()
+    public static function getDeletedReleaseInstance()
     {
         return new DeletedRelease();
     }
     /**
      * @return Radio
      */
-    static public function getRadioInstance()
+    public static function getRadioInstance()
     {
         return new Radio();
     }
     /**
      * @return RadioHit
      */
-    static public function getRadioHitInstance()
+    public static function getRadioHitInstance()
     {
         return new RadioHit();
     }

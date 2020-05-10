@@ -52,7 +52,7 @@ class Album
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -75,7 +75,7 @@ class Album
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -99,7 +99,7 @@ class Album
     /**
      * Get cover
      *
-     * @return string 
+     * @return string
      */
     public function getCover()
     {

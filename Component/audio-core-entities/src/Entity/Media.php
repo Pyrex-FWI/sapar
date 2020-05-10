@@ -3,9 +3,17 @@
 namespace AudioCoreEntity\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping\{Entity, Table, Index, UniqueConstraint, Column, Id, GeneratedValue, ManyToMany, JoinTable, JoinColumn};
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Table;
+use Doctrine\ORM\Mapping\Index;
+use Doctrine\ORM\Mapping\UniqueConstraint;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Symfony\Component\Serializer\Annotation\Groups;
-
 
 /**
  * Media
@@ -18,8 +26,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class Media
 {
-    const MEDIA_TYPE_AUDIO          = 1;
-    const MEDIA_TYPE_VIDEO          = 2;
+    public const MEDIA_TYPE_AUDIO          = 1;
+    public const MEDIA_TYPE_VIDEO          = 2;
     /**
      * @var string
      *
@@ -577,7 +585,8 @@ class Media
         $this->dirName = $dirName;
         return $this;
     }
-    public function isUntaged() {
+    public function isUntaged()
+    {
         // @codeCoverageIgnoreStart
         return !$this->tagged;
         // @codeCoverageIgnoreEnd

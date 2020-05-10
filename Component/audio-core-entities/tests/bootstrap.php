@@ -20,23 +20,23 @@ use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\Logger\DbalLogger;
 use Symfony\Component\Yaml\Parser;
 
-class bootstrap {
-
-    static public function getConf()
+class bootstrap
+{
+    public static function getConf()
     {
         $yaml = new Parser();
         return $yaml->parse(file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'/config/parameters.yml'));
     }
 
-    static public function getEntityManager()
+    public static function getEntityManager()
     {
-        $paths = array(__DIR__ . DIRECTORY_SEPARATOR . '../src/Entity');
+        $paths = [__DIR__ . DIRECTORY_SEPARATOR . '../src/Entity'];
         $isDevMode = true;
 
-        $dbParams = array(
+        $dbParams = [
             'driver' => 'pdo_sqlite',
             'path' => __DIR__ . '/db.sqlite',
-        );
+        ];
 
         $cache = new \Doctrine\Common\Cache\ArrayCache();
 
@@ -64,7 +64,7 @@ class bootstrap {
     /**
      * @throws \Exception
      */
-    static protected function getLogger(): SQLLogger
+    protected static function getLogger(): SQLLogger
     {
         $log = new Logger('doctrine');
         $log->pushHandler(new StreamHandler(__DIR__.'/cache/doctrine.log'));

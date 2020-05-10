@@ -40,7 +40,7 @@ class MediaTest extends EntityBase
     }
 
 
-    public function  testMediaMethods()
+    public function testMediaMethods()
     {
         $media = self::getMediaInstance();
         $genre = self::getGenreInstance(self::FAKE_GENRE);
@@ -91,7 +91,6 @@ class MediaTest extends EntityBase
         $this->assertEquals($media->getDirName(), basename(__DIR__));
         $media->getId();
         $this->assertEquals($media->getType(), 2);
-
     }
 
 
@@ -105,7 +104,6 @@ class MediaTest extends EntityBase
     {
         $this->expectException(\InvalidArgumentException::class);
         self::getMediaInstance()->setType(100);
-
     }
 
     public function testTypes()

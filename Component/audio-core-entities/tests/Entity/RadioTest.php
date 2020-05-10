@@ -2,13 +2,11 @@
 
 namespace AudioCoreEntity\Tests\Entity;
 
-
 use AudioCoreEntity\Tests\EntityBase;
 
 class RadioTest extends EntityBase
 {
-
-    public function  testGenreMethods()
+    public function testGenreMethods()
     {
         $radio = self::getRadioInstance();
         $hitUrls = [
