@@ -61,7 +61,9 @@ class Artist
      */
     public function __construct($name = null)
     {
-        $this->setName($name);
+        if ($name) {
+            $this->setName($name);
+        }
         $this->medias = new ArrayCollection();
     }
 

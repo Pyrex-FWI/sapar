@@ -15,7 +15,7 @@ use AudioCoreEntity\Tests\EntityBase;
  * @internal
  * @coversNothing
  */
-class DeletedReleaseTest extends EntityBase
+final class DeletedReleaseTest extends EntityBase
 {
     public function testGenreMethods(): void
     {
@@ -28,11 +28,11 @@ class DeletedReleaseTest extends EntityBase
             ->setGenre('Genre')
             ->setRawName('Raw_Name')
             ;
-        $this->assertEquals('AlbumName', $deletedRelease->getAlbumName());
-        $this->assertEquals('ArtistName', $deletedRelease->getArtistName());
-        $this->assertEquals($now, $deletedRelease->getDeletedDate());
-        $this->assertEquals('Genre', $deletedRelease->getGenre());
-        $this->assertEquals('Raw_Name', $deletedRelease->getRawName());
+        static::assertSame('AlbumName', $deletedRelease->getAlbumName());
+        static::assertSame('ArtistName', $deletedRelease->getArtistName());
+        static::assertSame($now, $deletedRelease->getDeletedDate());
+        static::assertSame('Genre', $deletedRelease->getGenre());
+        static::assertSame('Raw_Name', $deletedRelease->getRawName());
         $deletedRelease->getId();
     }
 }

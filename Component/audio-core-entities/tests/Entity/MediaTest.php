@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @internal
  * @coversNothing
  */
-class MediaTest extends EntityBase
+final class MediaTest extends EntityBase
 {
     private const FAKE_GENRE             = 'Genre';
     private const FAKE_ADDITIONAL_GENRE  = 'Additional genre';
@@ -83,28 +83,28 @@ class MediaTest extends EntityBase
         self::$em->persist($media);
         self::$em->flush();
 
-        $this->assertEquals($media->getArtist(), self::FAKE_ARTIST);
-        $this->assertEquals($media->getTitle(), self::FAKE_TITLE);
-        $this->assertEquals($media->getLinkedGenres()->get(0), $genre);
-        $this->assertEquals($media->getArtists()->get(0), $artist);
-        $this->assertEquals($media->getBpm(), 120);
-        $this->assertEquals(\get_class($media->getDeletedAt()), \DateTimeImmutable::class);
-        $this->assertEquals(\get_class($media->getReleaseDate()), \DateTimeImmutable::class);
-        $this->assertEquals($media->getExist(), false);
-        $this->assertEquals($media->getFileName(), self::FAKE_FILE_NAME);
-        $this->assertEquals($media->getHash(), self::$hash);
-        $this->assertEquals($media->getFilePath(), self::FILEPATH);
-        $this->assertEquals($media->getScore(), 3);
-        $this->assertEquals($media->getVersion(), 'Explicit');
-        $this->assertEquals($media->getDirName(), basename(__DIR__));
+        static::assertSame($media->getArtist(), self::FAKE_ARTIST);
+        static::assertSame($media->getTitle(), self::FAKE_TITLE);
+        static::assertSame($media->getLinkedGenres()->get(0), $genre);
+        static::assertSame($media->getArtists()->get(0), $artist);
+        static::assertSame($media->getBpm(), 120);
+        static::assertSame(\get_class($media->getDeletedAt()), \DateTimeImmutable::class);
+        static::assertSame(\get_class($media->getReleaseDate()), \DateTimeImmutable::class);
+        static::assertSame($media->getExist(), false);
+        static::assertSame($media->getFileName(), self::FAKE_FILE_NAME);
+        static::assertSame($media->getHash(), self::$hash);
+        static::assertSame($media->getFilePath(), self::FILEPATH);
+        static::assertSame($media->getScore(), 3);
+        static::assertSame($media->getVersion(), 'Explicit');
+        static::assertSame($media->getDirName(), basename(__DIR__));
         $media->getId();
-        $this->assertEquals($media->getType(), 2);
+        static::assertSame($media->getType(), 2);
     }
 
     public function testWrongBpm(): void
     {
-        $this->assertNull(self::getMediaInstance()->setBpm(-100.67)->getBpm());
-        $this->assertEquals(self::getMediaInstance()->setBpm(+100.67)->getBpm(), 100.67);
+        static::assertNull(self::getMediaInstance()->setBpm(-100.67)->getBpm());
+        static::assertSame(self::getMediaInstance()->setBpm(+100.67)->getBpm(), 100.67);
     }
 
     public function testWrongType(): void
@@ -115,13 +115,13 @@ class MediaTest extends EntityBase
 
     public function testTypes(): void
     {
-        $this->assertArrayHasKey('audio', self::getMediaInstance()->getTypes());
-        $this->assertArrayHasKey('video', self::getMediaInstance()->getTypes());
+        static::assertArrayHasKey('audio', self::getMediaInstance()->getTypes());
+        static::assertArrayHasKey('video', self::getMediaInstance()->getTypes());
     }
 
     public function testWrongYear(): void
     {
-        $this->assertNull(self::getMediaInstance()->setYear('toto')->getYear());
+        static::assertNull(self::getMediaInstance()->setYear('toto')->getYear());
     }
 
     protected static function cleanFixtures(): void

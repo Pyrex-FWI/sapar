@@ -15,7 +15,7 @@ use AudioCoreEntity\Tests\EntityBase;
  * @internal
  * @coversNothing
  */
-class GenreTest extends EntityBase
+final class GenreTest extends EntityBase
 {
     public function testGenreMethods(): void
     {
@@ -27,7 +27,7 @@ class GenreTest extends EntityBase
         ;
         $genre->getId();
         $genre->getMedias();
-        $this->assertEquals('Pop', $genre->getName());
-        $this->assertEquals($media, $genre->getMedias());
+        static::assertSame('Pop', $genre->getName());
+        static::assertSame($media, $genre->getMedias());
     }
 }

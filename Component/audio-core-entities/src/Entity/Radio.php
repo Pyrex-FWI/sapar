@@ -106,7 +106,7 @@ class Radio
     {
         foreach ($hitPagesUrls as $hitPage) {
             if (filter_var($hitPage, FILTER_VALIDATE_URL)) {
-                $this->hitPagesUrls[] = $hitPage;
+                $this->hitPagesUrls->add($hitPage);
             }
         }
 
@@ -116,7 +116,7 @@ class Radio
     /**
      * Get hitPages.
      *
-     * @return array
+     * @return ArrayCollection
      */
     public function getHitPagesUrls()
     {

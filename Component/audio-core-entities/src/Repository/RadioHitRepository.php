@@ -32,7 +32,7 @@ class RadioHitRepository extends CoreRepository
      *
      * @return RadioHit[]
      */
-    public function getSimilar($artist, $title, $minSimilarity = 51)
+    public function getSimilar(string $artist, string $title, int $minSimilarity = 51)
     {
         $query = $this->_em->createQuery('SELECT r FROM RadioHit r WHERE LEVENSHTEIN_RATIO(CONCAT(r.artist, \' \', title), :artistTitle) > :minSimilarity');
         $query->setParameter('artistTitle', sprintf('%s %s', $artist, $title));

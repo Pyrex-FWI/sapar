@@ -15,7 +15,7 @@ use AudioCoreEntity\Tests\EntityBase;
  * @internal
  * @coversNothing
  */
-class RadioHitTest extends EntityBase
+final class RadioHitTest extends EntityBase
 {
     public function testGenreMethods(): void
     {
@@ -33,10 +33,10 @@ class RadioHitTest extends EntityBase
 
         ;
 
-        $this->assertContains('Artist', (array) $radioHit->getArtist());
-        $this->assertEquals('Title', $radioHit->getTitle());
-        $this->assertEquals($created, $radioHit->getCreated());
-        $this->assertEquals($genre2, $radioHit->getGenres()->get(1));
+        static::assertContains('Artist', (array) $radioHit->getArtist());
+        static::assertSame('Title', $radioHit->getTitle());
+        static::assertSame($created, $radioHit->getCreated());
+        static::assertSame($genre2, $radioHit->getGenres()->get(1));
         $radioHit->getId();
     }
 }

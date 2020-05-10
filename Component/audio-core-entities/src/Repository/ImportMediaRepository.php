@@ -15,6 +15,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 
 /**
+ * @psalm-suppress LessSpecificImplementedReturnType
+ *
  * @method ImportMedia|null find($id, $lockMode = null, $lockVersion = null)
  * @method ImportMedia|null findOneBy(array $criteria, array $orderBy = null)
  * @method ImportMedia[]    findAll()
@@ -38,7 +40,7 @@ class ImportMediaRepository extends CoreRepository
             ->delete()
             ->where($query->expr()->in(
                 'im.hash',
-                $this->_em->createQueryBuilder('m')
+                $this->_em->createQueryBuilder()
                     ->select('m.hash')
                     ->from(Media::class, 'm')
 //                    ->setMaxResults(1000) #Iterrate for optimize?

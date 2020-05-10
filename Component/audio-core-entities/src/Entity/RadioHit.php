@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace AudioCoreEntity\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,7 +27,7 @@ class RadioHit
      *      inverseJoinColumns={@ORM\JoinColumn(name="genre_id", referencedColumnName="id")}
      *      )
      *
-     * @var ArrayCollection<Genre>
+     * @var Collection<int, Genre>
      */
     protected $genres;
     /**

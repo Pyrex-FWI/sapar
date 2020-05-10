@@ -1,4 +1,5 @@
 <?php
+#https://mlocati.github.io/php-cs-fixer-configurator
 
 $finder = PhpCsFixer\Finder::create()
     ->exclude(__DIR__.'/vendor')
@@ -10,19 +11,19 @@ return PhpCsFixer\Config::create()
     ->setRules([
         '@PSR2' => true,
         '@PhpCsFixer' => true,
+        '@PhpCsFixer:risky' => true,
         '@Symfony' => true,
+        '@Symfony:risky' => true,
         '@PHP73Migration' => true,
         '@PHP71Migration:risky' => true,
         'binary_operator_spaces' => [
             'operators' => ['=' => 'align_single_space_minimal']
         ],
-        //'array_syntax' => ['syntax' => 'short'],
         'header_comment' => [
             'commentType' => 'PHPDoc',
             'header' => 'This file is part of the Sapar project.
 @author Christophe Pyree <pyrex-fwi@gmail.com>'
         ],
-        '@Symfony:risky' => true,
     ])
     ->setFinder($finder)
     ;

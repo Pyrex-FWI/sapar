@@ -12,15 +12,18 @@ namespace AudioCoreEntity\Repository;
 use AudioCoreEntity\Entity\Genre;
 use AudioCoreEntity\Entity\Media;
 use Doctrine\ORM\EntityManagerInterface;
-use Sapar\Component\Id3\Metadata\Id3Metadata;
+use Sapar\Contract\Id3\Id3MetadataInterface;
 
 /**
  * MediaRepository.
  *
- * @method MediaRepository|null find($id, $lockMode = null, $lockVersion = null)
- * @method MediaRepository|null findOneBy(array $criteria, array $orderBy = null)
- * @method MediaRepository[]    findAll()
- * @method MediaRepository[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @psalm-suppress LessSpecificImplementedReturnType
+ * @psalm-suppress ImplementedReturnTypeMismatch
+ *
+ * @method Media|null   find($id, $lockMode = null, $lockVersion = null)
+ * @method Media|null   findOneBy(array $criteria, array $orderBy = null)
+ * @method Media[]|null findAll()
+ * @method Media[]|null findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
  * @property EntityManagerInterface $_em
  */
@@ -36,7 +39,11 @@ class MediaRepository extends CoreRepository
         parent::__construct($em, $em->getClassMetadata(Media::class));
     }
 
-    public function updateMeta(int $getId, ?Id3Metadata $id3): void
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     * @psalm-suppress PossiblyNullReference
+     */
+    public function updateMeta(int $getId, ?Id3MetadataInterface $id3): void
     {
         /** @var Media $media */
         $media = $this->_em->getReference(Media::class, $getId);
@@ -44,7 +51,7 @@ class MediaRepository extends CoreRepository
         $media->setTitle($id3->getTitle());
         $media->setYear($id3->getYear());
         $media->setTagged(true);
-        $media->setBpm($id3->getBpm());
+        $media->setBpm((int) $id3->getBpm());
         if ($genre = $this->getOrCreateNewGenre($id3->getGenre())) {
             $media->setGenre($genre);
         }
@@ -62,7 +69,8 @@ class MediaRepository extends CoreRepository
             return null;
         }
 
-        $getGenre = ucwords($getGenre);
+        $getGenre   = ucwords($getGenre);
+        $_allGenres = [];
 
         if (!$this->cachecGenres) {
             $_allGenres = (array) $this->_em->getRepository(Genre::class)->findAll();

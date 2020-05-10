@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace AudioCoreEntity\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -116,7 +117,7 @@ class Media
      */
     protected $tagged = false;
     /**
-     * @var string
+     * @var int
      *
      * @Column(type="integer", nullable=true)
      * @Groups({"media-read"})
@@ -153,7 +154,7 @@ class Media
      *      inverseJoinColumns={@JoinColumn(name="genre_id", referencedColumnName="id")}
      *      )
      *
-     * @var ArrayCollection<Genre>
+     * @var Collection<int, Genre>
      * @Groups({"media-read"})
      */
     protected $linkedGenres;
@@ -164,7 +165,7 @@ class Media
      *      inverseJoinColumns={@JoinColumn(name="artist_id", referencedColumnName="id")}
      *      )
      *
-     * @var ArrayCollection<Artist>
+     * @var Collection<int, Artist>
      * @Groups({"media-read"})
      */
     protected $artists;
@@ -218,13 +219,9 @@ class Media
     }
 
     /**
-     * Set artist.
-     *
-     * @param string $artist
-     *
-     * @return Media
+     * @return $this
      */
-    public function setArtist($artist)
+    public function setArtist(?string $artist = null)
     {
         if ($artist) {
             $this->artist = substr(trim($artist), 0, 254);
@@ -257,20 +254,15 @@ class Media
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getExist()
+    public function getExist(): bool
     {
         return $this->exist;
     }
 
     /**
-     * @param string $exist
-     *
      * @return $this
      */
-    public function setExist($exist)
+    public function setExist(bool $exist): self
     {
         $this->exist = $exist;
 
@@ -327,7 +319,7 @@ class Media
      */
     public function setHash($hash)
     {
-        if (32 == \strlen($hash)) {
+        if (32 === \strlen($hash)) {
             $this->hash = $hash;
         }
 
@@ -351,7 +343,7 @@ class Media
      *
      * @return Media
      */
-    public function setTitle($title)
+    public function setTitle($title = null)
     {
         if ($title) {
             $this->title = trim($title);
@@ -379,7 +371,7 @@ class Media
      */
     public function setType($type)
     {
-        if (!\in_array($type, self::getTypes())) {
+        if (!\in_array($type, self::getTypes(), true)) {
             throw new \InvalidArgumentException(sprintf('%s is not a valid type. See %s', $type, self::class.'::getTypes()'));
         }
 
@@ -437,7 +429,7 @@ class Media
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection<int, Genre>
      */
     public function getLinkedGenres()
     {
@@ -481,7 +473,7 @@ class Media
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection<int, Artist>
      */
     public function getArtists()
     {
@@ -542,20 +534,15 @@ class Media
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getScore()
+    public function getScore(): int
     {
         return $this->score;
     }
 
     /**
-     * @param string $score
-     *
      * @return Media
      */
-    public function setScore($score)
+    public function setScore(int $score)
     {
         if (filter_var($score, FILTER_VALIDATE_INT) || filter_var($score, FILTER_VALIDATE_FLOAT)) {
             $this->score = $score;
@@ -624,9 +611,9 @@ class Media
      *
      * @return Media
      */
-    public function setYear($year)
+    public function setYear($year = null)
     {
-        if (preg_match('/\d{4}/', (string) $year)) {
+        if ($year && preg_match('/\d{4}/', (string) $year)) {
             $this->year = $year;
         }
 
