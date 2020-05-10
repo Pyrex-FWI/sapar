@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /**
  * This file is part of the Sapar project.
- * @author Christophe Pyree <pyrex-fwi@gmail.com>
+ * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
 namespace AudioCoreEntity\Repository;
@@ -69,21 +69,21 @@ class MediaRepository extends CoreRepository
             return null;
         }
 
-        $getGenre   = ucwords($getGenre);
-        $_allGenres = [];
+        $getGenre  = ucwords($getGenre);
+        $allGenres = [];
 
         if (!$this->cachecGenres) {
-            /** @var Genre[] $_allGenres */
-            $_allGenres = (array) $this->_em->getRepository(Genre::class)->findAll();
+            /** @var Genre[] $allGenres */
+            $allGenres = (array) $this->_em->getRepository(Genre::class)->findAll();
 
-            foreach ($_allGenres as $item) {
-                $_allGenres[$item->getName()] = $item;
+            foreach ($allGenres as $item) {
+                $allGenres[$item->getName()] = $item;
             }
         }
 
-        if ($_allGenres[$getGenre] ?? false) {
-            // @var Genre $_allGenres
-            return $_allGenres[$getGenre]->getName();
+        if ($allGenres[$getGenre] ?? false) {
+            // @var Genre $allGenres
+            return $allGenres[$getGenre]->getName();
         }
 
         $genre = new Genre($getGenre);

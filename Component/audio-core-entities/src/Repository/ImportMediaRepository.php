@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /**
  * This file is part of the Sapar project.
- * @author Christophe Pyree <pyrex-fwi@gmail.com>
+ * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
 namespace AudioCoreEntity\Repository;
@@ -51,13 +51,13 @@ class ImportMediaRepository extends CoreRepository
 
     public function countNewFilesToImport(): int
     {
-        $allNewIndexCount         = $this->count([]);
-        $alreadyExistInMediaCount = $this->countExistingFileInMedias();
+        $allNewIndexCount = $this->count([]);
+        $existingMedias   = $this->countExistingMedias();
 
-        return $allNewIndexCount - $alreadyExistInMediaCount;
+        return $allNewIndexCount - $existingMedias;
     }
 
-    public function countExistingFileInMedias(): int
+    public function countExistingMedias(): int
     {
         return $this->createQueryBuilder('i')
             ->select('count(i.id)')

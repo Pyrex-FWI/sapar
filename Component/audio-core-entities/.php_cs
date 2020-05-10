@@ -22,7 +22,7 @@ return PhpCsFixer\Config::create()
         'header_comment' => [
             'commentType' => 'PHPDoc',
             'header' => 'This file is part of the Sapar project.
-@author Christophe Pyree <pyrex-fwi@gmail.com>'
+@author Christophe Pyree <pyrex-fwi[at]gmail.com>'
         ],
     ])
     ->setFinder($finder)

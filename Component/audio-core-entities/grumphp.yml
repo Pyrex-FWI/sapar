@@ -3,6 +3,12 @@ parameters:
         phpcsfixer2:
             config: .php_cs
             allow_risky: true
+        phpmd:
+            whitelist_patterns:
+                - /^src(.*)/
+            exclude: []
+            ruleset: ['phpmd_rules.xml']
+            triggered_by: ['php']
         phpstan:
             autoload_file: ~
             configuration: .phpstan.neon
