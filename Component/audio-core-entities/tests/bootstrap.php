@@ -6,13 +6,21 @@ namespace AudioCoreEntity\Tests;
 require_once 'autoload.php';
 
 use Doctrine\Common\Annotations\AnnotationReader;
-use Doctrine\Common\Annotations\AnnotationRegistry;
+use Doctrine\Common\EventManager;
+use Doctrine\DBAL\Logging\EchoSQLLogger;
+use Doctrine\DBAL\Logging\SQLLogger;
+use Doctrine\ORM\Mapping\UnderscoreNamingStrategy;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
+use Gedmo\Sluggable\SluggableListener;
+use Gedmo\Timestampable\TimestampableListener;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+use Psr\Log\LoggerInterface;
+use Symfony\Bridge\Doctrine\Logger\DbalLogger;
 use Symfony\Component\Yaml\Parser;
-use Composer\Autoload\ClassLoader;
 
-class Bootstrap {
+class bootstrap {
 
     static public function getConf()
     {
@@ -20,18 +28,14 @@ class Bootstrap {
         return $yaml->parse(file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'/config/parameters.yml'));
     }
 
-    static public function GetEntityManager()
+    static public function getEntityManager()
     {
-
         $paths = array(__DIR__ . DIRECTORY_SEPARATOR . '../src/Entity');
-        $isDevMode = false;
-        $params = self::getConf();
+        $isDevMode = true;
 
         $dbParams = array(
-            'driver'    => $params['database_driver'],
-            'user'      => $params['database_user'],
-            'password'  => $params['database_password'],
-            'dbname'    => $params['database_dbname'],
+            'driver' => 'pdo_sqlite',
+            'path' => __DIR__ . '/db.sqlite',
         );
 
         $cache = new \Doctrine\Common\Cache\ArrayCache();
@@ -40,15 +44,31 @@ class Bootstrap {
         $driver = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($reader, $paths);
 
         $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
-        $config->setMetadataCacheImpl( $cache );
-        $config->setQueryCacheImpl( $cache );
-        $config->setMetadataDriverImpl( $driver );
+        $config->setMetadataCacheImpl($cache);
+        $config->setQueryCacheImpl($cache);
+        $config->setMetadataDriverImpl($driver);
+        $config->setSQLLogger(self::getLogger());
+        $config->setNamingStrategy(new UnderscoreNamingStrategy(CASE_LOWER));
+        $eventManager = new EventManager();
+        $eventManager->addEventSubscriber(new SluggableListener());
+        $eventManager->addEventSubscriber(new TimestampableListener());
 
-        $entityManager = EntityManager::create($dbParams, $config);
+        $entityManager = EntityManager::create($dbParams, $config, $eventManager);
 
         $platform = $entityManager->getConnection()->getDatabasePlatform();
         $platform->registerDoctrineTypeMapping('enum', 'string');
 
         return $entityManager;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    static protected function getLogger(): SQLLogger
+    {
+        $log = new Logger('doctrine');
+        $log->pushHandler(new StreamHandler(__DIR__.'/cache/doctrine.log'));
+
+        return new DbalLogger($log);
     }
 }

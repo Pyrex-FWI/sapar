@@ -2,9 +2,15 @@
 
 # Audio core api
 
-Add `AnnotationRegistry::registerLoader(array($loader, 'loadClass'));` into autoloa.php to avoid MAppingException
+#### Build test database
 
-## Test
+`vendor/bin/doctrine o:s:cre`
 
-phpunit
+Configure composer require stof/doctrine-extensions-bundle
+
+#### Run tests
+
+`php vendor/bin/phpunit`
+
+`php -d zend_extension=xdebug.so vendor/bin/phpunit --coverage-html=coverage`
 

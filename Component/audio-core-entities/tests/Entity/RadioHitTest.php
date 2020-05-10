@@ -24,7 +24,7 @@ class RadioHitTest extends EntityBase
 
         ;
 
-        $this->assertContains('Artist', $radioHit->getArtist());
+        $this->assertContains('Artist', (array) $radioHit->getArtist());
         $this->assertEquals('Title', $radioHit->getTitle());
         $this->assertEquals($created, $radioHit->getCreated());
         $this->assertEquals($genre2, $radioHit->getGenres()->get(1));

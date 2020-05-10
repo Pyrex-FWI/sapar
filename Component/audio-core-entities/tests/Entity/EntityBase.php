@@ -9,9 +9,34 @@ use AudioCoreEntity\Entity\Genre;
 use AudioCoreEntity\Entity\Media;
 use AudioCoreEntity\Entity\Radio;
 use AudioCoreEntity\Entity\RadioHit;
+use AudioCoreEntity\Repository\MediaRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\TestCase;
 
-abstract class EntityBase extends \PHPUnit_Framework_TestCase
+abstract class EntityBase extends TestCase
 {
+    /** @var EntityManagerInterface */
+    public static $em;
+    /**
+     * @var MediaRepository
+     */
+    protected static $mediaRespository;
+    /**
+     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository|\Doctrine\Persistence\ObjectRepository
+     */
+    protected static $genreRepository;
+    /**
+     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository|\Doctrine\Persistence\ObjectRepository
+     */
+    protected static $artistRepository;
+
+    public static function setUpBeforeClass(): void
+    {
+        self::$em = bootstrap::getEntityManager();
+        self::$mediaRespository = self::$em->getRepository(Media::class);
+        self::$genreRepository = self::$em->getRepository(Genre::class);
+        self::$artistRepository = self::$em->getRepository(Artist::class);
+    }
 
     /**
      * @param null $name

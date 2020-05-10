@@ -11,8 +11,7 @@
     "autoload": {
         "psr-0": {
             "AudioCoreEntity": "./src/",
-            "AudioCoreEntity\\Tests": "./tests/",
-            "SymfonyStandard": "app/"
+            "AudioCoreEntity\\Tests": "./tests/"
         },
         "classmap": [
             "src/",
@@ -32,13 +31,16 @@
         "fza/mysql-doctrine-levenshtein-function": "^0.3.0",
         "gedmo/doctrine-extensions": "^2.4",
         "symfony/validator": "^4.0 || ^5.0",
-        "symfony/serializer": "^4.0 || ^5.0"
+        "symfony/serializer": "^4.0 || ^5.0",
+        "symfony/property-access": "^4.0 || ^5.0"
     },
     "require-dev": {
-        "symfony/doctrine-bridge": "^3.0",
+        "symfony/doctrine-bridge": "^5.0",
         "symfony/yaml": "*",
-        "doctrine/data-fixtures": "^1.1",
+        "doctrine/data-fixtures": "^1.4",
         "phpunit/phpunit": "^9.1",
-        "satooshi/php-coveralls": "^1.0"
+        "monolog/monolog": "^2.0",
+        "phpro/grumphp": "^0.18.0",
+        "friendsofphp/php-cs-fixer": "^2.16"
     }
 }

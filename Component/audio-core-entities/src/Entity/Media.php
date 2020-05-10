@@ -123,6 +123,15 @@ class Media
      * @GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @var string
+     *
+     * @Column(type="string", length=30, nullable=true)
+     * @Groups({"media-read"})
+     */
+    protected $genre;
+
     /**
      * @ManyToMany(targetEntity="\AudioCoreEntity\Entity\Genre", inversedBy="medias", cascade={"persist", "detach", "refresh"}, fetch="EXTRA_LAZY")
      * @JoinTable(name="media_genre",
@@ -132,7 +141,7 @@ class Media
      * @var ArrayCollection<Genre>
      * @Groups({"media-read"})
      **/
-    protected $genres;
+    protected $linkedGenres;
     /**
      * @ManyToMany(targetEntity="\AudioCoreEntity\Entity\Artist", inversedBy="medias", cascade={"persist", "detach", "refresh"}, fetch="EXTRA_LAZY")
      * @JoinTable(
@@ -162,7 +171,7 @@ class Media
      */
     public function __construct()
     {
-        $this->genres = new ArrayCollection();
+        $this->linkedGenres = new ArrayCollection();
         $this->artists = new ArrayCollection();
     }
 
@@ -390,8 +399,8 @@ class Media
      */
     public function addGenre(Genre $genre)
     {
-        if (!$this->genres->contains($genre)) {
-            $this->genres->add($genre);
+        if (!$this->linkedGenres->contains($genre)) {
+            $this->linkedGenres->add($genre);
         }
         return $this;
     }
@@ -402,8 +411,8 @@ class Media
      */
     public function removeGenre(Genre $genre)
     {
-        if ($this->genres->contains($genre)) {
-            $this->genres->removeElement($genre);
+        if ($this->linkedGenres->contains($genre)) {
+            $this->linkedGenres->removeElement($genre);
         }
         return $this;
     }
@@ -411,19 +420,19 @@ class Media
     /**
      * @return ArrayCollection
      */
-    public function getGenres()
+    public function getLinkedGenres()
     {
-        return $this->genres;
+        return $this->linkedGenres;
     }
 
     /**
      * Set Genres.
-     * @param ArrayCollection $genres
+     * @param ArrayCollection $linkedGenres
      * @return $this
      */
-    public function setGenres(ArrayCollection $genres)
+    public function setLinkedGenres(ArrayCollection $linkedGenres)
     {
-        $this->genres = $genres;
+        $this->linkedGenres = $linkedGenres;
 
         return $this;
     }
@@ -616,4 +625,22 @@ class Media
         // @codeCoverageIgnoreEnd
     }
 
+    /**
+     * @return string
+     */
+    public function getGenre(): ?string
+    {
+        return $this->genre;
+    }
+
+    /**
+     * @param string $genre
+     * @return Media
+     */
+    public function setGenre(string $genre): Media
+    {
+        $this->genre = $genre;
+
+        return $this;
+    }
 }
