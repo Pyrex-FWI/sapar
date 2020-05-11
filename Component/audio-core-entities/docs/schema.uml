@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.album</OriginalElement>
+  <nodes>
+    <node x="215.0" y="597.0">cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.radio</node>
+    <node x="0.0" y="597.0">cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.deleted_release</node>
+    <node x="493.0" y="132.0">cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.artist</node>
+    <node x="54.625" y="476.0">cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.radiohit_genre</node>
+    <node x="0.0" y="143.0">cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.radio_hit</node>
+    <node x="685.0" y="0.0">cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.import_media</node>
+    <node x="436.375" y="476.0">cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.media_artist</node>
+    <node x="247.5" y="476.0">cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.media_genre</node>
+    <node x="318.0" y="0.0">cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.media</node>
+    <node x="151.0" y="132.0">cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.genre</node>
+    <node x="407.0" y="597.0">cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.album</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.media_genre" target="cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.media">
+      <point x="30.75" y="-38.0" />
+      <point x="339.75" y="451.0" />
+      <point x="356.75" y="451.0" />
+      <point x="-38.75" y="213.0" />
+    </edge>
+    <edge source="cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.radiohit_genre" target="cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.radio_hit">
+      <point x="-36.0" y="-38.0" />
+      <point x="90.625" y="451.0" />
+      <point x="65.5" y="451.0" />
+      <point x="0.0" y="70.0" />
+    </edge>
+    <edge source="cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.media_genre" target="cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.genre">
+      <point x="-30.75" y="-38.0" />
+      <point x="278.25" y="451.0" />
+      <point x="261.25" y="451.0" />
+      <point x="36.75" y="81.0" />
+    </edge>
+    <edge source="cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.radiohit_genre" target="cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.genre">
+      <point x="36.0" y="-38.0" />
+      <point x="162.625" y="451.0" />
+      <point x="187.75" y="451.0" />
+      <point x="-36.75" y="81.0" />
+    </edge>
+    <edge source="cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.media_artist" target="cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.artist">
+      <point x="32.0" y="-38.0" />
+      <point x="532.375" y="451.0" />
+      <point x="566.5" y="451.0" />
+      <point x="0.0" y="81.0" />
+    </edge>
+    <edge source="cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.media_artist" target="cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.media">
+      <point x="-32.0" y="-38.0" />
+      <point x="468.375" y="451.0" />
+      <point x="434.25" y="451.0" />
+      <point x="38.75" y="213.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5655430711610487" x="420.0" y="390.49999999999994" />
+  <SelectedNodes>
+    <node>cc662c0c-7306-4ddb-b007-3e44744717a5.TABLE:main.import_media</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+
