@@ -9,11 +9,21 @@
             "email": "pyrex-fwi@gmail.com"
         }
     ],
+    "config": {
+        "sort-packages": true
+    },
     "autoload": {
         "psr-4": {
             "Sapar\\Component\\Id3\\": "src",
             "Sapar\\Component\\Id3\\Test\\": "Test"
         }
+    },
+    "require": {
+        "php": "^7.3",
+        "pyrex-fwi/core-contracts": "@dev",
+        "symfony/console": "4.* || 5.*",
+        "symfony/process": "4.* || 5.*",
+        "symfony/stopwatch": "4.* || 5.*"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.1",
@@ -22,10 +32,10 @@
         "symfony/var-dumper": "^4.3 | ^5.1",
         "phpmetrics/phpmetrics": "^2.6"
     },
-    "require": {
-        "php": "^7.3",
-        "symfony/process": "4.* || 5.*",
-        "symfony/console": "4.* || 5.*",
-        "symfony/stopwatch": "4.* || 5.*"
-    }
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../Contract/core"
+        }
+    ]
 }

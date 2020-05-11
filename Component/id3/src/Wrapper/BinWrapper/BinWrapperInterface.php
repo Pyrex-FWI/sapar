@@ -1,5 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the Sapar project.
+ * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
+ */
+
 namespace Sapar\Component\Id3\Wrapper\BinWrapper;
 
 use Sapar\Component\Id3\Wrapper\Id3WrapperInterface;
@@ -16,6 +23,8 @@ interface BinWrapperInterface extends Id3WrapperInterface
 
     /**
      * @var string
+     *
+     * @param mixed $binPath
      *
      * @return BinWrapperInterface
      */

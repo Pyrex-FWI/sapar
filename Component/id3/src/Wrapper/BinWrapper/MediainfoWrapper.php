@@ -2,11 +2,16 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the Sapar project.
+ * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
+ */
+
 namespace Sapar\Component\Id3\Wrapper\BinWrapper;
 
 use Sapar\Component\Id3\Helper;
-use Sapar\Component\Id3\Metadata\Id3MetadataInterface;
 use Sapar\Component\Id3\Process\Process;
+use Sapar\Contract\Id3\Id3MetadataInterface;
 
 /**
  * Class MediainfoWrapper.
@@ -20,8 +25,6 @@ class MediainfoWrapper extends BinWrapperBase
 
     /**
      * @throws \Exception
-     *
-     * @return bool
      */
     public function read(Id3MetadataInterface $id3Metadata): bool
     {
@@ -36,7 +39,7 @@ class MediainfoWrapper extends BinWrapperBase
             return false; // @codeCoverageIgnore
         }
 
-        if ($simpleXMLElement->media->attributes()['ref'] == $id3Metadata->getFile()->getRealPath()) {
+        if ((string) $simpleXMLElement->media->attributes()['ref'] === $id3Metadata->getFile()->getRealPath()) {
             /* @var \SimpleXMLElement $simpleXMLElement */
             /* @noinspection PhpUndefinedFieldInspection */
             $this->rawReadOutput = $simpleXMLElement->media->track[0];
@@ -52,23 +55,41 @@ class MediainfoWrapper extends BinWrapperBase
         return false; // @codeCoverageIgnore
     }
 
+    public function getSupportedExtensionsForRead(): array
+    {
+        return [Helper::getFlacExt(), Helper::getMp3Ext(), Helper::getMp4Ext()];
+    }
+
+    public function write(Id3MetadataInterface $id3Metadata): void
+    {
+        // Not supported
+    }
+
+    public function getSupportedExtensionsForWrite(): array
+    {
+        return [];
+    }
+
+    public function versionIsSupported(): bool
+    {
+        return version_compare($this->getVersion(), '17.0') >= 0;
+    }
+
     protected function retrieveVersion(): void
     {
         $process = $this->getProcess('--Version')->exec();
-        $str = $process->getOutput();
+        $str     = $process->getOutput();
         //'MediaInfoLib - v17.12'
         $re = '/(?P<version>(?P<major>\d{1,3})\.(?P<minor>\d{1,3}))$/';
         if (preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0)) {
             $this->version = $matches[0]['version'];
-            $this->major = $matches[0]['major'];
-            $this->minor = $matches[0]['minor'];
+            $this->major   = $matches[0]['major'];
+            $this->minor   = $matches[0]['minor'];
         }
     }
 
     /**
      * @var string
-     *
-     * @return Process
      */
     protected function getProcessForRead(string $file): Process
     {
@@ -76,24 +97,11 @@ class MediainfoWrapper extends BinWrapperBase
     }
 
     /**
-     * @return array
+     * @codeCoverageIgnore
      */
-    public function getSupportedExtensionsForRead(): array
-    {
-        return [Helper::getFlacExt(), Helper::getMp3Ext(), Helper::getMp4Ext()];
-    }
-
-    public function write(Id3MetadataInterface $id3Metadata)
+    protected function getProcessForWrite(Id3MetadataInterface $id3Metadata): Process
     {
         // Not supported
-    }
-
-    /**
-     * @return array
-     */
-    public function getSupportedExtensionsForWrite(): array
-    {
-        return [];
     }
 
     private function normalize(Id3MetadataInterface $id3Metadata): void
@@ -112,8 +120,6 @@ class MediainfoWrapper extends BinWrapperBase
 
     /**
      * To check UTC 2014-10- 7.
-     *
-     * @return int|null
      */
     private function extractYear(?string $rawRecordedDate): ?int
     {
@@ -144,37 +150,13 @@ class MediainfoWrapper extends BinWrapperBase
         return $return;
     }
 
-    /**
-     * @return float|null
-     */
     private function getDuration(): ?float
     {
         return (float) $this->rawReadOutput->Duration[0];
     }
 
-    /**
-     * @return int
-     */
     private function getFileSize(): int
     {
         return (int) $this->rawReadOutput->FileSize;
-    }
-
-    /**
-     * @return bool
-     */
-    public function versionIsSupported(): bool
-    {
-        return version_compare($this->getVersion(), '17.0') >= 0;
-    }
-
-    /**
-     * @codeCoverageIgnore
-     *
-     * @return Process
-     */
-    protected function getProcessForWrite(Id3MetadataInterface $id3Metadata): Process
-    {
-        // Not supported
     }
 }

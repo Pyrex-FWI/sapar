@@ -1,5 +1,25 @@
 parameters:
-  bin_dir: vendor/bin
+  testsuites:
+    qa:
+      tasks:
+        - phpcsfixer2
+#        - phpmd
+#        - phpstan
+#        - psalm
+#    security:
+#      tasks:
+#        - securitychecker
+    tests:
+      tasks:
+        - phpunit
+#        - infection
+    # Specify the test-suite for the git:commit-msg command:
+    git_commit_msg:
+      tasks: []
+    # Specify the test-suite for the git:pre-commit command:
+    git_pre_commit:
+      tasks: []
+
   tasks:
     phpcsfixer2:
       allow_risky: true
@@ -11,4 +31,8 @@ parameters:
       verbose: true
       diff: true
       triggered_by: ['php']
-
+    phpunit:
+      config_file: phpunit.xml
+      testsuite: ~
+      group: []
+      always_execute: false

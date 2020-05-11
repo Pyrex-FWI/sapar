@@ -1,5 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the Sapar project.
+ * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
+ */
+
 namespace Sapar\Component\Id3\Test;
 
 class Helper
@@ -54,7 +61,7 @@ class Helper
         return $backUpFile;
     }
 
-    public static function restoreFile($file)
+    public static function restoreFile($file): void
     {
         $backUpFile = $file.'.back';
 

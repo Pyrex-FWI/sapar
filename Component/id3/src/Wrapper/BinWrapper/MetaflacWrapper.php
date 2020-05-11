@@ -1,10 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the Sapar project.
+ * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
+ */
+
 namespace Sapar\Component\Id3\Wrapper\BinWrapper;
 
 use Sapar\Component\Id3\Helper;
-use Sapar\Component\Id3\Metadata\Id3MetadataInterface;
 use Sapar\Component\Id3\Process\Process;
+use Sapar\Contract\Id3\Id3MetadataInterface;
 
 /**
  * Class MetaflacWrapper.
@@ -25,7 +32,7 @@ class MetaflacWrapper extends BinWrapperBase
         $this->outputError = null;
 
         $process = $this->getProcessForRead($id3Metadata->getFile()->getRealPath())->exec();
-        if ($process->isSuccessful() && preg_match_all("/^(?P<tag>[\w]*)=(?P<value>[\w\s\n\']*)$/m", $process->getOutput(), $match)) {
+        if ($process->isSuccessful() && preg_match_all("/^(?P<tag>[\\w]*)=(?P<value>[\\w\\s\n\\']*)$/m", $process->getOutput(), $match)) {
             $this->rawReadOutput = array_combine($match['tag'], $match['value']);
             $id3Metadata
                 ->setArtist((string) $this->get('artist'))
@@ -49,6 +56,8 @@ class MetaflacWrapper extends BinWrapperBase
 
     /**
      * @var string
+     *
+     * @param mixed $file
      */
     public function getProcessForRead($file): Process
     {
@@ -82,9 +91,14 @@ class MetaflacWrapper extends BinWrapperBase
         return $this->getSupportedExtensionsForWrite();
     }
 
+    public function versionIsSupported(): bool
+    {
+        return version_compare($this->getVersion(), '1.3.0') >= 0;
+    }
+
     protected function getProcessForWrite(Id3MetadataInterface $id3Metadata): Process
     {
-        $arguments = [];
+        $arguments   = [];
         $arguments[] = $id3Metadata->getFile()->getRealPath();
         if (null !== $id3Metadata->getArtist()) {
             $arguments[] = '--remove-tag=ARTIST';
@@ -115,6 +129,21 @@ class MetaflacWrapper extends BinWrapperBase
     }
 
     /**
+     * @return string|null
+     */
+    protected function retrieveVersion(): void
+    {
+        $process       = $this->getProcess(['--v'])->exec();
+        $stringVersion = $process->getOutput();
+        $re            = '/(?P<version>(?P<major>\d{1,3})\.(?P<minor>\d{1,3})(\.(?P<bugfix>\d{1,3}))?)$/';
+        if (preg_match_all($re, $stringVersion, $matches, PREG_SET_ORDER, 0)) {
+            $this->version = $matches[0]['version'];
+            $this->major   = $matches[0]['major'];
+            $this->minor   = $matches[0]['minor'];
+        }
+    }
+
+    /**
      * @param mixed|null $key
      */
     private function get($key)
@@ -122,25 +151,5 @@ class MetaflacWrapper extends BinWrapperBase
         $key = strtoupper($key);
 
         return isset($this->rawReadOutput[$key]) ? trim($this->rawReadOutput[$key]) : null;
-    }
-
-    /**
-     * @return string|null
-     */
-    protected function retrieveVersion(): void
-    {
-        $process = $this->getProcess(['--v'])->exec();
-        $stringVersion = $process->getOutput();
-        $re = '/(?P<version>(?P<major>\d{1,3})\.(?P<minor>\d{1,3})(\.(?P<bugfix>\d{1,3}))?)$/';
-        if (preg_match_all($re, $stringVersion, $matches, PREG_SET_ORDER, 0)) {
-            $this->version = $matches[0]['version'];
-            $this->major = $matches[0]['major'];
-            $this->minor = $matches[0]['minor'];
-        }
-    }
-
-    public function versionIsSupported(): bool
-    {
-        return version_compare($this->getVersion(), '1.3.0') >= 0;
     }
 }

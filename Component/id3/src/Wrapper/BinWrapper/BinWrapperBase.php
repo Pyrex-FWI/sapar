@@ -1,5 +1,9 @@
 <?php
+
+declare(strict_types=1);
+
 /**
+ * This file is part of the Sapar project.
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
@@ -7,15 +11,15 @@ namespace Sapar\Component\Id3\Wrapper\BinWrapper;
 
 use Sapar\Component\Id3\Exception\Id3Exception;
 use Sapar\Component\Id3\Exception\ReadException;
-use Sapar\Component\Id3\Metadata\Id3MetadataInterface;
 use Sapar\Component\Id3\Process\Process;
+use Sapar\Contract\Id3\Id3MetadataInterface;
 
 /**
  * Class BinWrapperBase.
  */
 abstract class BinWrapperBase implements BinWrapperInterface
 {
-    /** @var null|string */
+    /** @var string|null */
     protected $binPath;
     /** @var int */
     protected $major;
@@ -25,22 +29,6 @@ abstract class BinWrapperBase implements BinWrapperInterface
     protected $version;
     /** @var string */
     protected $outputError;
-
-    abstract protected function retrieveVersion(): void;
-
-    abstract protected function getProcessForRead(string $file): Process;
-
-    abstract protected function getProcessForWrite(Id3MetadataInterface $id3Metadata): Process;
-
-    /**
-     * @var array|mixed
-     */
-    protected function getProcess($args): Process
-    {
-        $process = new Process($this->binPath, (array) $args);
-
-        return $process;
-    }
 
     /**
      * @param string $binPath
@@ -58,9 +46,6 @@ abstract class BinWrapperBase implements BinWrapperInterface
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getBinPath(): ?string
     {
         return $this->binPath;
@@ -68,12 +53,12 @@ abstract class BinWrapperBase implements BinWrapperInterface
 
     public function supportRead(Id3MetadataInterface $id3Metadata): bool
     {
-        return in_array(strtolower($id3Metadata->getFile()->getExtension()), $this->getSupportedExtensionsForRead());
+        return \in_array(strtolower($id3Metadata->getFile()->getExtension()), $this->getSupportedExtensionsForRead(), true);
     }
 
     public function supportWrite(Id3MetadataInterface $id3Metadata): bool
     {
-        return in_array($id3Metadata->getFile()->getExtension(), $this->getSupportedExtensionsForWrite());
+        return \in_array($id3Metadata->getFile()->getExtension(), $this->getSupportedExtensionsForWrite(), true);
     }
 
     /**
@@ -88,6 +73,22 @@ abstract class BinWrapperBase implements BinWrapperInterface
         return $this->version;
     }
 
+    abstract protected function retrieveVersion(): void;
+
+    abstract protected function getProcessForRead(string $file): Process;
+
+    abstract protected function getProcessForWrite(Id3MetadataInterface $id3Metadata): Process;
+
+    /**
+     * @var array|mixed
+     *
+     * @param mixed $args
+     */
+    protected function getProcess($args): Process
+    {
+        return new Process($this->binPath, (array) $args);
+    }
+
     /**
      * @throws ReadException x
      * @throws Id3Exception  x
@@ -100,7 +101,7 @@ abstract class BinWrapperBase implements BinWrapperInterface
 
         // @codeCoverageIgnoreStart
         if (!$this->versionIsSupported()) {
-            throw new Id3Exception(sprintf('Version %s is not supported for %s', $this->getVersion(), get_class($this)));
+            throw new Id3Exception(sprintf('Version %s is not supported for %s', $this->getVersion(), static::class));
         }
         // @codeCoverageIgnoreEnd
     }

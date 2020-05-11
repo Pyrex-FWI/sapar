@@ -1,10 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the Sapar project.
+ * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
+ */
+
 namespace Sapar\Component\Id3\Wrapper\BinWrapper;
 
 use Sapar\Component\Id3\Helper;
-use Sapar\Component\Id3\Metadata\Id3MetadataInterface;
 use Sapar\Component\Id3\Process\Process;
+use Sapar\Contract\Id3\Id3MetadataInterface;
 
 /**
  * Class Eyed3Wrapper.
@@ -42,32 +49,15 @@ class Eyed3Wrapper extends BinWrapperBase
             ->setAlbum($this->getFromRegex('/^album:\s(?P<album>.*)$/m', 'album'))
             ->setGenre($this->getFromRegex('/genre:\s(?P<genre>.*)\s\(.*\)$/m', 'genre'))
             ->setComment($this->getFromRegex('/^Comment:\s.*?\n^(?P<comment>.*)$/m', 'comment'))
-            ->setBpm($this->getFromRegex('/^BPM:\s(?P<bpm>\d{1,3})$/m', 'bpm'))
+            ->setBpm((float) $this->getFromRegex('/^BPM:\s(?P<bpm>\d{1,3})$/m', 'bpm'))
             ->setTitle($this->getFromRegex('/^title:\s(?P<title>.*)$/m', 'title'))
-            ->setYear($this->getFromRegex('/^recording\sdate:\s(?P<recording_date>\d{4})$/m', 'recording_date'))
+            ->setYear((int) $this->getFromRegex('/^recording\sdate:\s(?P<recording_date>\d{4})$/m', 'recording_date'))
             ->setReader(sprintf('EyeD3 (%s)', $this->getVersion()))
             ->setExecTime($process->getStopWatchEvent()->getDuration())
             ->setReadCmd($process->getCommandLine())
         ;
 
         return true;
-    }
-
-    protected function retrieveVersion(): void
-    {
-        $process = $this->getProcess(['--version'])->exec();
-        $this->version = trim($process->getOutput());
-        $versionArray = explode('.', $this->version);
-        $this->minor = $versionArray[1];
-        $this->major = $versionArray[0];
-    }
-
-    /**
-     * @param $file
-     */
-    protected function getProcessForRead($file): Process
-    {
-        return $this->getProcess(['--no-color', '--v2', $file]);
     }
 
     public function getSupportedExtensionsForWrite(): array
@@ -94,9 +84,34 @@ class Eyed3Wrapper extends BinWrapperBase
         return $this->getSupportedExtensionsForWrite();
     }
 
+    /**
+     * @return bool true
+     */
+    public function versionIsSupported(): bool
+    {
+        return version_compare($this->getVersion(), '0.8') >= 0;
+    }
+
+    protected function retrieveVersion(): void
+    {
+        $process       = $this->getProcess(['--version'])->exec();
+        $this->version = trim($process->getOutput());
+        $versionArray  = explode('.', $this->version);
+        $this->minor   = $versionArray[1];
+        $this->major   = $versionArray[0];
+    }
+
+    /**
+     * @param $file
+     */
+    protected function getProcessForRead($file): Process
+    {
+        return $this->getProcess(['--no-color', '--v2', $file]);
+    }
+
     protected function getProcessForWrite(Id3MetadataInterface $id3Metadata): Process
     {
-        $arguments = [];
+        $arguments   = [];
         $arguments[] = '--log-level';
         $arguments[] = 'critical';
         $arguments[] = '--quiet';
@@ -153,13 +168,5 @@ class Eyed3Wrapper extends BinWrapperBase
         preg_match_all($patern, $this->rawReadOutput, $match);
 
         return $match[$namedSubMask][0] ?? null;
-    }
-
-    /**
-     * @return bool true
-     */
-    public function versionIsSupported(): bool
-    {
-        return version_compare($this->getVersion(), '0.8') >= 0;
     }
 }

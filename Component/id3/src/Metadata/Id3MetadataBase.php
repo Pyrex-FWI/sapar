@@ -1,7 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the Sapar project.
+ * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
+ */
+
 namespace Sapar\Component\Id3\Metadata;
 
+use Sapar\Contract\Id3\Id3MetadataInterface;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 
 /**
@@ -85,18 +93,6 @@ abstract class Id3MetadataBase implements Id3MetadataInterface
             throw new FileNotFoundException(sprintf('%s not exist', $file));
         }
         $this->file = new  \SplFileInfo($file);
-    }
-
-    /**
-     * @param $bpm
-     */
-    protected static function floatCast($bpm): ?float
-    {
-        if (null === $bpm) {
-            return null; //@codeCoverageIgnore
-        }
-
-        return (float) (($bpm));
     }
 
     final public function getFile(): \SplFileInfo
@@ -219,7 +215,7 @@ abstract class Id3MetadataBase implements Id3MetadataInterface
      */
     public function setBpm(?float $bpm): self
     {
-        $this->bpm = self::floatCast($bpm);
+        $this->bpm = $bpm;
 
         return $this;
     }
@@ -318,5 +314,17 @@ abstract class Id3MetadataBase implements Id3MetadataInterface
         $this->readCmd = $readCmd;
 
         return $this;
+    }
+
+    /**
+     * @param $bpm
+     */
+    protected static function floatCast($bpm): ?float
+    {
+        if (null === $bpm) {
+            return null; //@codeCoverageIgnore
+        }
+
+        return (float) (($bpm));
     }
 }

@@ -1,8 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the Sapar project.
+ * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
+ */
+
 namespace Sapar\Component\Id3\Writer;
 
-use Sapar\Component\Id3\Metadata\Id3MetadataInterface;
+use Sapar\Contract\Id3\Id3MetadataInterface;
 
 /**
  * Interface Id3WriterInterface.

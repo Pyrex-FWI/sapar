@@ -1,5 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the Sapar project.
+ * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
+ */
+
 namespace Sapar\Component\Id3\Metadata;
 
 class Id3Metadata extends Id3MetadataBase implements \JsonSerializable, \Serializable
@@ -30,12 +37,12 @@ class Id3Metadata extends Id3MetadataBase implements \JsonSerializable, \Seriali
      *
      * @since 5.1.0
      */
-    public function unserialize($serialized)
+    public function unserialize($serialized): void
     {
         $serialized = unserialize($serialized);
 
         foreach ((array) $serialized as $key => $value) {
-            if ('_' == $key[0]) {
+            if ('_' === $key[0]) {
                 $key = substr($key, 1);
             }
 
@@ -43,7 +50,7 @@ class Id3Metadata extends Id3MetadataBase implements \JsonSerializable, \Seriali
                 continue; // @codeCoverageIgnore
             }
 
-            if ('file' == $key) {
+            if ('file' === $key) {
                 $this->file = new \SplFileInfo($value);
                 continue;
             }

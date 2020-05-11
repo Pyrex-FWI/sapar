@@ -1,78 +1,88 @@
 <?php
 
-namespace Sapar\Component\Id3\Test\Wrapper\BinWrapper;
+declare(strict_types=1);
 
+/**
+ * This file is part of the Sapar project.
+ * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
+ */
+
+namespace Sapar\Component\Id3\Test\Wrapper\BinWrapper;
 
 use PHPUnit\Framework\TestCase;
 use Sapar\Component\Id3\Metadata\Id3Metadata;
-use Sapar\Component\Id3\Wrapper\BinWrapper\Eyed3Wrapper;
 use Sapar\Component\Id3\Test\Helper;
+use Sapar\Component\Id3\Wrapper\BinWrapper\Eyed3Wrapper;
 
-class Eyed3WrapperTest extends TestCase
+/**
+ * @internal
+ * @coversNothing
+ */
+final class Eyed3WrapperTest extends TestCase
 {
-	public static $originalFile;
-	public static $backupFile;
+    public static $originalFile;
+    public static $backupFile;
 
-	/**
-	 * @var Eyed3Wrapper
-	 */
-	private $eyed3Wrapper;
+    /**
+     * @var Eyed3Wrapper
+     */
+    private $eyed3Wrapper;
 
-	protected function setUp(): void
-	{
-		$this->eyed3Wrapper = new Eyed3Wrapper();
+    public static function setUpBeforeClass(): void
+    {
+        self::$originalFile = Helper::getSampleMp3File();
+        self::$backupFile   = Helper::getSampleMp3File().'.back';
+        copy(self::$originalFile, self::$backupFile);
+    }
+
+    public static function tearDownAfterClass(): void
+    {
+        unlink(self::$originalFile);
+        copy(self::$backupFile, self::$originalFile);
+        unlink(self::$backupFile);
+    }
+
+    protected function setUp(): void
+    {
+        $this->eyed3Wrapper = new Eyed3Wrapper();
         $this->eyed3Wrapper->setBinPath(Helper::getEyed3Path());
     }
 
-	public static function setUpBeforeClass(): void
-	{
-		self::$originalFile = Helper::getSampleMp3File();
-		self::$backupFile = Helper::getSampleMp3File().".back";
-		copy(self::$originalFile, self::$backupFile);
-	}
+    public function testWrite(): void
+    {
+        $this->eyed3Wrapper->setBinPath(Helper::getEyed3Path());
 
-	public static function tearDownAfterClass(): void
-	{
-		unlink(self::$originalFile);
-		copy(self::$backupFile, self::$originalFile);
-		unlink(self::$backupFile);
-	}
+        $writeData = [
+            'artist' => 'Artist',
+            'title'  => 'Title',
+            'album'  => 'l\'album',
+            'genre'  => 'Dance Hall',
+            'year'   => 2011,
+            'comm'   => 'Test comment',
+            'bpm'    => (float) '122',
+        ];
 
-	public function testWrite()
-	{
-		$this->eyed3Wrapper->setBinPath(Helper::getEyed3Path());
+        $metaDataFile = new Id3Metadata(Helper::getSampleMp3File());
+        $metaDataFile->setArtist($writeData['artist']);
+        $metaDataFile->setAlbum($writeData['album']);
+        $metaDataFile->setTitle($writeData['title']);
+        $metaDataFile->setGenre($writeData['genre']);
+        $metaDataFile->setYear($writeData['year']);
+        $metaDataFile->setComment($writeData['comm']);
+        $metaDataFile->setBpm($writeData['bpm']);
 
-		$writeData = [
-			'artist'=> 'Artist',
-			'title' => 'Title',
-			'album' => 'l\'album',
-			'genre' => 'Dance Hall',
-			'year' 	=> 2011,
-			'comm'	=> 'Test comment',
-			'bpm'	=> '122',
-		];
+        static::assertTrue($this->eyed3Wrapper->write($metaDataFile));
 
-		$metaDataFile = new Id3Metadata(Helper::getSampleMp3File());
-		$metaDataFile->setArtist($writeData['artist']);
-		$metaDataFile->setAlbum($writeData['album']);
-		$metaDataFile->setTitle($writeData['title']);
-		$metaDataFile->setGenre($writeData['genre']);
-		$metaDataFile->setYear($writeData['year']);
-		$metaDataFile->setComment($writeData['comm']);
-		$metaDataFile->setBpm($writeData['bpm']);
+        $metaDataFile = new Id3Metadata(Helper::getSampleMp3File());
+        static::assertTrue($this->eyed3Wrapper->read($metaDataFile));
+        static::assertSame($writeData['album'], $metaDataFile->getAlbum());
+        static::assertSame($writeData['title'], $metaDataFile->getTitle());
+        static::assertSame($writeData['genre'], $metaDataFile->getGenre());
+        static::assertSame($writeData['comm'], $metaDataFile->getComment());
+        static::assertSame($writeData['bpm'], $metaDataFile->getBpm());
+    }
 
-		$this->assertTrue($this->eyed3Wrapper->write($metaDataFile));
-
-		$metaDataFile = new Id3Metadata(Helper::getSampleMp3File());
-		$this->assertTrue($this->eyed3Wrapper->read($metaDataFile));
-		$this->assertEquals($writeData['album'], $metaDataFile->getAlbum());
-		$this->assertEquals($writeData['title'], $metaDataFile->getTitle());
-		$this->assertEquals($writeData['genre'], $metaDataFile->getGenre());
-		$this->assertEquals($writeData['comm'], $metaDataFile->getComment());
-		$this->assertEquals($writeData['bpm'], $metaDataFile->getBpm());
-	}
-
-    public function testWriteException()
+    public function testWriteException(): void
     {
         $this->expectException(\Exception::class);
         $metaDataFile = new Id3Metadata(__FILE__);
@@ -80,7 +90,7 @@ class Eyed3WrapperTest extends TestCase
         $eyed3Wrapper->write($metaDataFile);
     }
 
-    public function testReadException()
+    public function testReadException(): void
     {
         $this->expectException(\Exception::class);
         $metaDataFile = new Id3Metadata(__FILE__);
@@ -88,10 +98,10 @@ class Eyed3WrapperTest extends TestCase
         $eyed3Wrapper->read($metaDataFile);
     }
 
-    public function testVersion()
+    public function testVersion(): void
     {
         $this->eyed3Wrapper->setBinPath(Helper::getEyed3Path());
-		$this->assertStringContainsString('0.9.5', $this->eyed3Wrapper->getVersion());
-        $this->assertTrue($this->eyed3Wrapper->versionIsSupported());
+        static::assertStringContainsString('0.9.5', $this->eyed3Wrapper->getVersion());
+        static::assertTrue($this->eyed3Wrapper->versionIsSupported());
     }
 }

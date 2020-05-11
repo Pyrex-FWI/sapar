@@ -1,9 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the Sapar project.
+ * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
+ */
+
 namespace Sapar\Component\Id3\Wrapper\BinWrapper;
 
-use Sapar\Component\Id3\Metadata\Id3MetadataInterface;
 use Sapar\Component\Id3\Process\Process;
+use Sapar\Contract\Id3\Id3MetadataInterface;
 
 /**
  * Class FfprobeWrapper.
@@ -11,7 +18,6 @@ use Sapar\Component\Id3\Process\Process;
 class FfprobeWrapper extends BinWrapperBase
 {
     public const DEFAULT_BIN_NAME = 'ffprobe';
-
 
     private $rawReadOutput;
     private $cleanOuput;
@@ -31,7 +37,7 @@ class FfprobeWrapper extends BinWrapperBase
             return false; // @codeCoverageIgnore
         }
         $this->rawReadOutput = $process->getOutput();
-        $this->cleanOuput = json_decode($this->rawReadOutput, true);
+        $this->cleanOuput    = json_decode($this->rawReadOutput, true);
 
         $id3Metadata
             ->setArtist((string) $this->get('artist'))
@@ -47,11 +53,6 @@ class FfprobeWrapper extends BinWrapperBase
         ;
 
         return true;
-    }
-
-    protected function getProcessForRead($file): Process
-    {
-        return $this->getProcess(['-v', 'quiet', '-show_format', '-show_streams', $file, '-of', 'json']);
     }
 
     /**
@@ -71,27 +72,8 @@ class FfprobeWrapper extends BinWrapperBase
      * @param Id3MetadataInterface $id3Metadata
      *                                          {@inheritdoc}
      */
-    public function write(Id3MetadataInterface $id3Metadata)
+    public function write(Id3MetadataInterface $id3Metadata): void
     {
-    }
-
-    /**
-     * @param string $key
-     */
-    private function get($key)
-    {
-        return isset($this->cleanOuput['format']['tags'][$key]) ? trim($this->cleanOuput['format']['tags'][$key]) : null;
-    }
-
-    protected function retrieveVersion(): void
-    {
-        $process = $this->getProcess('-version')->exec();
-        $re = '/(version)?\s(?P<version>(?P<major>\d{1,3})\.(?P<minor>\d{1,3})(\.(?P<bugfix>\d{1,3}))?)/';
-        if (preg_match_all($re, $process->getOutput(), $matches, PREG_SET_ORDER, 0)) {
-            $this->version = $matches[0]['version'];
-            $this->major = $matches[0]['major'];
-            $this->minor = $matches[0]['minor'];
-        }
     }
 
     /**
@@ -105,11 +87,35 @@ class FfprobeWrapper extends BinWrapperBase
         return $ffprobe || $avprobe;
     }
 
+    protected function getProcessForRead($file): Process
+    {
+        return $this->getProcess(['-v', 'quiet', '-show_format', '-show_streams', $file, '-of', 'json']);
+    }
+
+    protected function retrieveVersion(): void
+    {
+        $process = $this->getProcess('-version')->exec();
+        $re      = '/(version)?\s(?P<version>(?P<major>\d{1,3})\.(?P<minor>\d{1,3})(\.(?P<bugfix>\d{1,3}))?)/';
+        if (preg_match_all($re, $process->getOutput(), $matches, PREG_SET_ORDER, 0)) {
+            $this->version = $matches[0]['version'];
+            $this->major   = $matches[0]['major'];
+            $this->minor   = $matches[0]['minor'];
+        }
+    }
+
     /**
      * @codeCoverageIgnore
      */
     protected function getProcessForWrite(Id3MetadataInterface $id3Metadata): Process
     {
         // Not supported
+    }
+
+    /**
+     * @param string $key
+     */
+    private function get($key)
+    {
+        return isset($this->cleanOuput['format']['tags'][$key]) ? trim($this->cleanOuput['format']['tags'][$key]) : null;
     }
 }
