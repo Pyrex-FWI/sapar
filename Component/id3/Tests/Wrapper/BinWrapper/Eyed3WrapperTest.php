@@ -7,16 +7,22 @@ declare(strict_types=1);
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
-namespace Sapar\Component\Id3\Test\Wrapper\BinWrapper;
+namespace Sapar\Component\Id3\Tests\Wrapper\BinWrapper;
 
 use PHPUnit\Framework\TestCase;
 use Sapar\Component\Id3\Metadata\Id3Metadata;
-use Sapar\Component\Id3\Test\Helper;
+use Sapar\Component\Id3\Tests\Helper;
 use Sapar\Component\Id3\Wrapper\BinWrapper\Eyed3Wrapper;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \Sapar\Component\Id3\Wrapper\BinWrapper\BinWrapperBase
+ * @covers \Sapar\Component\Id3\Wrapper\BinWrapper\Eyed3Wrapper
+ * @covers \Sapar\Component\Id3\Metadata\Id3Metadata
+ * @covers \Sapar\Component\Id3\Metadata\Id3MetadataBase
+ * @covers \Sapar\Component\Id3\Process\Process
+ * @covers \Sapar\Component\Id3\Helper
+ *
  */
 final class Eyed3WrapperTest extends TestCase
 {

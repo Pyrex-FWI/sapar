@@ -18,6 +18,8 @@ SPLIT_NAME_PREFIX=archive_file-
 SF5=phpsf5
 IMAGE=yemistikris/docker-sapar:sapar
 DEBIAN_IMAGE=debian:stable-slim
+PHPUNIT_INI=-d error_reporting=-1 -d log_errors_max_len=0 -d xdebug.show_exception_trace=0 -d zend.assertions=1 -d assert.exception=1
+
 pull:
 	docker-compose pull && docker image prune -f
 up: pull
@@ -109,3 +111,26 @@ reset-tag-status:
 	docker-compose exec ${SF5} php bin/console doctrine:query:sql "DELETE FROM media_artist" -q
 
 force-update-tags: reset-tag-status update-tags
+
+tests: ace-tests
+
+#
+# A U D I O   C O R E   E N T I T I E S
+#
+ace-phpunit:
+	docker-compose exec -w /var/www/Component/audio-core-entities ${SF5} php ${PHPUNIT_INI} vendor/bin/phpunit --stop-on-error
+ace-phpunit-coverage:
+	docker-compose exec -w /var/www/Component/audio-core-entities ${SF5} php ${PHPUNIT_INI}  -d zend_extension=xdebug.so vendor/bin/phpunit --coverage-html=coverage --stop-on-error
+ace-tests:
+	docker-compose exec -w /var/www/Component/audio-core-entities ${SF5} php vendor/bin/doctrine orm:info && \
+	docker-compose exec -w /var/www/Component/audio-core-entities ${SF5} php vendor/bin/grumphp run --testsuite tests -vvv
+ace-qa:
+	docker-compose exec -w /var/www/Component/audio-core-entities ${SF5} php vendor/bin/grumphp run --testsuite qa -vvv
+
+#
+# I D 3
+#
+id3-phpunit:
+	time docker-compose exec -w /var/www/Component/id3 ${SF5} php ${PHPUNIT_INI}  vendor/bin/phpunit --testdox --stop-on-error
+id3-phpunit-coverage:
+	docker-compose exec -w /var/www/Component/id3 ${SF5} php -d zend_extension=xdebug.so vendor/bin/phpunit --coverage-html=coverage --stop-on-error

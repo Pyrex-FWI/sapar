@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
-namespace Sapar\Component\Id3\Test;
+namespace Sapar\Component\Id3\Tests;
 
 class Helper
 {

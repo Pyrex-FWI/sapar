@@ -7,16 +7,17 @@ declare(strict_types=1);
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
-namespace Sapar\Component\Id3\Test\Metadata;
+namespace Sapar\Component\Id3\Tests\Metadata;
 
 use PHPUnit\Framework\TestCase;
 use Sapar\Component\Id3\Metadata\Id3Metadata;
-use Sapar\Component\Id3\Test\Helper;
+use Sapar\Component\Id3\Tests\Helper;
 use Sapar\Contract\Id3\Id3MetadataInterface;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \Sapar\Component\Id3\Metadata\Id3Metadata
+ * @covers \Sapar\Component\Id3\Metadata\Id3MetadataBase
  */
 final class Id3MetadataTest extends TestCase
 {

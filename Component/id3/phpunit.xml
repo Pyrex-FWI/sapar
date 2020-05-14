@@ -8,10 +8,15 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          bootstrap="vendor/autoload.php"
+         executionOrder="depends,defects"
+         verbose="true"
+         forceCoversAnnotation="true"
+         beStrictAboutCoversAnnotation="true"
+         beStrictAboutOutputDuringTests="true"
 >
     <testsuites>
         <testsuite name="Id3 Test Suite">
-            <directory>./Test</directory>
+            <directory>./Tests</directory>
         </testsuite>
     </testsuites>
     <filter>

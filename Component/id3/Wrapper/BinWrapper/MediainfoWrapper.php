@@ -34,9 +34,11 @@ class MediainfoWrapper extends BinWrapperBase
         $process->exec();
         $simpleXMLElement = @simplexml_load_string($process->getOutput());
         if (!$process->isSuccessful() || !$simpleXMLElement instanceof  \SimpleXMLElement) {
+            //@codeCoverageIgnoreStart
             $this->outputError = sprintf('%s - %s', $process->getErrorOutput(), $process->getCommandLine());
 
-            return false; // @codeCoverageIgnore
+            return false;
+            //@codeCoverageIgnoreEnd
         }
 
         if ((string) $simpleXMLElement->media->attributes()['ref'] === $id3Metadata->getFile()->getRealPath()) {
@@ -144,7 +146,9 @@ class MediainfoWrapper extends BinWrapperBase
             return (string) $this->rawReadOutput->{$tagName};
         }
         if ($this->rawReadOutput->extra->{$tagName}) {
+            //@codeCoverageIgnoreStart
             return (string) $this->rawReadOutput->extra->{$tagName};
+            //@codeCoverageIgnoreEnd
         }
 
         return $return;

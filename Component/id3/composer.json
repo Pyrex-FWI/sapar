@@ -14,9 +14,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Sapar\\Component\\Id3\\": "src",
-            "Sapar\\Component\\Id3\\Test\\": "Test"
-        }
+            "Sapar\\Component\\Id3\\": ".",
+            "Sapar\\Component\\Id3\\Test\\": "tests"
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
     },
     "require": {
         "php": "^7.3",

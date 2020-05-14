@@ -7,17 +7,22 @@ declare(strict_types=1);
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
-namespace Sapar\Component\Id3\Test\Bench;
+namespace Sapar\Component\Id3\Tests\Bench;
 
 use PHPUnit\Framework\TestCase;
 use Sapar\Component\Id3\Metadata\Id3Metadata;
-use Sapar\Component\Id3\Test\Helper;
+use Sapar\Component\Id3\Tests\Helper;
 use Sapar\Component\Id3\Wrapper\BinWrapper\Eyed3Wrapper;
 use Sapar\Component\Id3\Wrapper\BinWrapper\MediainfoWrapper;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \Sapar\Component\Id3\Wrapper\BinWrapper\Eyed3Wrapper
+ * @covers \Sapar\Component\Id3\Wrapper\BinWrapper\BinWrapperBase
+ * @covers \Sapar\Component\Id3\Wrapper\BinWrapper\MediainfoWrapper
+ * @covers \Sapar\Component\Id3\Metadata\Id3MetadataBase
+ * @covers \Sapar\Component\Id3\Helper
+ * @covers \Sapar\Component\Id3\Process\Process
  */
 final class ReadTest extends TestCase
 {
@@ -37,10 +42,10 @@ final class ReadTest extends TestCase
 
     public static function setUpBeforeClass(): void
     {
-        self::$id3meta = new \Sapar\Component\Id3\Metadata\Id3Metadata(Helper::getSampleMp3File());
-        self::$eyed3   = new \Sapar\Component\Id3\Wrapper\BinWrapper\Eyed3Wrapper();
+        self::$id3meta = new Id3Metadata(Helper::getSampleMp3File());
+        self::$eyed3   = new Eyed3Wrapper();
         self::$eyed3->setBinPath(Helper::getEyed3Path());
-        self::$mediainfo = new \Sapar\Component\Id3\Wrapper\BinWrapper\MediainfoWrapper();
+        self::$mediainfo = new MediainfoWrapper();
         self::$mediainfo->setBinPath(Helper::getMediainfoPath());
     }
 

@@ -315,16 +315,4 @@ abstract class Id3MetadataBase implements Id3MetadataInterface
 
         return $this;
     }
-
-    /**
-     * @param $bpm
-     */
-    protected static function floatCast($bpm): ?float
-    {
-        if (null === $bpm) {
-            return null; //@codeCoverageIgnore
-        }
-
-        return (float) (($bpm));
-    }
 }
