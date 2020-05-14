@@ -14,8 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Sapar\\Component\\Id3\\": ".",
-            "Sapar\\Component\\Id3\\Test\\": "tests"
+            "Sapar\\Component\\Id3\\": "."
         },
         "exclude-from-classmap": [
             "/Tests/"
