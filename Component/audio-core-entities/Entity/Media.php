@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
-namespace AudioCoreEntity\Entity;
+namespace Sapar\Component\AudioCoreEntity\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -26,7 +26,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * Media.
  *
- * @Entity(repositoryClass="AudioCoreEntity\Repository\MediaRepository")
+ * @Entity(repositoryClass="Sapar\Component\AudioCoreEntity\Repository\MediaRepository")
  * @Table(
  *      indexes={@Index(name="provider_filename", columns={"file_name"})},
  *      uniqueConstraints={@UniqueConstraint(name="unique_hash", columns={"hash"})},
@@ -148,7 +148,7 @@ class Media
     protected $genre;
 
     /**
-     * @ManyToMany(targetEntity="\AudioCoreEntity\Entity\Genre", inversedBy="medias", cascade={"persist", "detach", "refresh"}, fetch="EXTRA_LAZY")
+     * @ManyToMany(targetEntity="\Sapar\Component\AudioCoreEntity\Entity\Genre", inversedBy="medias", cascade={"persist", "detach", "refresh"}, fetch="EXTRA_LAZY")
      * @JoinTable(name="media_genre",
      *      joinColumns={@JoinColumn(name="media_id", referencedColumnName="id")},
      *      inverseJoinColumns={@JoinColumn(name="genre_id", referencedColumnName="id")}
@@ -159,7 +159,7 @@ class Media
      */
     protected $linkedGenres;
     /**
-     * @ManyToMany(targetEntity="\AudioCoreEntity\Entity\Artist", inversedBy="medias", cascade={"persist", "detach", "refresh"}, fetch="EXTRA_LAZY")
+     * @ManyToMany(targetEntity="\Sapar\Component\AudioCoreEntity\Entity\Artist", inversedBy="medias", cascade={"persist", "detach", "refresh"}, fetch="EXTRA_LAZY")
      * @JoinTable(
      *      joinColumns={@JoinColumn(name="media_id", referencedColumnName="id")},
      *      inverseJoinColumns={@JoinColumn(name="artist_id", referencedColumnName="id")}

@@ -7,13 +7,13 @@ declare(strict_types=1);
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
-namespace AudioCoreEntity\Tests\Entity;
+namespace Sapar\Component\AudioCoreEntity\Tests\Entity;
 
-use AudioCoreEntity\Tests\EntityBase;
+
 
 /**
  * @internal
- * @covers \AudioCoreEntity\Entity\Album
+ * @covers \Sapar\Component\AudioCoreEntity\Entity\Album
  */
 final class AlbumTest extends EntityBase
 {

@@ -7,10 +7,10 @@ declare(strict_types=1);
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
-namespace AudioCoreEntity\Repository;
+namespace Sapar\Component\AudioCoreEntity\Repository;
 
-use AudioCoreEntity\Entity\Genre;
-use AudioCoreEntity\Entity\Media;
+use Sapar\Component\AudioCoreEntity\Entity\Genre;
+use Sapar\Component\AudioCoreEntity\Entity\Media;
 use Doctrine\ORM\EntityManagerInterface;
 use Sapar\Contract\Id3\Id3MetadataInterface;
 

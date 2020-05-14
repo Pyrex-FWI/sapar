@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
-namespace AudioCoreEntity\Entity;
+namespace Sapar\Component\AudioCoreEntity\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * RadioHit.
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="AudioCoreEntity\Repository\RadioHitRepository")
+ * @ORM\Entity(repositoryClass="Sapar\Component\AudioCoreEntity\Repository\RadioHitRepository")
  */
 class RadioHit
 {
@@ -153,7 +153,7 @@ class RadioHit
     /**
      * Add genres.
      *
-     * @param \AudioCoreEntity\Entity\Genre $genres
+     * @param \Sapar\Component\AudioCoreEntity\Entity\Genre $genres
      *
      * @return RadioHit
      */
@@ -167,7 +167,7 @@ class RadioHit
     /**
      * Remove genres.
      *
-     * @param \AudioCoreEntity\Entity\Genre $genres
+     * @param \Sapar\Component\AudioCoreEntity\Entity\Genre $genres
      */
     public function removeGenre(Genre $genres): void
     {

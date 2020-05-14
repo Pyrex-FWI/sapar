@@ -34,9 +34,10 @@ parameters:
             config: .php_cs
             allow_risky: true
         phpmd:
-            whitelist_patterns:
-                - /^src(.*)/
-            exclude: []
+            whitelist_patterns: ~
+            exclude: [
+                - /^Tests(.*)/
+            ]
             ruleset: ['phpmd_rules.xml']
             triggered_by: ['php']
         phpstan:

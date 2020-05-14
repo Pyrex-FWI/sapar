@@ -7,15 +7,14 @@ declare(strict_types=1);
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
-namespace AudioCoreEntity\Tests\Entity;
+namespace Sapar\Component\AudioCoreEntity\Tests\Entity;
 
-use AudioCoreEntity\Tests\EntityBase;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @internal
- * @covers \AudioCoreEntity\Entity\Media
- * @covers \AudioCoreEntity\Repository\MediaRepository
+ * @covers \Sapar\Component\AudioCoreEntity\Entity\Media
+ * @covers \Sapar\Component\AudioCoreEntity\Repository\MediaRepository
  */
 final class MediaTest extends EntityBase
 {

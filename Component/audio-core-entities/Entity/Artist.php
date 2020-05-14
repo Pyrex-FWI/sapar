@@ -7,22 +7,21 @@ declare(strict_types=1);
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
-namespace AudioCoreEntity\Entity;
+namespace Sapar\Component\AudioCoreEntity\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * Radio.
+ * Artist.
  *
- * @ORM\Table()
+ * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="artist_name_idx", columns={"name"})})
  * @ORM\Entity
- * @UniqueEntity("name")
  */
-class Radio
+class Artist
 {
     use TimestampableEntity;
 
@@ -45,22 +44,27 @@ class Radio
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @ORM\Column(name="name", type="string", length=200, nullable=false)
+     * @Groups({"artist-read", "media-read"})
      */
     private $name;
-
     /**
-     * @todo refactor in favour of hitPagesUrls
+     * @ORM\ManyToMany(targetEntity="\Sapar\Component\AudioCoreEntity\Entity\Media",mappedBy="artists")
+     * @Groups({"artist-read"})
      *
      * @var ArrayCollection
-     *
-     * @ORM\Column(name="hitPages", type="json_array")
      */
-    private $hitPagesUrls;
+    private $medias;
 
-    public function __construct()
+    /**
+     * Artist constructor.
+     */
+    public function __construct(?string $name = null)
     {
-        $this->hitPagesUrls = new ArrayCollection();
+        if ($name) {
+            $this->setName($name);
+        }
+        $this->medias = new ArrayCollection();
     }
 
     /**
@@ -74,11 +78,17 @@ class Radio
     }
 
     /**
-     * Set name.
-     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * @param string $name
      *
-     * @return Radio
+     * @return $this
      */
     public function setName($name)
     {
@@ -88,37 +98,23 @@ class Radio
     }
 
     /**
-     * Get name.
-     *
-     * @return string
+     * @return mixed
      */
-    public function getName()
+    public function getMedias()
     {
-        return $this->name;
+        return $this->medias;
     }
 
     /**
-     * @return $this
+     * @param mixed $medias
+     *
+     * @return Artist
      */
-    public function setHitPagesUrls(array $hitPagesUrls)
+    public function setMedias($medias)
     {
-        foreach ($hitPagesUrls as $hitPage) {
-            if (filter_var($hitPage, FILTER_VALIDATE_URL)) {
-                $this->hitPagesUrls->add($hitPage);
-            }
-        }
+        $this->medias = $medias;
 
         return $this;
-    }
-
-    /**
-     * Get hitPages.
-     *
-     * @return ArrayCollection
-     */
-    public function getHitPagesUrls()
-    {
-        return $this->hitPagesUrls;
     }
 
     /**

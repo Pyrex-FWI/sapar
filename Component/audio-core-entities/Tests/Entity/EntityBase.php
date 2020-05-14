@@ -7,18 +7,19 @@ declare(strict_types=1);
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
-namespace AudioCoreEntity\Tests;
+namespace Sapar\Component\AudioCoreEntity\Tests\Entity;
 
-use AudioCoreEntity\Entity\Album;
-use AudioCoreEntity\Entity\Artist;
-use AudioCoreEntity\Entity\DeletedRelease;
-use AudioCoreEntity\Entity\Genre;
-use AudioCoreEntity\Entity\Media;
-use AudioCoreEntity\Entity\Radio;
-use AudioCoreEntity\Entity\RadioHit;
-use AudioCoreEntity\Repository\MediaRepository;
+use Sapar\Component\AudioCoreEntity\Entity\Album;
+use Sapar\Component\AudioCoreEntity\Entity\Artist;
+use Sapar\Component\AudioCoreEntity\Entity\DeletedRelease;
+use Sapar\Component\AudioCoreEntity\Entity\Genre;
+use Sapar\Component\AudioCoreEntity\Entity\Media;
+use Sapar\Component\AudioCoreEntity\Entity\Radio;
+use Sapar\Component\AudioCoreEntity\Entity\RadioHit;
+use Sapar\Component\AudioCoreEntity\Repository\MediaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
+use Sapar\Component\AudioCoreEntity\Tests\bootstrap;
 
 abstract class EntityBase extends TestCase
 {

@@ -7,10 +7,10 @@ declare(strict_types=1);
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
-namespace AudioCoreEntity\Repository;
+namespace Sapar\Component\AudioCoreEntity\Repository;
 
-use AudioCoreEntity\Entity\ImportMedia;
-use AudioCoreEntity\Entity\Media;
+use Sapar\Component\AudioCoreEntity\Entity\ImportMedia;
+use Sapar\Component\AudioCoreEntity\Entity\Media;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 

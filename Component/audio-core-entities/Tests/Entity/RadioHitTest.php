@@ -7,13 +7,11 @@ declare(strict_types=1);
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
-namespace AudioCoreEntity\Tests\Entity;
-
-use AudioCoreEntity\Tests\EntityBase;
+namespace Sapar\Component\AudioCoreEntity\Tests\Entity;
 
 /**
  * @internal
- * @covers \AudioCoreEntity\Entity\RadioHit
+ * @covers \Sapar\Component\AudioCoreEntity\Entity\RadioHit
  */
 final class RadioHitTest extends EntityBase
 {

@@ -7,20 +7,22 @@ declare(strict_types=1);
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
-namespace AudioCoreEntity\Entity;
+namespace Sapar\Component\AudioCoreEntity\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * Album.
+ * Radio.
  *
  * @ORM\Table()
  * @ORM\Entity
- * @SuppressWarnings(PHPMD.ShortVariable)
+ * @UniqueEntity("name")
  */
-class Album
+class Radio
 {
     use TimestampableEntity;
 
@@ -43,24 +45,22 @@ class Album
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
 
     /**
-     * @todo set url instead blob data
+     * @todo refactor in favour of hitPagesUrls
      *
-     * @var string
+     * @var ArrayCollection
      *
-     * @ORM\Column(name="cover", type="blob")
+     * @ORM\Column(name="hitPages", type="json_array")
      */
-    private $cover;
+    private $hitPagesUrls;
 
-    public function __construct(?string $name = null)
+    public function __construct()
     {
-        if ($name) {
-            $this->setName($name);
-        }
+        $this->hitPagesUrls = new ArrayCollection();
     }
 
     /**
@@ -78,7 +78,7 @@ class Album
      *
      * @param string $name
      *
-     * @return Album
+     * @return Radio
      */
     public function setName($name)
     {
@@ -98,31 +98,27 @@ class Album
     }
 
     /**
-     * Set cover.
-     *
-     * @param string $cover
-     *
-     * @return Album
+     * @return $this
      */
-    public function setCover($cover)
+    public function setHitPagesUrls(array $hitPagesUrls)
     {
-        // @codeCoverageIgnoreStart
-        $this->cover = $cover;
+        foreach ($hitPagesUrls as $hitPage) {
+            if (filter_var($hitPage, FILTER_VALIDATE_URL)) {
+                $this->hitPagesUrls->add($hitPage);
+            }
+        }
 
         return $this;
-        // @codeCoverageIgnoreEnd
     }
 
     /**
-     * Get cover.
+     * Get hitPages.
      *
-     * @return string
+     * @return ArrayCollection
      */
-    public function getCover()
+    public function getHitPagesUrls()
     {
-        // @codeCoverageIgnoreStart
-        return $this->cover;
-        // @codeCoverageIgnoreEnd
+        return $this->hitPagesUrls;
     }
 
     /**

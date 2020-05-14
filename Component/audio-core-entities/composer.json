@@ -8,16 +8,17 @@
             "email": "christophe.pyree@gmail.com"
         }
     ],
-    "autoload": {
-        "psr-0": {
-            "AudioCoreEntity": "./src/",
-            "AudioCoreEntity\\Tests": "./tests/"
-        },
-        "classmap": [
-            "src/",
-            "./tests/"
-        ]
+    "config": {
+        "sort-packages": true
     },
+    "autoload": {
+        "psr-4": {
+            "Sapar\\Component\\AudioCoreEntity\\": "."
+        }
+    },
+    "exclude-from-classmap": [
+        "/Tests/"
+    ],
     "scripts": {
         "ci:test-travis": [
             "phpunit --coverage-html=coverage"
@@ -30,10 +31,11 @@
         "doctrine/orm": "*",
         "fza/mysql-doctrine-levenshtein-function": "^0.3.0",
         "gedmo/doctrine-extensions": "^2.4",
-        "symfony/validator": "^4.0 || ^5.0",
-        "symfony/serializer": "^4.0 || ^5.0",
+        "phpmetrics/phpmetrics": "^2.6",
+        "pyrex-fwi/core-contracts": "@dev",
         "symfony/property-access": "^4.0 || ^5.0",
-        "pyrex-fwi/core-contracts": "@dev"
+        "symfony/serializer": "^4.0 || ^5.0",
+        "symfony/validator": "^4.0 || ^5.0"
     },
     "require-dev": {
         "symfony/doctrine-bridge": "^4.0 || ^5.0",

@@ -7,9 +7,9 @@ declare(strict_types=1);
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
-namespace AudioCoreEntity\Tests\DataFixtures;
+namespace Sapar\Component\AudioCoreEntity\Tests\DataFixtures;
 
-use AudioCoreEntity\Entity\Genre;
+use Sapar\Component\AudioCoreEntity\Entity\Genre;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 

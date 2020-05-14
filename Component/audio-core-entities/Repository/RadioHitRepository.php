@@ -7,9 +7,9 @@ declare(strict_types=1);
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
-namespace AudioCoreEntity\Repository;
+namespace Sapar\Component\AudioCoreEntity\Repository;
 
-use AudioCoreEntity\Entity\RadioHit;
+use Sapar\Component\AudioCoreEntity\Entity\RadioHit;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**

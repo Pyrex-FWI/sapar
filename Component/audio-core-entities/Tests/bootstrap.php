@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
-namespace AudioCoreEntity\Tests;
+namespace Sapar\Component\AudioCoreEntity\Tests;
 
 require_once 'autoload.php';
 
@@ -51,7 +51,7 @@ class bootstrap
 
         $dbParams = [
             'driver' => 'pdo_sqlite',
-            'path' => __DIR__.'/db.sqlite',
+            'path'   => __DIR__.'/db.sqlite',
         ];
 
         $cache = new \Doctrine\Common\Cache\ArrayCache();

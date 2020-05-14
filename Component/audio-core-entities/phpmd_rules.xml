@@ -10,9 +10,6 @@
         My custom rule set that checks my code...
     </description>
 
-    <rule ref="rulesets/naming.xml">
-        <exclude name="ShortVariable"/>
-    </rule>
 
     <rule ref="rulesets/cleancode.xml">
         <exclude name="MissingImport" />
@@ -30,6 +27,11 @@
     <rule ref="rulesets/design.xml">
     </rule>
     <rule ref="rulesets/controversial.xml">
+    </rule>
+
+
+    <rule ref="rulesets/naming.xml">
+        <exclude name="ShortVariable"/>
     </rule>
 
     <rule ref="rulesets/naming.xml/ShortVariable"

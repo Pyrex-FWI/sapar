@@ -7,22 +7,20 @@ declare(strict_types=1);
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
-namespace AudioCoreEntity\Entity;
+namespace Sapar\Component\AudioCoreEntity\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Genre.
+ * Album.
  *
- * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="genre_name_idx", columns={"name"})}, options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
+ * @ORM\Table()
  * @ORM\Entity
+ * @SuppressWarnings(PHPMD.ShortVariable)
  */
-class Genre
+class Album
 {
     use TimestampableEntity;
 
@@ -45,27 +43,24 @@ class Genre
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=50, nullable=false)
-     * @Assert\NotBlank()
-     * @Groups({"genre-read", "media-read"})
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\AudioCoreEntity\Entity\Media",mappedBy="linkedGenres")
-     * @Groups({"genre-read"})
+     * @todo set url instead blob data
      *
-     * @var ArrayCollection
+     * @var string
+     *
+     * @ORM\Column(name="cover", type="blob")
      */
-    private $medias;
+    private $cover;
 
     public function __construct(?string $name = null)
     {
         if ($name) {
             $this->setName($name);
         }
-
-        $this->medias = new ArrayCollection();
     }
 
     /**
@@ -79,17 +74,11 @@ class Genre
     }
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
+     * Set name.
+     *
      * @param string $name
      *
-     * @return $this
+     * @return Album
      */
     public function setName($name)
     {
@@ -99,23 +88,41 @@ class Genre
     }
 
     /**
-     * @return mixed
+     * Get name.
+     *
+     * @return string
      */
-    public function getMedias()
+    public function getName()
     {
-        return $this->medias;
+        return $this->name;
     }
 
     /**
-     * @param mixed $medias
+     * Set cover.
      *
-     * @return Genre
+     * @param string $cover
+     *
+     * @return Album
      */
-    public function setMedias($medias)
+    public function setCover($cover)
     {
-        $this->medias = $medias;
+        // @codeCoverageIgnoreStart
+        $this->cover = $cover;
 
         return $this;
+        // @codeCoverageIgnoreEnd
+    }
+
+    /**
+     * Get cover.
+     *
+     * @return string
+     */
+    public function getCover()
+    {
+        // @codeCoverageIgnoreStart
+        return $this->cover;
+        // @codeCoverageIgnoreEnd
     }
 
     /**
