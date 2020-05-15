@@ -58,5 +58,11 @@
         "sapar/movie-unrar": "self.version",
         "sapar/release-dispatcher": "self.version",
         "sapar/sfv-checker": "self.version"
+    },
+    "scripts": {
+        "merge": "vendor/bin/monorepo-builder merge --ansi",
+        "propagate": "vendor/bin/monorepo-builder propagate --ansi",
+        "rector": "vendor/bin/rector process --config rector-ci.yaml --dry-run --ansi",
+        "validate-monorepo": "vendor/bin/monorepo-builder validate --ansi"
     }
 }

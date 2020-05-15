@@ -26,7 +26,7 @@ parameters:
     directories_to_repositories:
 #        App/Symfony4: 'git@gitlab.com:Pyrex-FWI/symfony4.git'
 #        App/Symfony5: 'git@gitlab.com:Pyrex-FWI/symfony5.git'
-#        Component/sfv-checker: 'git@gitlab.com:Pyrex-FWI/sfv-checker.git'
+        Component/sfv-checker: 'git@gitlab.com:Pyrex-FWI/sfv-checker.git'
         Component/audio-core-entities: 'git@gitlab.com:Pyrex-FWI/audio-core-entities.git'
         Component/id3: 'git@gitlab.com:Pyrex-FWI/sapar-id3.git'
 #        Console/MovieUnrar: 'git@gitlab.com:Pyrex-FWI/movie-unrar.git'
