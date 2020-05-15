@@ -7,7 +7,6 @@ parameters:
 #        - 'App/Symfony5'
 #        - 'Contract'
     package_directories_excludes:
-        - 'MediaFileIndexer'
         - 'SfvChecker'
     # for "merge" command
     data_to_append:
