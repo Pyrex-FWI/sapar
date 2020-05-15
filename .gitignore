@@ -102,3 +102,5 @@ data.db
 /*.db
 /Component/audio-core-entities/tests/cache/
 /Component/audio-core-entities/infection.log
+/Component/audio-core-entities/.php_cs.cache
+/App/Symfony4/symfony.lock

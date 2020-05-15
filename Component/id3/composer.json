@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Sapar\\Component\\Id3\\": "."
+            "Sapar\\Component\\Id3\\": ""
         },
         "exclude-from-classmap": [
             "/Tests/"
@@ -29,15 +29,9 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9.1",
-        "friendsofphp/php-cs-fixer": "^2.11",
+        "friendsofphp/php-cs-fixer": "^2.16",
         "phpro/grumphp": "^0.18",
         "symfony/var-dumper": "^4.3 | ^5.1",
         "phpmetrics/phpmetrics": "^2.6"
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../../Contract/core"
-        }
-    ]
+    }
 }

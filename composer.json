@@ -1,12 +1,48 @@
 {
     "name": "pyrex-fwi/sapar",
-    "repositories": [
-    ],
     "require": {
-
+        "php": "^7.3",
+        "doctrine/orm": "*",
+        "fza/mysql-doctrine-levenshtein-function": "^0.3.0",
+        "gedmo/doctrine-extensions": "^2.4",
+        "symfony/console": "4.* || 5.*",
+        "symfony/process": "4.* || 5.*",
+        "symfony/property-access": "^4.0 || ^5.0",
+        "symfony/serializer": "^4.0 || ^5.0",
+        "symfony/stopwatch": "4.* || 5.*",
+        "symfony/validator": "^4.0 || ^5.0",
+        "symplify/monorepo-builder": "^7.3"
     },
     "require-dev": {
-
+        "doctrine/data-fixtures": "^1.4",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "infection/infection": "^0.16.3",
+        "monolog/monolog": "^2.0",
+        "phpmd/phpmd": "^2.8",
+        "phpmetrics/phpmetrics": "^2.6",
+        "phpro/grumphp": "^0.18",
+        "phpstan/phpstan": "^0.12.23",
+        "phpunit/phpunit": "^9.1",
+        "psalm/plugin-phpunit": "^0.10.0",
+        "sebastian/phpcpd": "^5.0",
+        "sensiolabs/security-checker": "^6.0",
+        "symfony/doctrine-bridge": "^4.0 || ^5.0",
+        "symfony/var-dumper": "^4.3 | ^5.1",
+        "symfony/yaml": "*",
+        "vimeo/psalm": "^3.11",
+        "weirdan/doctrine-psalm-plugin": "^0.11.1"
+    },
+    "autoload": {
+        "exclude-from-classmap": [
+            "Component/audio-core-entities/Tests/",
+            "Component/id3/Tests/"
+        ],
+        "psr-4": {
+            "Sapar\\Component\\AudioCoreEntity\\": "Component/audio-core-entities/",
+            "Sapar\\Component\\Id3\\": "Component/id3/",
+            "Sapar\\Component\\SfvChecker\\": "Component/SfvChecker/src",
+            "Sapar\\Mfi\\": "Component/MediaFileIndexer/"
+        }
     },
     "replace": {
         "pyrex-fwi/audio-core-entities": "self.version",
@@ -17,7 +53,5 @@
         "sapar/movie-unrar": "self.version",
         "sapar/release-dispatcher": "self.version",
         "sapar/sfv-checker": "self.version"
-    },
-    "minimum-stability": "stable",
-    "prefer-stable": true
+    }
 }
