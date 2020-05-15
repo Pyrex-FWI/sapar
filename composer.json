@@ -1,5 +1,6 @@
 {
     "name": "pyrex-fwi/sapar",
+    "minimum-stability": "dev",
     "require": {
         "php": "^7.3",
         "doctrine/collections": "^1.6",
@@ -13,7 +14,7 @@
         "symfony/serializer": "^4.0 || ^5.0",
         "symfony/stopwatch": "4.* || 5.*",
         "symfony/validator": "^4.0 || ^5.0",
-        "symplify/monorepo-builder": "^7.3"
+        "symplify/monorepo-builder": "^7.3.17"
     },
     "require-dev": {
         "doctrine/data-fixtures": "^1.4",
