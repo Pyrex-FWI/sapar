@@ -7,7 +7,7 @@ parameters:
 #        - 'App/Symfony5'
 #        - 'Contract'
     package_directories_excludes:
-        - 'SfvChecker'
+        - 'sfv-checker'
     # for "merge" command
     data_to_append:
         require:
@@ -19,20 +19,6 @@ parameters:
         "minimum-stability": stable
         require:
             "pyrex-fwi/core-contracts": "*"
-#            "doctrine/collections": "*"
-#            "doctrine/orm": "*"
-#            "fza/mysql-doctrine-levenshtein-function": "*"
-#            "gedmo/doctrine-extensions": "*"
-#            "phpmetrics/phpmetrics": "*"
-#            "pyrex-fwi/core-contracts": "*"
-#            "symfony/console": "*"
-#            "symfony/filesystem": "*"
-#            "symfony/finder": "*"
-#            "symfony/process": "*"
-#            "symfony/property-access": "*"
-#            "symfony/serializer": "*"
-#            "symfony/stopwatch": "*"
-#            "symfony/validator": "*"
 #        repositories:
 #            core: "*"
 #            audio-core-entities: "*"
@@ -40,7 +26,7 @@ parameters:
     directories_to_repositories:
 #        App/Symfony4: 'git@gitlab.com:Pyrex-FWI/symfony4.git'
 #        App/Symfony5: 'git@gitlab.com:Pyrex-FWI/symfony5.git'
-#        Component/SfvChecker: 'git@gitlab.com:Pyrex-FWI/sfv-checker.git'
+#        Component/sfv-checker: 'git@gitlab.com:Pyrex-FWI/sfv-checker.git'
         Component/audio-core-entities: 'git@gitlab.com:Pyrex-FWI/audio-core-entities.git'
         Component/id3: 'git@gitlab.com:Pyrex-FWI/sapar-id3.git'
 #        Console/MovieUnrar: 'git@gitlab.com:Pyrex-FWI/movie-unrar.git'

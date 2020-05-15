@@ -2,7 +2,7 @@
     "name": "pyrex-fwi/sapar",
     "require": {
         "php": "^7.3",
-        "doctrine/collections": "^1.5",
+        "doctrine/collections": "^1.6",
         "doctrine/orm": "*",
         "fza/mysql-doctrine-levenshtein-function": "^0.3.0",
         "gedmo/doctrine-extensions": "^2.4",
@@ -43,7 +43,10 @@
             "Sapar\\Component\\AudioCoreEntity\\": "Component/audio-core-entities/",
             "Sapar\\Component\\Id3\\": "Component/id3/",
             "Sapar\\Component\\SfvChecker\\": "Component/SfvChecker/src",
-            "Sapar\\Mfi\\": "Component/MediaFileIndexer/"
+            "Sapar\\Mfi\\": [
+                "Component/MediaFileIndexer/",
+                "Component/media-file-indexer/"
+            ]
         }
     },
     "replace": {
