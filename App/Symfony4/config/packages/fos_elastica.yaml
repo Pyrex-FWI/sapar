@@ -3,16 +3,21 @@ fos_elastica:
     clients:
         default: { url: '%env(ELASTICSEARCH_URL)%' }
     indexes:
-        app:
+        media_index:
             types:
                 media:
                     properties:
-                        filePath: ~
+                        filePath:
                         hash: ~
                         title: ~
-                        artist: ~
-                        bpm: ~
-                        year: ~
+                        artist:
+                            type: keyword
+                        bpm:
+                            type: double
+                        genre:
+                            type: keyword
+                        year:
+                            type: integer
                     persistence:
                         driver: orm
-                        model: AudioCoreEntity\Entity\Media
+                        model: Sapar\Component\AudioCoreEntity\Entity\Media

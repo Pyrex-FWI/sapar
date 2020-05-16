@@ -3,10 +3,10 @@
 
 namespace Sapar\Index;
 
-use AudioCoreEntity\Entity\ImportMedia;
-use AudioCoreEntity\Entity\Media;
-use AudioCoreEntity\Repository\ImportMediaRepository;
-use AudioCoreEntity\Repository\MediaRepository;
+use Sapar\Component\AudioCoreEntity\Entity\ImportMedia;
+use Sapar\Component\AudioCoreEntity\Entity\Media;
+use Sapar\Component\AudioCoreEntity\Repository\ImportMediaRepository;
+use Sapar\Component\AudioCoreEntity\Repository\MediaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sapar\Message\ReadMediaFilesTag;
@@ -114,8 +114,9 @@ class IndexManager
         /** @var QueryBuilder $qb */
         $qb = $this->entityManager->getRepository(Media::class)->createQueryBuilder('m');
         $limit = $count < 100 ? $count : 100;
-
-        $symfonyStyle->progressStart($count);
+        $progress = $symfonyStyle->createProgressBar($count);
+        $progress->setFormat('very_verbose');
+//        $symfonyStyle->progressStart($count);
 
         foreach(range(0, $count, $limit) as $from) {
             $mediafiles = $qb
@@ -125,9 +126,11 @@ class IndexManager
                 ->getQuery()->execute()
                 ;
             $this->bus->dispatch(new ReadMediaFilesTag($mediafiles));
-            $symfonyStyle->progressAdvance($limit);
+//            $symfonyStyle->progressAdvance($limit);
+            $progress->advance($limit);
             $this->entityManager->clear();
         }
-        $symfonyStyle->progressFinish();
+//        $symfonyStyle->progressFinish();
+        $progress->finish();
     }
 }

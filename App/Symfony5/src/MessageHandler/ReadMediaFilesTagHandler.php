@@ -2,7 +2,7 @@
 
 namespace Sapar\MessageHandler;
 
-use AudioCoreEntity\Repository\MediaRepository;
+use Sapar\Component\AudioCoreEntity\Repository\MediaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sapar\Component\Id3\Metadata\Id3Metadata;
 use Sapar\Id3Metadata\Id3MetadataManager;
@@ -28,9 +28,15 @@ final class ReadMediaFilesTagHandler implements MessageHandlerInterface
 
     public function __invoke(ReadMediaFilesTag $message)
     {
+        $i = 0;
         foreach($message->getMediaFiles() as $media){
+            $i++;
             $id3 = $this->id3MetadataManager->read($media->getFilePath());
             $this->mediaRepository->updateMeta($media->getId(), $id3);
+            if ($i % 100 === 0) {
+                $this->mediaRepository->flush();
+            }
         }
+        $this->mediaRepository->flush();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Sapar\Command;
 
-use AudioCoreEntity\Entity\ImportMedia;
+use Sapar\Component\AudioCoreEntity\Entity\ImportMedia;
 use Sapar\Index\IndexManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

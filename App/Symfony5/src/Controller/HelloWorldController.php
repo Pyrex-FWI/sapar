@@ -2,7 +2,7 @@
 
 namespace Sapar\Controller;
 
-use AudioCoreEntity\Repository\MediaRepository;
+use Sapar\Component\AudioCoreEntity\Repository\MediaRepository;
 use Sapar\Id3Metadata\Id3MetadataManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;

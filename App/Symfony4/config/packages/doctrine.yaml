@@ -20,5 +20,5 @@ doctrine:
                 is_bundle: false
                 type: annotation
                 dir: '%kernel.project_dir%/vendor/pyrex-fwi/audio-core-entities/src/Entity'
-                prefix: 'AudioCoreEntity\Entity'
+                prefix: 'Sapar\Component\AudioCoreEntity\Entity'
                 alias: AudioCore

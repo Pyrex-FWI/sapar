@@ -2,7 +2,7 @@
 
 namespace Sapar\Command\Import;
 
-use AudioCoreEntity\Repository\ImportMediaRepository;
+use Sapar\Component\AudioCoreEntity\Repository\ImportMediaRepository;
 use Sapar\Index\IndexManager;
 use Sapar\Repository\ImportMediaFileRepository;
 use Symfony\Component\Console\Command\Command;

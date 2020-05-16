@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1ed5d269f88b3fd07560b5d75c912968",
+    "content-hash": "21cd44952677cb551da865710005dd41",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2345,22 +2345,17 @@
         },
         {
             "name": "pyrex-fwi/audio-core-entities",
-            "version": "v5.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://gitlab.com/Pyrex-FWI/audio-core-entities.git",
-                "reference": "90d2a3f3a06de5c9c84202c784794b71fc1a34a3"
-            },
+            "version": "dev-master",
             "dist": {
-                "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/Pyrex-FWI%2Faudio-core-entities/repository/archive.zip?sha=90d2a3f3a06de5c9c84202c784794b71fc1a34a3",
-                "reference": "90d2a3f3a06de5c9c84202c784794b71fc1a34a3",
-                "shasum": ""
+                "type": "path",
+                "url": "../../Component/audio-core-entities",
+                "reference": "9dd1029ef39bc101e4ef0e0ba0603f21a9c56758"
             },
             "require": {
                 "doctrine/orm": "*",
                 "fza/mysql-doctrine-levenshtein-function": "^0.3.0",
                 "gedmo/doctrine-extensions": "^2.4",
+                "symfony/property-access": "^4.0 || ^5.0",
                 "symfony/serializer": "^4.0 || ^5.0",
                 "symfony/validator": "^4.0 || ^5.0"
             },
@@ -2383,7 +2378,14 @@
                     "./tests/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "ci:test-travis": [
+                    "phpunit --coverage-html=coverage"
+                ],
+                "tests": [
+                    "php vendor/bin/doctrine orm/info"
+                ]
+            },
             "authors": [
                 {
                     "name": "Christophe Pyree",
@@ -2391,7 +2393,9 @@
                 }
             ],
             "description": "Core entities for Sapar audio project",
-            "time": "2020-05-03T08:44:03+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "react/promise",
@@ -2499,16 +2503,16 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v5.5.4",
+            "version": "v5.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "d0585d4825a87a5030ca8cd34adb4a17e1066c17"
+                "reference": "c76bb1c5c67840ecb6d9be8e9d8d7036e375e317"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/d0585d4825a87a5030ca8cd34adb4a17e1066c17",
-                "reference": "d0585d4825a87a5030ca8cd34adb4a17e1066c17",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/c76bb1c5c67840ecb6d9be8e9d8d7036e375e317",
+                "reference": "c76bb1c5c67840ecb6d9be8e9d8d7036e375e317",
                 "shasum": ""
             },
             "require": {
@@ -2568,7 +2572,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2020-04-06T12:20:39+00:00"
+            "time": "2020-05-06T12:12:33+00:00"
         },
         {
             "name": "symfony/asset",
@@ -7705,16 +7709,16 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.15.1",
+            "version": "v1.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "ae95a2b7fa8272e75630c273396097074f23e03f"
+                "reference": "c8b36ce2aac3635603b4ffc58fbc26717e0a7317"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/ae95a2b7fa8272e75630c273396097074f23e03f",
-                "reference": "ae95a2b7fa8272e75630c273396097074f23e03f",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/c8b36ce2aac3635603b4ffc58fbc26717e0a7317",
+                "reference": "c8b36ce2aac3635603b4ffc58fbc26717e0a7317",
                 "shasum": ""
             },
             "require": {
@@ -7783,7 +7787,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-04-21T19:17:25+00:00"
+            "time": "2020-05-05T14:21:24+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",
@@ -8003,7 +8007,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "pyrex-fwi/audio-core-entities": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

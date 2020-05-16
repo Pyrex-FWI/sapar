@@ -2,7 +2,7 @@
 
 namespace Sapar\Message;
 
-use AudioCoreEntity\Entity\Media;
+use Sapar\Component\AudioCoreEntity\Entity\Media;
 
 final class ReadMediaFilesTag
 {

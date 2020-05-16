@@ -18,7 +18,7 @@ services:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
-    AudioCoreEntity\Repository\:
+    Sapar\Component\AudioCoreEntity\Repository\:
         resource: '../vendor/pyrex-fwi/audio-core-entities/src/Repository/*'
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
