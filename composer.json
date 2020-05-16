@@ -1,10 +1,9 @@
 {
     "name": "pyrex-fwi/sapar",
-    "minimum-stability": "dev",
     "require": {
         "php": "^7.3",
         "doctrine/collections": "^1.6",
-        "doctrine/orm": "*",
+        "doctrine/orm": "^2.7",
         "fza/mysql-doctrine-levenshtein-function": "^0.3.0",
         "gedmo/doctrine-extensions": "^2.4",
         "symfony/console": "4.* || 5.*",
@@ -14,7 +13,7 @@
         "symfony/serializer": "^4.0 || ^5.0",
         "symfony/stopwatch": "4.* || 5.*",
         "symfony/validator": "^4.0 || ^5.0",
-        "symplify/monorepo-builder": "^7.3.17"
+        "symplify/monorepo-builder": "^7.3.18"
     },
     "require-dev": {
         "doctrine/data-fixtures": "^1.4",
@@ -64,6 +63,6 @@
         "merge": "vendor/bin/monorepo-builder merge --ansi",
         "propagate": "vendor/bin/monorepo-builder propagate --ansi",
         "rector": "vendor/bin/rector process --config rector-ci.yaml --dry-run --ansi",
-        "validate-monorepo": "vendor/bin/monorepo-builder validate --ansi"
+        "validatem": "vendor/bin/monorepo-builder validate --ansi"
     }
 }
