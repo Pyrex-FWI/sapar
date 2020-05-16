@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+## v5.1.1 - 2020-05-16
+
+- Add Contract/Core
+
 ## 5.1.0 - 2020-05-06
 
 - Ajout du script d'attente wait-for-it
