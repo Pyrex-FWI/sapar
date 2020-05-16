@@ -5,7 +5,7 @@ parameters:
 #        - 'Console'
 #        - 'App/Symfony4'
 #        - 'App/Symfony5'
-#        - 'Contract'
+        - 'Contract'
     package_directories_excludes:
         - 'sfv-checker'
     # for "merge" command
@@ -33,4 +33,4 @@ parameters:
 #        Console/ReleaseDispatcher: 'git@gitlab.com:Pyrex-FWI/release-dispatcher.git'
 #        App/NodeFolderApi: 'git@gitlab.com:Pyrex-FWI/node-folder-api.git'
 #        Devops/docker-sapar: 'git@github.com:Pyrex-FWI/docker-sapar.git'
-#        Contract/core: 'git@gitlab.com:Pyrex-FWI/core-contracts.git'
+        Contract/core: 'git@gitlab.com:Pyrex-FWI/core-contracts.git'

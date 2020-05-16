@@ -134,3 +134,11 @@ id3-phpunit:
 	time docker-compose exec -w /var/www/Component/id3 ${SF5} php ${PHPUNIT_INI}  vendor/bin/phpunit --testdox --stop-on-error
 id3-phpunit-coverage:
 	docker-compose exec -w /var/www/Component/id3 ${SF5} php -d zend_extension=xdebug.so vendor/bin/phpunit --coverage-html=coverage --stop-on-error
+
+#
+# M O N O R E P O   T O O L S
+#
+validate:
+	php vendor/symplify/monorepo-builder/bin/monorepo-builder validate
+bump:
+	php vendor/symplify/monorepo-builder/bin/monorepo-builder package-alias
