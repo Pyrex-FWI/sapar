@@ -21,6 +21,7 @@ use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\UniqueConstraint;
+use InvalidArgumentException;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -372,7 +373,7 @@ class Media
     public function setType($type)
     {
         if (!\in_array($type, self::getTypes(), true)) {
-            throw new \InvalidArgumentException(sprintf('%s is not a valid type. See %s', $type, self::class.'::getTypes()'));
+            throw new InvalidArgumentException(sprintf('%s is not a valid type. See %s', $type, self::class.'::getTypes()'));
         }
 
         $this->type = $type;
