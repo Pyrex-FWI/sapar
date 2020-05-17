@@ -15,11 +15,18 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Install dependencies
-      run: cd Component/audio-core-entities && composer install --prefer-dist --no-progress
-
+      run: composer install --prefer-dist --no-progress
+      working-directory: ./Component/audio-core-entities
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
+    - name: AudioCore DB init
+      run: php vendor/bin/doctrine orm:schema-tool:update -n --dump-sql --force
+      working-directory: ./Component/audio-core-entities
+
+    - name: AudioCore DB validate
+      run: php vendor/bin/doctrine orm:validate-schema --skip-sync -vv -n
+      working-directory: ./Component/audio-core-entities
+
     - name: AudioCorePhpUnit
-      run: cd Component/audio-core-entities && php vendor/bin/phpunit --stop-on-error
-    # - name: Run test suite
-    #   run: composer run-script test
+      run: php vendor/bin/phpunit --stop-on-error
+      working-directory: ./Component/audio-core-entities
