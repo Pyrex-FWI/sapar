@@ -15,11 +15,11 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Install dependencies
-      run: cd /var/www/Component/audio-core-entities && composer install --prefer-dist --no-progress
+      run: cd Component/audio-core-entities && composer install --prefer-dist --no-progress
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
     - name: AudioCorePhpUnit
-      run: php /var/www/Component/audio-core-entities/vendor/bin/phpunit --stop-on-error
+      run: php Component/audio-core-entities/vendor/bin/phpunit --stop-on-error
     # - name: Run test suite
     #   run: composer run-script test
