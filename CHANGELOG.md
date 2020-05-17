@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
-- 
+- add package_alias_format to monorepo-builder.yaml to handle X.X.x version
 
 ## v5.1.3 - 2020-05-17 
 

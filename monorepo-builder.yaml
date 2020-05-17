@@ -1,4 +1,5 @@
 parameters:
+    package_alias_format: '<major>.<minor>.x-dev' # default: "<major>.<minor>-dev"
     package_directories:
 #        - 'Bundle'
         - 'Component'
