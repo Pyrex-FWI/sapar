@@ -44,8 +44,11 @@ bash4:
 	docker-compose exec -w /var/www/App/Symfony4 $(SF5) bash
 bash5:
 	docker-compose exec $(SF5) bash
-bash:
+exec-bash:
 	docker-compose exec -w /var/www $(SF5) bash
+
+run-bash:
+	docker-compose run --no-deps --rm $(SF5) bash
 
 install-vendors:
 	docker-compose run --rm --no-deps  -w /var/www/App/Symfony4 $(SF5) php -dmemory_limit=-1 /usr/bin/composer install \
