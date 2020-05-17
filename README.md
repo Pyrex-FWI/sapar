@@ -21,6 +21,14 @@
 `docker-compose  -f App/ReleaseDispatcherUi/docker-compose.yml  up`
 `docker-compose  -f App/ReleaseDispatcherUi/docker-compose.yml -f App/NodeFolderApi/docker-compose.yml up`
 
+### Pour faire un patch
+
+- Modifier les source
+- Mettre à jour le changelog
+- Exécuter `vendor/bin/monorepo-builder release patch`
+- Puis deployer le tout `vendor/symplify/monorepo-builder/bin/monorepo-builder split -v`
+
+
 #### Commit / Push / Dispatch to readOnlyrepositories [(MonorepoBuilder)](https://github.com/Symplify/MonorepoBuilder)
 
 - vendor/bin/monorepo-builder release v0.12.5 --dry-run

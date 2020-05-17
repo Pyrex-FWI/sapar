@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## v5.1.3 - 2020-05-17 
+
+- Update doc
+
 ## v5.1.2 - 2020-05-17
+
+- Fix audiocore tests (fix namespace changes)
 
 ## v5.1.1 - 2020-05-16
 
