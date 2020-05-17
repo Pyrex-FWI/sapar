@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @author Christophe Pyree <pyrex-fwi[at]gmail.com>
  */
 
-require_once __DIR__.'/tests/autoload.php';
+require_once __DIR__.'/Tests/autoload.php';
 
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 

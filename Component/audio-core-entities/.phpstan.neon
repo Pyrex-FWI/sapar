@@ -2,6 +2,6 @@ parameters:
   checkGenericClassInNonGenericObjectType: false
   checkMissingIterableValueType: false
   excludes_analyse:
-    - tests/*
+    - Tests/*
   paths:
-    - src
+    - ./

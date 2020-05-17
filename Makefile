@@ -125,8 +125,8 @@ ace-phpunit:
 ace-phpunit-coverage:
 	docker-compose exec -w /var/www/Component/audio-core-entities ${SF5} php ${PHPUNIT_INI}  -d zend_extension=xdebug.so vendor/bin/phpunit --coverage-html=coverage --stop-on-error
 ace-tests:
-	docker-compose exec -w /var/www/Component/audio-core-entities ${SF5} php vendor/bin/doctrine orm:info && \
-	docker-compose exec -w /var/www/Component/audio-core-entities ${SF5} php vendor/bin/grumphp run --testsuite tests -vvv
+	docker-compose run --rm --no-deps -w /var/www/Component/audio-core-entities ${SF5} php vendor/bin/doctrine orm:info && \
+	docker-compose run --rm --no-deps -w /var/www/Component/audio-core-entities ${SF5} php vendor/bin/grumphp run --testsuite tests -vvv
 ace-qa:
 	docker-compose exec -w /var/www/Component/audio-core-entities ${SF5} php vendor/bin/grumphp run --testsuite qa -vvv
 

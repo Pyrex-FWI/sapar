@@ -1,4 +1,6 @@
 parameters:
+    process_timeout: 120
+    stop_on_failure: true
     testsuites:
         qa:
             tasks:
@@ -34,10 +36,9 @@ parameters:
             config: .php_cs
             allow_risky: true
         phpmd:
-            whitelist_patterns: ~
-            exclude: [
+            whitelist_patterns: []
+            exclude:
                 - /^Tests(.*)/
-            ]
             ruleset: ['phpmd_rules.xml']
             triggered_by: ['php']
         phpstan:

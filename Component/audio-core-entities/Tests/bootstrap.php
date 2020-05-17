@@ -46,7 +46,7 @@ class bootstrap
      */
     public static function getEntityManager()
     {
-        $paths     = [__DIR__.\DIRECTORY_SEPARATOR.'../src/Entity'];
+        $paths     = [__DIR__.\DIRECTORY_SEPARATOR.'../Entity'];
         $isDevMode = true;
 
         $dbParams = [
