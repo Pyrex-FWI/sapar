@@ -6,5 +6,10 @@
             "Sapar\\Contract\\": "src"
         }
     },
-    "require": []
+    "require": [],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "5.1.1"
+        }
+    }
 }

@@ -143,5 +143,5 @@ id3-phpunit-coverage:
 #
 validate:
 	php vendor/symplify/monorepo-builder/bin/monorepo-builder validate
-bump:
+package-alias:
 	php vendor/symplify/monorepo-builder/bin/monorepo-builder package-alias
