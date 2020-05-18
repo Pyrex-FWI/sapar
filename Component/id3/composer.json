@@ -33,5 +33,10 @@
         "phpro/grumphp": "^0.18",
         "symfony/var-dumper": "^4.3 | ^5.1",
         "phpmetrics/phpmetrics": "^2.6"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "5.2-dev"
+        }
     }
 }

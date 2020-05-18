@@ -52,5 +52,10 @@
         "phpmd/phpmd": "^2.8",
         "sebastian/phpcpd": "^5.0",
         "infection/infection": "^0.16.3"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "5.2-dev"
+        }
     }
 }
