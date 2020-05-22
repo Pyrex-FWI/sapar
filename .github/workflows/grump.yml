@@ -1,4 +1,4 @@
-name: PhpUnit
+name: Grump
 
 on:
   push:
@@ -23,10 +23,6 @@ jobs:
       run: php vendor/bin/doctrine orm:schema-tool:update -n --dump-sql --force
       working-directory: ./Component/audio-core-entities
 
-    - name: AudioCore DB validate
-      run: php vendor/bin/doctrine orm:validate-schema --skip-sync -vv -n
-      working-directory: ./Component/audio-core-entities
-
-    - name: AudioCorePhpUnit
-      run: php vendor/bin/phpunit --stop-on-error
+    - name: Grump
+      run: php vendor/bin/grumphp run --testsuite tests -vvv
       working-directory: ./Component/audio-core-entities
