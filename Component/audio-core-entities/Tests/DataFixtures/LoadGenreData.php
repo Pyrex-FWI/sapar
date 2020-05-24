@@ -9,9 +9,9 @@ declare(strict_types=1);
 
 namespace Sapar\Component\AudioCoreEntity\Tests\DataFixtures;
 
-use Sapar\Component\AudioCoreEntity\Entity\Genre;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sapar\Component\AudioCoreEntity\Entity\Genre;
 
 class LoadGenreData implements FixtureInterface
 {

@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace Sapar\Component\AudioCoreEntity\Tests\Entity;
 
-
 /**
  * @internal
  * @covers \Sapar\Component\AudioCoreEntity\Entity\Artist

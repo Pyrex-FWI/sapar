@@ -9,9 +9,9 @@ declare(strict_types=1);
 
 namespace Sapar\Component\AudioCoreEntity\Repository;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sapar\Component\AudioCoreEntity\Entity\Genre;
 use Sapar\Component\AudioCoreEntity\Entity\Media;
-use Doctrine\ORM\EntityManagerInterface;
 use Sapar\Contract\Id3\Id3MetadataInterface;
 
 /**

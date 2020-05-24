@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace Sapar\Component\AudioCoreEntity\Tests\Entity;
 
+use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\TestCase;
 use Sapar\Component\AudioCoreEntity\Entity\Album;
 use Sapar\Component\AudioCoreEntity\Entity\Artist;
 use Sapar\Component\AudioCoreEntity\Entity\DeletedRelease;
@@ -17,8 +19,6 @@ use Sapar\Component\AudioCoreEntity\Entity\Media;
 use Sapar\Component\AudioCoreEntity\Entity\Radio;
 use Sapar\Component\AudioCoreEntity\Entity\RadioHit;
 use Sapar\Component\AudioCoreEntity\Repository\MediaRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use PHPUnit\Framework\TestCase;
 use Sapar\Component\AudioCoreEntity\Tests\bootstrap;
 
 abstract class EntityBase extends TestCase
