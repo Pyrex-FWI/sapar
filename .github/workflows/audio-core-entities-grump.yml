@@ -1,4 +1,4 @@
-name: Grump
+name: audio-core-entities Grump
 
 on:
   push:

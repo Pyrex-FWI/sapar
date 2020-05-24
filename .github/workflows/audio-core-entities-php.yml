@@ -1,4 +1,4 @@
-name: PhpUnit
+name: audio-core-entities PhpUnit
 
 on:
   push:
