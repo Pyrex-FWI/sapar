@@ -1,4 +1,4 @@
-name: Grump-Qa
+name: Grump
 
 on:
   push:
