@@ -1,4 +1,4 @@
-name: Grump
+name: Grump-Qa
 
 on:
   push:
@@ -23,6 +23,6 @@ jobs:
       run: php vendor/bin/doctrine orm:schema-tool:update -n --dump-sql --force
       working-directory: ./Component/audio-core-entities
 
-    - name: Grump
-      run: php vendor/bin/grumphp run --testsuite tests -vvv
+    - name: Qa
+      run: php vendor/bin/grumphp run --testsuite qa -vvv
       working-directory: ./Component/audio-core-entities
