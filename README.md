@@ -1,4 +1,9 @@
 
+
+![audio-core-entities PhpUnit](https://github.com/Pyrex-FWI/sapar/workflows/audio-core-entities%20PhpUnit/badge.svg)
+
+![audio-core-entities Grump](https://github.com/Pyrex-FWI/sapar/workflows/audio-core-entities%20Grump/badge.svg)
+
 # Sapar personal project
 
 ```
