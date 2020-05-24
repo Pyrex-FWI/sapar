@@ -38,7 +38,7 @@ parameters:
         phpmd:
             whitelist_patterns: []
             exclude:
-                - /^Tests(.*)/
+                - '*/Tests/*'
             ruleset: ['phpmd_rules.xml']
             triggered_by: ['php']
         phpstan:
