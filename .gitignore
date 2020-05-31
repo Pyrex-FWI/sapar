@@ -106,3 +106,4 @@ data.db
 /App/Symfony4/symfony.lock
 /App/Symfony4/.env
 /App/Symfony5/.env
+/App/Seedbox/

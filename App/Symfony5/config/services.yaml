@@ -26,7 +26,7 @@ services:
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
     Sapar\Component\AudioCoreEntity\Repository\:
-        resource: '../vendor/pyrex-fwi/audio-core-entities/src/Repository/*'
+        resource: '../vendor/pyrex-fwi/audio-core-entities/Repository/*'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -39,7 +39,7 @@ services:
 
 
     Sapar\Component\Id3\Wrapper\BinWrapper\:
-        resource: '../vendor/pyrex-fwi/sapar-id3/src/Wrapper/BinWrapper'
+        resource: '../vendor/pyrex-fwi/sapar-id3/Wrapper/BinWrapper'
 
     Sapar\Id3Metadata\Id3MetadataManager:
         arguments:
