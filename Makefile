@@ -1,4 +1,5 @@
 .PHONY: up
+COMPOSE_FILE=./docker-compose-base.yml:./docker-compose-asynch.yml:./docker-compose-ui.yml
 
 include .env
 export
@@ -146,3 +147,20 @@ validate:
 	php vendor/symplify/monorepo-builder/bin/monorepo-builder validate
 package-alias:
 	php vendor/symplify/monorepo-builder/bin/monorepo-builder package-alias
+
+#
+# C E R T  U T I L S
+#
+ca-show:
+	openssl x509 -in Devops/traefik/tls/CA-WIN/rootCA.pem -text ;\
+	openssl x509 -in Devops/traefik/tls/CA-UNIX/rootCA.pem -text
+
+ca-install:
+	CAROOT=Devops/traefik/tls/CA-WIN mkcert -install
+
+tls-build: ca-install
+	cd Devops/traefik/tls && \
+	CAROOT=CA-WIN mkcert sf4.sapar.test sf5.sapar.test *.sapar.test
+
+tls-show:
+	openssl x509 -in Devops/traefik/tls/sf4.sapar.test+2.pem -text

@@ -1,0 +1,25 @@
+
+api:
+#  insecure: true
+  dashboard: true
+#  debug: true
+
+log:
+#  level: DEBUG
+  level: info
+
+accessLog: {}
+
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+  file:
+    directory: /etc/traefik/dynamic
+    watch: true
+#    debugLogGeneratedTemplate: true

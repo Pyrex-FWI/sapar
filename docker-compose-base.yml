@@ -1,0 +1,36 @@
+version: "3.7"
+
+x-volumes: &volumeAnchor
+  volumes:
+    - ${PWD}/:/var/www/
+    - ${ARCHIVE_PATH}:${ARCHIVE_PATH}
+    - ./App/Symfony5/config/supervisor/messenger-worker.conf:/etc/supervisor.d/messenger-worker.ini
+    - ./Devops/supervisord/supervisord.conf:/etc/supervisord.conf
+
+x-image: &image
+  image: yemistikris/docker-sapar:base
+
+x-log: &log
+  logging:
+    driver: json-file
+    options:
+      max-size: 10m
+
+services:
+  phpsf5:
+    <<: *image
+    working_dir: /var/www/App/Symfony5
+    hostname: phpsf5
+    <<: *volumeAnchor
+    command: ["symfony", "server:start"]
+    <<: *log
+    expose: [8000]
+
+  phpsf4:
+    <<: *image
+    working_dir: /var/www/App/Symfony4
+    <<: *volumeAnchor
+    hostname: phpsf4
+    command: ["symfony", "server:start"]
+    <<: *log
+    expose: [8000]

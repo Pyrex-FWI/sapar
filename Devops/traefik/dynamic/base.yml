@@ -1,0 +1,44 @@
+## http routing section
+http:
+  routers:
+    edge-router:
+      rule: Host(`traefik.sapar.test`)
+      tls: {}
+      service: api@internal
+    symfony5-http:
+      rule: Host(`sf5.sapar.test`)
+      middlewares:
+        - "http-to-https"
+      service: phpsf5-sapar@docker
+
+    symfony5-https:
+      tls: {}
+      rule: Host(`sf5.sapar.test`)
+      entrypoint:
+        - web-secure
+      service: phpsf5-sapar@docker
+
+    symfony4:
+      rule: Host(`sf4.sapar.test`)
+      service: phpsf4-sapar@docker
+#
+  middlewares:
+#    test-user:
+#      basicAuth:
+#        users:
+#          - test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/
+    http-to-https:
+      redirectScheme:
+        scheme: https
+        permanent: true
+#  services:
+##    # Define how to reach an existing service on our infrastructure
+#    phpsf5:
+#      loadBalancer:
+#        servers:
+#          - url: http://192.168.176.3:8000
+
+tls:
+  certificates:
+    - certFile: /etc/traefik/tls/sf4.sapar.test+2.pem
+      keyFile: /etc/traefik/tls/sf4.sapar.test+2-key.pem

@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  reverse-proxy:
+    image: traefik:v2.2
+    hostname: traefik
+    ports:
+      - "80:80"
+      - "443:443"
+#      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${PWD}/Devops/traefik:/etc/traefik/
